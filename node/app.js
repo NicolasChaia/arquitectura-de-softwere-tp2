@@ -1,25 +1,44 @@
-import express from 'express';
-import axios from 'axios';
-import config from './config.js'
+import { AccountsRepository } from "./repository/accounts.js";
+import { RatesRepository } from "./repository/rates.js";
+import { LogRepository } from "./repository/log.js";
 
-const app = express();
+import { AccountsService } from "./services/accounts.js";
+import { RatesService } from "./services/rates.js";
+import { LogService } from "./services/log.js";
+import { ExchangeService } from "./services/exchange.js";
 
-app.get('/', (req, res) => {
-    res.status(200).send('Server is up.')
+import { connectRedis } from "./repository/redisClient.js";
+import { StatsdClient } from "./metrics/statsd.js";
+import { createApp } from "./createApp.js";
+
+await connectRedis();
+
+// single shared instance per resource, so every service/route
+// reads and writes the same in-memory state
+const accountsRepository = new AccountsRepository();
+const ratesRepository = new RatesRepository();
+const logRepository = new LogRepository();
+
+await accountsRepository.init();
+await ratesRepository.init();
+await logRepository.init();
+
+const accountsService = new AccountsService(accountsRepository);
+const ratesService = new RatesService(ratesRepository);
+const logService = new LogService(logRepository);
+const exchangeService = new ExchangeService(
+  accountsRepository,
+  ratesRepository,
+  logRepository,
+  new StatsdClient()
+);
+
+const app = createApp({ accountsService, ratesService, logService, exchangeService });
+
+const port = 3000;
+
+app.listen(port, () => {
+  console.log(`Exchange API listening on port ${port}`);
 });
 
-app.get('/:dni', async (req, res) => {
-    try {
-        const response = await axios.post(`${config.arcaUri}/validar`, {dni: parseInt(req.params.dni)});
-        if (response.status == 200) {
-            res.status(200).send(response.data);
-        } else {
-            res.status(500).send(`Unexpected return code ${response.status} from ARCA`);
-        }
-    } catch (e) {
-        console.error("Exception consuming ARCA's service", e);
-        res.status(500).send("Exception consuming ARCA's service");
-    }
-})
-
-app.listen(3000, () => console.log("Listening on port 3000"));
+export default app;

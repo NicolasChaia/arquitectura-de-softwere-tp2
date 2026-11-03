@@ -1,16 +1,23 @@
 {
-  "name": "node",
+  "name": "exchange-service",
   "version": "1.0.0",
   "description": "",
-  "license": "ISC",
-  "author": "",
+  "main": "app.js",
   "type": "module",
-  "main": "config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "node --test \"test/unit/*.test.js\"",
+    "test:integration": "node --test --test-concurrency=1 \"test/integration/*.test.js\""
   },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "axios": "^1.16.1",
-    "express": "^5.2.1"
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.7.0",
+    "nanoid": "^5.1.2",
+    "redis": "^4.7.1"
+  },
+  "devDependencies": {
+    "supertest": "^7.3.0"
   }
 }
