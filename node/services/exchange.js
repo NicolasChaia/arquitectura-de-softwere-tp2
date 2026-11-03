@@ -24,7 +24,7 @@ export class ExchangeService {
     } = exchangeRequest;
 
     // get the exchange rate
-    const exchangeRate = this.ratesRepository.getRate(baseCurrency, counterCurrency);
+    const exchangeRate = await this.ratesRepository.getRate(baseCurrency, counterCurrency);
     // compute the requested (counter) amount
     const counterAmount = baseAmount * exchangeRate;
     const [baseAccount, counterAccount] = await Promise.all([
@@ -105,7 +105,7 @@ export class ExchangeService {
     }
 
     // log the transaction and return it
-    this.logRepository.addLog(exchangeResult);
+    await this.logRepository.addLog(exchangeResult);
 
     return exchangeResult;
   }

@@ -7,6 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const INDEX_KEY = "accounts:index";
+const SEED_LOCK_KEY = "accounts:seeded";
 const accountKey = (id) => `account:${id}`;
 const currencyKey = (currency) => `accounts:by_currency:${currency}`;
 
@@ -54,7 +55,10 @@ export class AccountsRepository {
   async init() {
     const redis = getRedisClient();
 
-    if ((await redis.exists(INDEX_KEY)) === 0) {
+    // Several nodes start at the same time (Ansible deploys them in parallel):
+    // SET NX makes exactly one of them seed, otherwise both would RPUSH the
+    // ids and duplicate them in the index.
+    if ((await redis.exists(INDEX_KEY)) === 0 && (await redis.set(SEED_LOCK_KEY, "1", { NX: true }))) {
       console.error(`${INDEX_KEY} not found in Redis, seeding from accounts.json`);
       await seed(redis);
     }

@@ -5,11 +5,15 @@ import { MalformedRequestError } from "../exceptions/errors.js";
 export function createRatesRouter(ratesService) {
   const router = Router();
 
-  router.get("/", (req, res) => {
-    res.json(ratesService.getRates());
+  router.get("/", async (req, res, next) => {
+    try {
+      res.json(await ratesService.getRates());
+    } catch (err) {
+      next(err);
+    }
   });
 
-  router.put("/", (req, res, next) => {
+  router.put("/", async (req, res, next) => {
     const { baseCurrency, counterCurrency, rate } = req.body;
 
     if (!baseCurrency || !counterCurrency || !rate) {
@@ -17,8 +21,8 @@ export function createRatesRouter(ratesService) {
     }
 
     try {
-      ratesService.setRate(req.body);
-      res.json(ratesService.getRates());
+      await ratesService.setRate(req.body);
+      res.json(await ratesService.getRates());
     } catch (err) {
       next(err);
     }

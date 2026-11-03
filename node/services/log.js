@@ -7,15 +7,9 @@ export class LogService {
   }
 
   // returns the most recent log entries, capped to avoid unbounded payloads
-  getLog(limit = DEFAULT_LOG_LIMIT) {
-    const log = this.repository.getLog();
+  async getLog(limit = DEFAULT_LOG_LIMIT) {
     const safeLimit = Math.min(Math.max(limit, 1), MAX_LOG_LIMIT);
-
-    if (log.length <= safeLimit) {
-      return log;
-    }
-
-    return log.slice(log.length - safeLimit);
+    return await this.repository.getLog(safeLimit);
   }
 }
 

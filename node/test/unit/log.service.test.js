@@ -3,8 +3,14 @@ import assert from "node:assert/strict";
 
 import { LogService, DEFAULT_LOG_LIMIT, MAX_LOG_LIMIT } from "../../services/log.js";
 
+// The repository (Redis LRANGE) returns the most recent `limit` entries; the
+// service is responsible for clamping `limit` to a safe range.
 function fakeRepository(entries) {
-  return { getLog: () => entries };
+  const limits = [];
+  return {
+    limits,
+    getLog: async (limit) => (limits.push(limit), entries.slice(-limit)),
+  };
 }
 
 function entries(n) {
@@ -12,58 +18,49 @@ function entries(n) {
 }
 
 describe("LogService", () => {
-  test("returns everything when there are fewer entries than the limit", () => {
+  test("returns everything when there are fewer entries than the limit", async () => {
     const service = new LogService(fakeRepository(entries(3)));
 
-    assert.deepEqual(service.getLog(10), entries(3));
+    assert.deepEqual(await service.getLog(10), entries(3));
   });
 
-  test("returns exactly the limit worth of entries when there are more", () => {
-    const service = new LogService(fakeRepository(entries(250)));
+  test("asks the repository for exactly the requested limit", async () => {
+    const repository = fakeRepository(entries(250));
+    const service = new LogService(repository);
 
-    const result = service.getLog(10);
+    const result = await service.getLog(10);
 
     assert.equal(result.length, 10);
+    assert.deepEqual(repository.limits, [10]);
   });
 
-  test("keeps the most recent entries, not the oldest, when trimming", () => {
-    const log = entries(5); // ids 0..4
-    const service = new LogService(fakeRepository(log));
+  test("defaults to DEFAULT_LOG_LIMIT when no limit is given", async () => {
+    const repository = fakeRepository(entries(DEFAULT_LOG_LIMIT + 50));
+    const service = new LogService(repository);
 
-    const result = service.getLog(2);
-
-    assert.deepEqual(result.map((e) => e.id), [3, 4]);
-  });
-
-  test("defaults to DEFAULT_LOG_LIMIT when no limit is given", () => {
-    const service = new LogService(fakeRepository(entries(DEFAULT_LOG_LIMIT + 50)));
-
-    const result = service.getLog();
+    const result = await service.getLog();
 
     assert.equal(result.length, DEFAULT_LOG_LIMIT);
   });
 
-  test("clamps a limit above MAX_LOG_LIMIT down to MAX_LOG_LIMIT", () => {
-    const service = new LogService(fakeRepository(entries(MAX_LOG_LIMIT + 100)));
+  test("clamps a limit above MAX_LOG_LIMIT down to MAX_LOG_LIMIT", async () => {
+    const repository = fakeRepository(entries(MAX_LOG_LIMIT + 100));
+    const service = new LogService(repository);
 
-    const result = service.getLog(MAX_LOG_LIMIT + 100);
+    await service.getLog(MAX_LOG_LIMIT + 100);
 
-    assert.equal(result.length, MAX_LOG_LIMIT);
+    assert.deepEqual(repository.limits, [MAX_LOG_LIMIT]);
   });
 
-  test("clamps a limit below 1 up to 1", () => {
-    const service = new LogService(fakeRepository(entries(10)));
+  for (const bad of [0, -5]) {
+    test(`clamps a limit below 1 (${bad}) up to 1`, async () => {
+      const repository = fakeRepository(entries(10));
+      const service = new LogService(repository);
 
-    const result = service.getLog(0);
+      const result = await service.getLog(bad);
 
-    assert.equal(result.length, 1);
-  });
-
-  test("clamps a negative limit up to 1", () => {
-    const service = new LogService(fakeRepository(entries(10)));
-
-    const result = service.getLog(-5);
-
-    assert.equal(result.length, 1);
-  });
+      assert.deepEqual(repository.limits, [1]);
+      assert.deepEqual(result, [{ id: 9 }]);
+    });
+  }
 });

@@ -6,10 +6,10 @@ import { DEFAULT_LOG_LIMIT, MAX_LOG_LIMIT } from "../services/log.js";
 export function createLogRouter(logService) {
   const router = Router();
 
-  router.get("/", (req, res, next) => {
+  router.get("/", async (req, res, next) => {
     try {
       const limit = parseLimit(req.query.limit);
-      res.json(logService.getLog(limit));
+      res.json(await logService.getLog(limit));
     } catch (err) {
       next(err);
     }
