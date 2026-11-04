@@ -1,7 +1,12 @@
+#!/bin/bash
 OLD_DIR="$(pwd)"
 DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd $DIR
+cd "$DIR"
 
-zip src.zip *.js *.json -1
+rm -f src.zip
+zip -r src.zip \
+  *.js *.json \
+  api repository services exceptions metrics middleware state \
+  -x 'src.zip' -x '*.bak'
 
-cd $OLD_DIR
+cd "$OLD_DIR"

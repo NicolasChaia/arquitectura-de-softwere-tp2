@@ -66,9 +66,8 @@ resource "azurerm_lb" "tp2_lb" {
   sku                 = "Standard"
 
   frontend_ip_configuration {
-    name                       = "tp2_lb_public_ip"
-    public_ip_address_id       = azurerm_public_ip.lb_public_ip.id
-    private_ip_address_version = "IPv4"
+    name                 = "tp2_lb_public_ip"
+    public_ip_address_id = azurerm_public_ip.lb_public_ip.id
   }
 
   provisioner "local-exec" {

@@ -25,3 +25,5 @@ pubkey
 *.pem
 *.bak
 .vscode
+
+node/redis.json

@@ -15,7 +15,7 @@ variable "dockerhub_token" {
 }
 
 variable "region" {
-  default = "eastus2"
+  default = "eastus"
 }
 
 variable "ssh_key_group_name" {
@@ -23,7 +23,7 @@ variable "ssh_key_group_name" {
 }
 
 variable "ssh_key_name" {
-  default = "ssh_key"
+  default = "SSH-KEY"
 }
 
 variable "os_publisher" {
@@ -43,5 +43,5 @@ variable "os_version" {
 }
 
 variable "machine_sku" {
-  default = "Standard_B1s"
+  default = "Standard_D2as_v4"
 }

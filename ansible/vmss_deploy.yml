@@ -3,7 +3,7 @@
   gather_facts: yes
   tasks:
     - name: Stop old version
-      command: pm2 stop app.js
+      command: pm2 delete app
       ignore_errors: yes
     - name: Extract new version
       unarchive:
@@ -14,4 +14,4 @@
     - name: Install dependencies
       command: npm install
     - name: Start new version
-      command: pm2 start app.js
+      command: pm2 start app.js --name app
