@@ -15,8 +15,17 @@ export class StatsdClient {
   }
 
   // counter increment; statsd sums them per flush and accepts negative values
-  count(name, value) {
-    this.send(`${this.prefix}.${name}:${value}|c`);
+  count(name, value, tags) {
+    this.send(`${this.prefix}.${name}:${value}|c${formatTags(tags)}`);
+  }
+
+  increment(name, tags) {
+    this.count(name, 1, tags);
+  }
+
+  // duration in ms; Datadog aggregates it into avg/median/p95/max per flush
+  timing(name, ms, tags) {
+    this.send(`${this.prefix}.${name}:${ms}|ms${formatTags(tags)}`);
   }
 
   send(message) {
@@ -26,4 +35,9 @@ export class StatsdClient {
       }
     });
   }
+}
+
+// DogStatsD tag extension: "name:1|c|#tag1,tag2"
+function formatTags(tags) {
+  return tags && tags.length ? `|#${tags.join(",")}` : "";
 }

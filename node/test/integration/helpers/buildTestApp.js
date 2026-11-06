@@ -13,8 +13,7 @@ import { createApp } from "../../../createApp.js";
 // exactly like app.js does - the only difference is `transferFn`, which
 // tests control instead of leaving to the random 200-400ms stub, and
 // `rateLimits`, which tests can tighten to exercise 429s without waiting a
-// full second per test.
-export async function buildTestApp({ transferFn, rateLimits } = {}) {
+export async function buildTestApp({ transferFn, rateLimits, arcaClient } = {}) {
   const accountsRepository = new AccountsRepository();
   const ratesRepository = new RatesRepository();
   const logRepository = new LogRepository();
@@ -31,7 +30,9 @@ export async function buildTestApp({ transferFn, rateLimits } = {}) {
     ratesRepository,
     logRepository,
     undefined,
-    transferFn ?? (async () => true)
+    transferFn ?? (async () => true),
+    arcaClient ??
+      fakeArca({ status: "approved", codigoAutorizacion: "test-auth-code", latencyMs: 1 })
   );
 
   const app = createApp({
@@ -43,4 +44,12 @@ export async function buildTestApp({ transferFn, rateLimits } = {}) {
   });
 
   return { app, accountsRepository, ratesRepository, logRepository };
+}
+
+// Stand-in for ArcaClient that always answers with `result`
+// (same shape ArcaClient.validar resolves to).
+export function fakeArca(result) {
+  return {
+    validar: async () => ({ ...result }),
+  };
 }

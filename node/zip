@@ -6,7 +6,7 @@ cd "$DIR"
 rm -f src.zip
 zip -r src.zip \
   *.js *.json \
-  api repository services exceptions metrics middleware state \
+  api repository services exceptions metrics middleware state external \
   -x 'src.zip' -x '*.bak'
 
 cd "$OLD_DIR"

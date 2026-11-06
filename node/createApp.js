@@ -33,6 +33,10 @@ export function createApp({
     max: rateLimits.exchangeMax,
   });
 
+  app.get("/", (req, res) => {
+    res.type("text/plain").send("Server is up.");
+  });
+
   app.use("/health", createHealthRouter());
   app.use("/accounts", createAccountsRouter(accountsService));
   app.use("/rates", createRatesRouter(ratesService));

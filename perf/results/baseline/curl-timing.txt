@@ -1,0 +1,20 @@
+# Desglose de tiempos de GET / con curl (5 muestras secuenciales, sin carga)
+# Fecha: 2026-11-06T12:18:35Z (09:18:35 hora Argentina)
+# Origen: PC del generador de carga (CABA, Ethernet, IPLAN)
+# Destino: http://<lb_dns>/ (Azure Load Balancer, region eastus)
+# Comando:
+#   for i in 1 2 3 4 5; do curl -s -o /dev/null -w "%{time_namelookup} %{time_connect} %{time_starttransfer} %{time_total}\n" "$LB/"; done
+#
+# Columnas (segundos, acumulados desde el inicio del request):
+#   dns      = resolucion DNS
+#   connect  = handshake TCP terminado (~ 1 RTT despues del DNS)
+#   ttfb     = primer byte de la respuesta (~ 1 RTT mas, request + respuesta)
+#   total    = respuesta completa
+#
+# La primera muestra incluye la resolucion DNS sin cache (0,082 s).
+dns_s    connect_s ttfb_s   total_s
+0.081903 0.227158  0.372818 0.372888
+0.004493 0.146448  0.288663 0.288735
+0.004605 0.146731  0.289670 0.289768
+0.004502 0.147038  0.289226 0.289308
+0.005814 0.148997  0.292255 0.292331

@@ -5,12 +5,20 @@ export class ExchangeService {
   // exchange (success, failure, ordering) instead of depending on the
   // random 200-400ms stub, which always resolves true and never exercises
   // the reconciliation branches below.
-  constructor(accountsRepository, ratesRepository, logRepository, metrics, transferFn = transfer) {
+  constructor(
+    accountsRepository,
+    ratesRepository,
+    logRepository,
+    metrics,
+    transferFn = transfer,
+    arcaClient = null
+  ) {
     this.accountsRepository = accountsRepository;
     this.ratesRepository = ratesRepository;
     this.logRepository = logRepository;
     this.metrics = metrics;
     this.transfer = transferFn;
+    this.arcaClient = arcaClient;
   }
 
   // executes an exchange operation
@@ -21,7 +29,32 @@ export class ExchangeService {
       baseAccountId: clientBaseAccountId,
       counterAccountId: clientCounterAccountId,
       baseAmount,
+      dni,
     } = exchangeRequest;
+    let arca = null;
+    if (this.arcaClient) {
+      arca = await this.arcaClient.validar(dni);
+      logArcaResult(dni, arca);
+
+      if (arca.status !== "approved") {
+        const rejected = arca.status === "rejected";
+        const exchangeResult = {
+          id: nanoid(),
+          ts: new Date(),
+          ok: false,
+          request: exchangeRequest,
+          exchangeRate: null,
+          counterAmount: 0.0,
+          obs: rejected
+            ? "Client has fiscal restrictions according to ARCA"
+            : "Could not validate client with ARCA",
+          failure: rejected ? "arca_rejected" : "arca_unavailable",
+          arca,
+        };
+        await this.logRepository.addLog(exchangeResult);
+        return exchangeResult;
+      }
+    }
 
     // get the exchange rate
     const exchangeRate = await this.ratesRepository.getRate(baseCurrency, counterCurrency);
@@ -41,6 +74,7 @@ export class ExchangeService {
       exchangeRate: exchangeRate,
       counterAmount: 0.0,
       obs: null,
+      arca,
     };
 
     const reservation = await this.accountsRepository.atomicFundsTransfer(
@@ -132,6 +166,15 @@ export class ExchangeService {
       counterAmount
     );
   }
+}
+
+function logArcaResult(dni, arca) {
+  const parts = [`ARCA dni=${dni}`, `status=${arca.status}`];
+  if (arca.codigoAutorizacion) parts.push(`codigoAutorizacion=${arca.codigoAutorizacion}`);
+  if (arca.reason) parts.push(`reason=${arca.reason}`);
+  if (arca.detail) parts.push(`detail=${arca.detail}`);
+  parts.push(`latencyMs=${arca.latencyMs}`);
+  console.log(parts.join(" "));
 }
 
 // internal - call transfer service to execute transfer between accounts

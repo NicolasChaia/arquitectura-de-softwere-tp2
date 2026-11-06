@@ -30,6 +30,7 @@ describe("/log (integration)", () => {
           baseAccountId: "client-1",
           counterAccountId: "client-2",
           baseAmount: 100,
+          dni: "40101235",
         });
     }
 
@@ -51,6 +52,7 @@ describe("/log (integration)", () => {
           baseAccountId: "client-1",
           counterAccountId: "client-2",
           baseAmount: 100,
+          dni: "40101235",
         });
     }
 

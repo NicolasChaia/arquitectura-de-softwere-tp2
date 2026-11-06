@@ -1,0 +1,94 @@
+{
+  "id": "knk-d94-nxb",
+  "title": "NicolasChaia's Dashboard Fri, Nov 6, 9:45:57 am",
+  "description": null,
+  "author_handle": "nchaia@fi.uba.ar",
+  "author_name": "NicolasChaia Backpack",
+  "layout_type": "ordered",
+  "url": "/dashboard/knk-d94-nxb/nicolaschaias-dashboard-fri-nov-6-94557-am",
+  "template_variables": [],
+  "widgets": [
+    {
+      "id": 8680961900284734,
+      "definition": {
+        "title": "TP2 - /",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
+        ],
+        "time": {
+          "type": "fixed",
+          "from": 1793968500000,
+          "to": 1793968680000
+        },
+        "type": "timeseries",
+        "requests": [
+          {
+            "response_format": "timeseries",
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "sum:artillery.http.codes.200{*}.as_count()"
+              },
+              {
+                "name": "query2",
+                "data_source": "metrics",
+                "query": "sum:artillery.http.requests{*}.as_count()"
+              },
+              {
+                "name": "query3",
+                "data_source": "metrics",
+                "query": "sum:artillery.http.response_time.p95{*}"
+              },
+              {
+                "name": "query4",
+                "data_source": "metrics",
+                "query": "sum:artillery.http.response_time.median{*}"
+              }
+            ],
+            "formulas": [
+              {
+                "formula": "query1"
+              },
+              {
+                "formula": "query2"
+              },
+              {
+                "formula": "query3"
+              },
+              {
+                "formula": "query4"
+              }
+            ],
+            "style": {
+              "palette": "dog_classic",
+              "order_by": "values",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "line"
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 2
+      }
+    }
+  ],
+  "notify_list": [],
+  "created_at": "2026-11-06T12:45:47.154735+00:00",
+  "modified_at": "2026-11-06T12:51:18.629477+00:00",
+  "experience_type": "default",
+  "reflow_type": "fixed"
+}

@@ -29,6 +29,7 @@ describe("POST /exchange (integration, real Redis + HTTP layer)", () => {
         baseAccountId: "client-1",
         counterAccountId: "client-2",
         baseAmount: 1750000,
+        dni: "40101235",
       });
 
     assert.equal(res.status, 200);
@@ -51,6 +52,7 @@ describe("POST /exchange (integration, real Redis + HTTP layer)", () => {
         baseAccountId: "client-1",
         counterAccountId: "client-2",
         baseAmount: 999999999999,
+        dni: "40101235",
       });
 
     assert.equal(res.status, 500);
@@ -71,6 +73,7 @@ describe("POST /exchange (integration, real Redis + HTTP layer)", () => {
       baseAccountId: "client-1",
       // counterAccountId missing
       baseAmount: 1000,
+      dni: "40101235",
     });
 
     assert.equal(res.status, 400);
@@ -98,6 +101,7 @@ describe("POST /exchange (integration, real Redis + HTTP layer)", () => {
         baseAccountId: "client-1",
         counterAccountId: "client-2",
         baseAmount: 1750000,
+        dni: "40101235",
       });
 
     assert.equal(res.status, 500);
@@ -121,6 +125,7 @@ describe("POST /exchange (integration, real Redis + HTTP layer)", () => {
           baseAccountId: "client-1",
           counterAccountId: "client-2",
           baseAmount: 1750000, // ~1155 USD each, 60 of these can't all fit in 60000 USD
+          dni: "40101235",
         })
     );
 
