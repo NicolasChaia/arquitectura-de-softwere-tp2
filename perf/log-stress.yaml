@@ -1,0 +1,46 @@
+config:
+  target: "{{ $processEnvironment.TARGET }}"
+  plugins:
+    publish-metrics:
+      - type: datadog
+        apiKey: "{{ $processEnvironment.DATADOG_API_KEY }}"
+        apiHost: "us5.datadoghq.com"
+        prefix: "artillery."
+        tags:
+          - "test:log-stress"
+
+  http:
+    pool: 300
+    timeout: 10
+
+  phases:
+    - name: Warm up
+      duration: 30
+      arrivalRate: 20
+    - name: Step 50 rps
+      duration: 60
+      arrivalRate: 50
+    - name: Step 100 rps
+      duration: 60
+      arrivalRate: 100
+    - name: Step 200 rps
+      duration: 60
+      arrivalRate: 200
+    - name: Step 400 rps
+      duration: 60
+      arrivalRate: 400
+    - name: Step 800 rps
+      duration: 60
+      arrivalRate: 800
+    - name: Step 1600 rps
+      duration: 60
+      arrivalRate: 1600
+    - name: Recovery 25 rps
+      duration: 60
+      arrivalRate: 25
+
+scenarios:
+  - name: Log (/log)
+    flow:
+      - get:
+          url: '/log'

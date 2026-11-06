@@ -1,0 +1,85 @@
+config:
+  target: "{{ $processEnvironment.TARGET }}"
+  plugins:
+    publish-metrics:
+      - type: datadog
+        apiKey: "{{ $processEnvironment.DATADOG_API_KEY }}"
+        apiHost: "us5.datadoghq.com"
+        prefix: "artillery."
+        tags:
+          - "test:exchange-concurrency-stress"
+
+  http:
+    pool: 300
+    timeout: 10
+
+  # Same step-load shape as rates-stress.yaml / accounts-stress.yaml / log-stress.yaml
+  phases:
+    - name: Warm up
+      duration: 30
+      arrivalRate: 20
+    - name: Step 50 rps
+      duration: 60
+      arrivalRate: 50
+    - name: Step 100 rps
+      duration: 60
+      arrivalRate: 100
+    - name: Step 200 rps
+      duration: 60
+      arrivalRate: 200
+    - name: Step 400 rps
+      duration: 60
+      arrivalRate: 400
+    - name: Step 800 rps
+      duration: 60
+      arrivalRate: 800
+    - name: Step 1600 rps
+      duration: 60
+      arrivalRate: 1600
+    - name: Recovery 25 rps
+      duration: 60
+      arrivalRate: 25
+
+# Reload internal ARS/USD accounts so the stress run measures exchange latency
+# under load, not instant rejections after balances are drained.
+before:
+  flow:
+    - put:
+        url: '/accounts/1/balance'
+        json:
+          balance: 1000000000000
+    - put:
+        url: '/accounts/2/balance'
+        json:
+          balance: 1000000000000
+
+# Same two scenarios as exchange-concurrency.yaml (USD <-> ARS, same internal
+# accounts on both directions) but pushed through the step-load ramp above, to
+# maximize the number of exchanges racing over the same accounts as load grows
+# and make lock contention (and, in the base case, lost updates) visible.
+scenarios:
+  - name: Exchange (USD -> ARS)
+    weight: 1
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: 'USD'
+            counterCurrency: 'ARS'
+            baseAccountId: 'client-{{ $randomNumber(1, 10000) }}'
+            counterAccountId: 'client-{{ $randomNumber(1, 10000) }}'
+            baseAmount: 10
+            dni: "{{ $randomNumber(1000000, 99999999) }}"
+
+  - name: Exchange (ARS -> USD)
+    weight: 1
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: 'ARS'
+            counterCurrency: 'USD'
+            baseAccountId: 'client-{{ $randomNumber(1, 10000) }}'
+            counterAccountId: 'client-{{ $randomNumber(1, 10000) }}'
+            baseAmount: 1000
+            dni: "{{ $randomNumber(1000000, 99999999) }}"

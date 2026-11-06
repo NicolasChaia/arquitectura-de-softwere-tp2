@@ -1,0 +1,86 @@
+# Estrés de POST /exchange: escalones de 5 a 1600 req/s y recuperación.
+config:
+  target: "{{ $processEnvironment.TARGET }}"
+  plugins:
+    publish-metrics:
+      - type: datadog
+        apiKey: "{{ $processEnvironment.DATADOG_API_KEY }}"
+        apiHost: "us5.datadoghq.com"
+        prefix: "artillery."
+        tags:
+          - "test:exchange-stress"
+
+  http:
+    pool: 1000
+    timeout: 10
+
+  phases:
+    - name: Warm up
+      duration: 30
+      arrivalRate: 5
+    - name: Step 50 rps
+      duration: 60
+      arrivalRate: 50
+    - name: Step 100 rps
+      duration: 60
+      arrivalRate: 100
+    - name: Step 200 rps
+      duration: 60
+      arrivalRate: 200
+    - name: Step 400 rps
+      duration: 60
+      arrivalRate: 400
+    - name: Step 800 rps
+      duration: 60
+      arrivalRate: 800
+    - name: Step 1600 rps
+      duration: 60
+      arrivalRate: 1600
+    - name: Recovery 25 rps
+      duration: 60
+      arrivalRate: 25
+
+before:
+  flow:
+    - put:
+        url: '/accounts/1/balance'
+        json:
+          balance: 1000000000000 # ARS interna, para que no se agote durante la prueba
+
+scenarios:
+  - name: Exchange USD to ARS
+    weight: 5
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: USD
+            counterCurrency: ARS
+            baseAccountId: 100
+            counterAccountId: 101
+            baseAmount: 100
+            dni: "{{ $randomNumber(1000000, 99999999) }}"
+  - name: Exchange EUR to ARS
+    weight: 3
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: EUR
+            counterCurrency: ARS
+            baseAccountId: 100
+            counterAccountId: 101
+            baseAmount: 50
+            dni: "{{ $randomNumber(1000000, 99999999) }}"
+  - name: Exchange BRL to ARS
+    weight: 2
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: BRL
+            counterCurrency: ARS
+            baseAccountId: 100
+            counterAccountId: 101
+            baseAmount: 200
+            dni: "{{ $randomNumber(1000000, 99999999) }}"

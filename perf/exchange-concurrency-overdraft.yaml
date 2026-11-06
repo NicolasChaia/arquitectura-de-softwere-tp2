@@ -1,0 +1,49 @@
+# Ráfaga concurrente que agota a propósito la cuenta interna de USD, para
+# verificar que intentos de sobregiro concurrentes (ahora desde 1 o más nodos
+# sobre el mismo Redis) no dejan saldos internos negativos.
+config:
+  target: "{{ $processEnvironment.TARGET }}"
+  plugins:
+    publish-metrics:
+      - type: datadog
+        apiKey: "{{ $processEnvironment.DATADOG_API_KEY }}"
+        apiHost: "us5.datadoghq.com"
+        prefix: "artillery."
+        tags:
+          - "test:exchange-concurrency-overdraft"
+
+  http:
+    pool: 50
+
+  phases:
+    - name: Overdraft burst
+      duration: 30
+      arrivalRate: 20
+
+before:
+  flow:
+    - put:
+        url: '/accounts/2/balance'
+        json:
+          balance: 60000 # USD interna en su valor semilla (node/state/accounts.json)
+    # rates-put*.yaml cambian USD/ARS a 1267 (y ARS/USD a 1/1267). Se vuelve a
+    # la tasa semilla para que el umbral de sobregiro sea siempre el mismo.
+    - put:
+        url: '/rates'
+        json:
+          baseCurrency: USD
+          counterCurrency: ARS
+          rate: 1513
+
+scenarios:
+  - name: Overdraft ARS -> USD
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: 'ARS'
+            counterCurrency: 'USD'
+            baseAccountId: 'client-{{ $randomNumber(1, 10000) }}'
+            counterAccountId: 'client-{{ $randomNumber(1, 10000) }}'
+            baseAmount: 1750000
+            dni: "{{ $randomNumber(1000000, 99999999) }}"

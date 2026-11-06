@@ -1,0 +1,36 @@
+config:
+  target: "{{ $processEnvironment.TARGET }}"
+  plugins:
+    publish-metrics:
+      - type: datadog
+        apiKey: "{{ $processEnvironment.DATADOG_API_KEY }}"
+        apiHost: "us5.datadoghq.com"
+        prefix: "artillery."
+        tags:
+          - "test:accounts-put"
+
+  http:
+    pool: 50
+
+  phases:
+    - name: Warm up
+      duration: 20
+      arrivalRate: 2
+    - name: Ramp up
+      duration: 60
+      arrivalRate: 2
+      rampTo: 25
+    - name: Peak
+      duration: 90
+      arrivalRate: 25
+    - name: Recovery
+      duration: 30
+      arrivalRate: 5
+
+scenarios:
+  - name: PUT /accounts/1/balance
+    flow:
+      - put:
+          url: '/accounts/1/balance'
+          json:
+            balance: 120000000
