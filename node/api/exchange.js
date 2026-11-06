@@ -10,8 +10,9 @@ function isValidDni(dni) {
 }
 
 const FAILURE_STATUS = {
-  arca_rejected: 403, 
-  arca_unavailable: 503, 
+  arca_rejected: 403,
+  insufficient_funds: 409,
+  arca_unavailable: 503,
 };
 
 export function createExchangeRouter(exchangeService) {

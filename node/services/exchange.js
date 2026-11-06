@@ -86,6 +86,7 @@ export class ExchangeService {
 
     if (!reservation.ok && reservation.reason === "insufficient_funds") {
       exchangeResult.obs = "Not enough funds on counter currency account";
+      exchangeResult.failure = "insufficient_funds";
     }
 
     const reserved = reservation.ok;

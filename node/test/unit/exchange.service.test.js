@@ -137,6 +137,7 @@ describe("ExchangeService - reservation fails", () => {
 
     assert.equal(result.ok, false);
     assert.equal(result.obs, "Not enough funds on counter currency account");
+    assert.equal(result.failure, "insufficient_funds");
     assert.deepEqual(transfer.calls, []);
     assert.equal(logRepository.entries[0].ok, false);
   });

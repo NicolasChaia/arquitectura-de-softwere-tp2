@@ -40,7 +40,7 @@ describe("POST /exchange (integration, real Redis + HTTP layer)", () => {
     assert.ok(usd.balance < 60000, "USD balance should have decreased");
   });
 
-  test("500s with a business obs when funds are insufficient, and balances stay untouched", async () => {
+  test("409s with a business obs when funds are insufficient, and balances stay untouched", async () => {
     const { app, accountsRepository } = await buildTestApp({ transferFn: async () => true });
     const usdBefore = await accountsRepository.getAccountByCurrency("USD");
 
@@ -55,9 +55,10 @@ describe("POST /exchange (integration, real Redis + HTTP layer)", () => {
         dni: "40101235",
       });
 
-    assert.equal(res.status, 500);
+    assert.equal(res.status, 409);
     assert.equal(res.body.ok, false);
     assert.equal(res.body.obs, "Not enough funds on counter currency account");
+    assert.equal(res.body.failure, "insufficient_funds");
 
     const usdAfter = await accountsRepository.getAccountByCurrency("USD");
     assert.equal(usdAfter.balance, usdBefore.balance);
@@ -131,7 +132,7 @@ describe("POST /exchange (integration, real Redis + HTTP layer)", () => {
 
     const responses = await Promise.all(attempts);
     const ok = responses.filter((r) => r.status === 200).length;
-    const rejected = responses.filter((r) => r.status === 500).length;
+    const rejected = responses.filter((r) => r.status === 409).length;
 
     assert.equal(ok + rejected, 60);
     assert.ok(ok > 0 && ok < 60, `expected a partial success mix, got ${ok} ok`);
