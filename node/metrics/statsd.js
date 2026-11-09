@@ -23,6 +23,10 @@ export class StatsdClient {
     this.count(name, 1, tags);
   }
 
+  gauge(name, value, tags) {
+    this.send(`${this.prefix}.${name}:${value}|g${formatTags(tags)}`);
+  }
+
   // duration in ms; Datadog aggregates it into avg/median/p95/max per flush
   timing(name, ms, tags) {
     this.send(`${this.prefix}.${name}:${ms}|ms${formatTags(tags)}`);

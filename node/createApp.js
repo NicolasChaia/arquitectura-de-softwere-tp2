@@ -8,6 +8,7 @@ import { createHealthRouter } from "./api/health.js";
 
 import { DomainError } from "./exceptions/errors.js";
 import { createRateLimiter } from "./middleware/rateLimit.js";
+import { createResponseTimeMiddleware } from "./middleware/responseTime.js";
 
 // Builds the Express app from already-constructed services, with no I/O
 // side effects (no Redis connection, no listen()). This is what lets tests
@@ -19,8 +20,13 @@ export function createApp({
   logService,
   exchangeService,
   rateLimits = { logWindowMs: 1000, logMax: 300, exchangeWindowMs: 1000, exchangeMax: 500 },
+  metrics = null,
 }) {
   const app = express();
+
+  if (metrics) {
+    app.use(createResponseTimeMiddleware(metrics));
+  }
 
   app.use(express.json());
 

@@ -1,0 +1,76 @@
+# Capacidad de POST /exchange: escalones de 50 req/s (30 s cada uno).
+# exchange-stress.yaml duplica la tasa en cada escalón (200 -> 400 -> 800), así
+# que no distingue una capacidad de 250 de una de 350 req/s. Este escenario sí.
+# Mismo flujo, pesos y montos que exchange.yaml. Se corre con 1 y con 2 nodos.
+config:
+  target: "{{ $processEnvironment.TARGET }}"
+  plugins:
+    publish-metrics:
+      - type: datadog
+        apiKey: "{{ $processEnvironment.DATADOG_API_KEY }}"
+        apiHost: "us5.datadoghq.com"
+        prefix: "artillery."
+        tags:
+          - "test:exchange-capacity"
+
+  http:
+    pool: 1000
+    timeout: 10
+
+  phases:
+    - { name: "150 rps", duration: 30, arrivalRate: 150 }
+    - { name: "200 rps", duration: 30, arrivalRate: 200 }
+    - { name: "250 rps", duration: 30, arrivalRate: 250 }
+    - { name: "300 rps", duration: 30, arrivalRate: 300 }
+    - { name: "350 rps", duration: 30, arrivalRate: 350 }
+    - { name: "400 rps", duration: 30, arrivalRate: 400 }
+    - { name: "450 rps", duration: 30, arrivalRate: 450 }
+    - { name: "500 rps", duration: 30, arrivalRate: 500 }
+    - { name: "550 rps", duration: 30, arrivalRate: 550 }
+    - { name: "600 rps", duration: 30, arrivalRate: 600 }
+    - { name: "650 rps", duration: 30, arrivalRate: 650 }
+
+before:
+  flow:
+    - put:
+        url: '/accounts/1/balance'
+        json:
+          balance: 1000000000000 # ARS interna, para que no se agote durante la prueba
+
+scenarios:
+  - name: Exchange USD to ARS
+    weight: 5
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: USD
+            counterCurrency: ARS
+            baseAccountId: 100
+            counterAccountId: 101
+            baseAmount: 100
+            dni: "{{ $randomNumber(1000000, 99999999) }}"
+  - name: Exchange EUR to ARS
+    weight: 3
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: EUR
+            counterCurrency: ARS
+            baseAccountId: 100
+            counterAccountId: 101
+            baseAmount: 50
+            dni: "{{ $randomNumber(1000000, 99999999) }}"
+  - name: Exchange BRL to ARS
+    weight: 2
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: BRL
+            counterCurrency: ARS
+            baseAccountId: 100
+            counterAccountId: 101
+            baseAmount: 200
+            dni: "{{ $randomNumber(1000000, 99999999) }}"

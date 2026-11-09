@@ -1,0 +1,58 @@
+# Ejecución previa local del generador: mismo pool/timeout y flujo que perf/exchange-stress.yaml, contra servidor-instantaneo.mjs.
+# Estrés de POST /exchange: escalones de 5 a 1600 req/s y recuperación.
+config:
+  target: "{{ $processEnvironment.TARGET }}"
+
+  http:
+    pool: 1000
+    timeout: 10
+
+  phases:
+    - { name: "400", duration: 20, arrivalRate: 400 }
+    - { name: "800", duration: 20, arrivalRate: 800 }
+    - { name: "1600", duration: 20, arrivalRate: 1600 }
+
+before:
+  flow:
+    - put:
+        url: '/accounts/1/balance'
+        json:
+          balance: 1000000000000 # ARS interna, para que no se agote durante la prueba
+
+scenarios:
+  - name: Exchange USD to ARS
+    weight: 5
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: USD
+            counterCurrency: ARS
+            baseAccountId: 100
+            counterAccountId: 101
+            baseAmount: 100
+            dni: "{{ $randomNumber(1000000, 99999999) }}"
+  - name: Exchange EUR to ARS
+    weight: 3
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: EUR
+            counterCurrency: ARS
+            baseAccountId: 100
+            counterAccountId: 101
+            baseAmount: 50
+            dni: "{{ $randomNumber(1000000, 99999999) }}"
+  - name: Exchange BRL to ARS
+    weight: 2
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: BRL
+            counterCurrency: ARS
+            baseAccountId: 100
+            counterAccountId: 101
+            baseAmount: 200
+            dni: "{{ $randomNumber(1000000, 99999999) }}"

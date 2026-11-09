@@ -1,0 +1,59 @@
+# Ejecución previa local: mismo flujo que perf/exchange.yaml, escalones de 50 a 800 req/s (con el rate limit normal).
+config:
+  target: "{{ $processEnvironment.TARGET }}"
+
+  http:
+    pool: 2000
+    timeout: 10
+
+  phases:
+    - { name: "50", duration: 30, arrivalRate: 50 }
+    - { name: "100", duration: 30, arrivalRate: 100 }
+    - { name: "200", duration: 30, arrivalRate: 200 }
+    - { name: "400", duration: 30, arrivalRate: 400 }
+    - { name: "800", duration: 30, arrivalRate: 800 }
+
+before:
+  flow:
+    - put:
+        url: '/accounts/1/balance'
+        json:
+          balance: 1000000000000 # ARS interna, para que no se agote durante la prueba
+
+scenarios:
+  - name: Exchange USD to ARS
+    weight: 5
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: USD
+            counterCurrency: ARS
+            baseAccountId: 100
+            counterAccountId: 101
+            baseAmount: 100
+            dni: "{{ $randomNumber(1000000, 99999999) }}"
+  - name: Exchange EUR to ARS
+    weight: 3
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: EUR
+            counterCurrency: ARS
+            baseAccountId: 100
+            counterAccountId: 101
+            baseAmount: 50
+            dni: "{{ $randomNumber(1000000, 99999999) }}"
+  - name: Exchange BRL to ARS
+    weight: 2
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: BRL
+            counterCurrency: ARS
+            baseAccountId: 100
+            counterAccountId: 101
+            baseAmount: 200
+            dni: "{{ $randomNumber(1000000, 99999999) }}"

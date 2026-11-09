@@ -9,6 +9,7 @@ import { ExchangeService } from "./services/exchange.js";
 
 import { connectRedis } from "./repository/redisClient.js";
 import { StatsdClient } from "./metrics/statsd.js";
+import { startRuntimeMetrics } from "./metrics/runtime.js";
 import { ArcaClient } from "./external/arca.js";
 import { createApp } from "./createApp.js";
 import config from "./config.js";
@@ -30,6 +31,7 @@ const ratesService = new RatesService(ratesRepository);
 const logService = new LogService(logRepository);
 
 const metrics = new StatsdClient();
+startRuntimeMetrics(metrics);
 const arcaClient = new ArcaClient({
   baseUri: config.arcaUri,
   timeoutMs: config.arcaTimeoutMs,
@@ -45,7 +47,7 @@ const exchangeService = new ExchangeService(
   arcaClient
 );
 
-const app = createApp({ accountsService, ratesService, logService, exchangeService });
+const app = createApp({ accountsService, ratesService, logService, exchangeService, metrics });
 
 const port = 3000;
 

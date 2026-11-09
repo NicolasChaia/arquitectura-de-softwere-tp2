@@ -1,0 +1,18 @@
+# Ejecución previa local de ARCA (arqsoft/arca:1.0.0 con --cpus 0.5 --memory 512m, como arca.tf).
+config:
+  target: "{{ $processEnvironment.ARCA_TARGET }}"
+  http:
+    pool: 2000
+    timeout: 10
+  phases:
+    - { name: "100", duration: 20, arrivalRate: 100 }
+    - { name: "200", duration: 20, arrivalRate: 200 }
+    - { name: "400", duration: 20, arrivalRate: 400 }
+    - { name: "800", duration: 20, arrivalRate: 800 }
+    - { name: "1600", duration: 20, arrivalRate: 1600 }
+scenarios:
+  - flow:
+      - post:
+          url: "/validar"
+          json:
+            dni: "{{ $randomNumber(1000000, 99999999) }}"

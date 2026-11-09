@@ -1,0 +1,1110 @@
+{
+  "title": "TP2 - arVault en Azure (pruebas de carga)",
+  "description": "Escenario: filtrar con la variable test (tag test:<escenario> de los YAML de perf/). Nodos: variable host. Latencias de Artillery incluyen la latencia de base L (generador fuera de Azure).",
+  "layout_type": "ordered",
+  "reflow_type": "fixed",
+  "template_variables": [
+    {
+      "name": "test",
+      "prefix": "test",
+      "available_values": [],
+      "default": "*"
+    },
+    {
+      "name": "host",
+      "prefix": "host",
+      "available_values": [],
+      "default": "*"
+    }
+  ],
+  "notify_list": [],
+  "widgets": [
+    {
+      "definition": {
+        "title": "Carga (Artillery, desde el generador)",
+        "type": "group",
+        "background_color": "vivid_blue",
+        "show_title": true,
+        "layout_type": "ordered",
+        "widgets": [
+          {
+            "definition": {
+              "title": "Throughput (req/s)",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "q1",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.http.requests{$test}.as_rate()"
+                    },
+                    {
+                      "name": "q2",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.http.responses{$test}.as_rate()"
+                    },
+                    {
+                      "name": "q3",
+                      "data_source": "metrics",
+                      "query": "avg:artillery.http.request_rate{$test}"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "q1",
+                      "alias": "requests enviados/s"
+                    },
+                    {
+                      "formula": "q2",
+                      "alias": "respuestas/s"
+                    },
+                    {
+                      "formula": "q3",
+                      "alias": "request_rate (Artillery)"
+                    }
+                  ],
+                  "display_type": "line",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ]
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "width": 6,
+              "height": 3
+            }
+          },
+          {
+            "definition": {
+              "title": "Latencia vista por el cliente (ms, incluye L)",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "q1",
+                      "data_source": "metrics",
+                      "query": "avg:artillery.http.response_time.median{$test}"
+                    },
+                    {
+                      "name": "q2",
+                      "data_source": "metrics",
+                      "query": "avg:artillery.http.response_time.p95{$test}"
+                    },
+                    {
+                      "name": "q3",
+                      "data_source": "metrics",
+                      "query": "avg:artillery.http.response_time.p99{$test}"
+                    },
+                    {
+                      "name": "q4",
+                      "data_source": "metrics",
+                      "query": "max:artillery.http.response_time.max{$test}"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "q1",
+                      "alias": "mediana"
+                    },
+                    {
+                      "formula": "q2",
+                      "alias": "p95"
+                    },
+                    {
+                      "formula": "q3",
+                      "alias": "p99"
+                    },
+                    {
+                      "formula": "q4",
+                      "alias": "max"
+                    }
+                  ],
+                  "display_type": "line",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ]
+            },
+            "layout": {
+              "x": 6,
+              "y": 0,
+              "width": 6,
+              "height": 3
+            }
+          },
+          {
+            "definition": {
+              "title": "Códigos HTTP (por intervalo)",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "c200",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.http.codes.200{$test}.as_count()"
+                    },
+                    {
+                      "name": "c400",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.http.codes.400{$test}.as_count()"
+                    },
+                    {
+                      "name": "c403",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.http.codes.403{$test}.as_count()"
+                    },
+                    {
+                      "name": "c409",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.http.codes.409{$test}.as_count()"
+                    },
+                    {
+                      "name": "c429",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.http.codes.429{$test}.as_count()"
+                    },
+                    {
+                      "name": "c500",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.http.codes.500{$test}.as_count()"
+                    },
+                    {
+                      "name": "c503",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.http.codes.503{$test}.as_count()"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "c200",
+                      "alias": "200"
+                    },
+                    {
+                      "formula": "c400",
+                      "alias": "400"
+                    },
+                    {
+                      "formula": "c403",
+                      "alias": "403"
+                    },
+                    {
+                      "formula": "c409",
+                      "alias": "409"
+                    },
+                    {
+                      "formula": "c429",
+                      "alias": "429"
+                    },
+                    {
+                      "formula": "c500",
+                      "alias": "500"
+                    },
+                    {
+                      "formula": "c503",
+                      "alias": "503"
+                    }
+                  ],
+                  "display_type": "bars",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ]
+            },
+            "layout": {
+              "x": 0,
+              "y": 3,
+              "width": 6,
+              "height": 3
+            }
+          },
+          {
+            "definition": {
+              "title": "Errores del cliente (sin respuesta HTTP)",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "q1",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.errors.ETIMEDOUT{$test}.as_count()"
+                    },
+                    {
+                      "name": "q2",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.errors.ECONNRESET{$test}.as_count()"
+                    },
+                    {
+                      "name": "q3",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.errors.ECONNREFUSED{$test}.as_count()"
+                    },
+                    {
+                      "name": "q4",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.vusers.failed{$test}.as_count()"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "q1",
+                      "alias": "ETIMEDOUT"
+                    },
+                    {
+                      "formula": "q2",
+                      "alias": "ECONNRESET"
+                    },
+                    {
+                      "formula": "q3",
+                      "alias": "ECONNREFUSED"
+                    },
+                    {
+                      "formula": "q4",
+                      "alias": "VUs fallidos"
+                    }
+                  ],
+                  "display_type": "bars",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ]
+            },
+            "layout": {
+              "x": 6,
+              "y": 3,
+              "width": 6,
+              "height": 3
+            }
+          },
+          {
+            "definition": {
+              "title": "Tasa de errores del sistema (%) = 5xx + errores de conexión / requests",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "a",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.http.codes.500{$test}.as_count()"
+                    },
+                    {
+                      "name": "b",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.http.codes.503{$test}.as_count()"
+                    },
+                    {
+                      "name": "c",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.vusers.failed{$test}.as_count()"
+                    },
+                    {
+                      "name": "r",
+                      "data_source": "metrics",
+                      "query": "sum:artillery.http.requests{$test}.as_count()"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "100 * (a + b + c) / r",
+                      "alias": "% errores"
+                    }
+                  ],
+                  "display_type": "line",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ]
+            },
+            "layout": {
+              "x": 0,
+              "y": 6,
+              "width": 12,
+              "height": 3
+            }
+          }
+        ]
+      }
+    },
+    {
+      "definition": {
+        "title": "Servidor (tiempo dentro del nodo, sin internet)",
+        "type": "group",
+        "background_color": "vivid_orange",
+        "show_title": true,
+        "layout_type": "ordered",
+        "widgets": [
+          {
+            "definition": {
+              "title": "POST /exchange: latencia en el servidor (ms)",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "q1",
+                      "data_source": "metrics",
+                      "query": "avg:exchange.http.response_time.median{$host,route:/exchange}"
+                    },
+                    {
+                      "name": "q2",
+                      "data_source": "metrics",
+                      "query": "avg:exchange.http.response_time.95percentile{$host,route:/exchange}"
+                    },
+                    {
+                      "name": "q3",
+                      "data_source": "metrics",
+                      "query": "max:exchange.http.response_time.max{$host,route:/exchange}"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "q1",
+                      "alias": "mediana"
+                    },
+                    {
+                      "formula": "q2",
+                      "alias": "p95"
+                    },
+                    {
+                      "formula": "q3",
+                      "alias": "max"
+                    }
+                  ],
+                  "display_type": "line",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ]
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "width": 6,
+              "height": 3
+            }
+          },
+          {
+            "definition": {
+              "title": "Mediana en el servidor por ruta y código (ms)",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "q1",
+                      "data_source": "metrics",
+                      "query": "avg:exchange.http.response_time.median{$host} by {route,status}"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "q1",
+                      "alias": "mediana"
+                    }
+                  ],
+                  "display_type": "line",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ]
+            },
+            "layout": {
+              "x": 6,
+              "y": 0,
+              "width": 6,
+              "height": 3
+            }
+          }
+        ]
+      }
+    },
+    {
+      "definition": {
+        "title": "ARCA (métricas propias de la app, exchange.arca.*)",
+        "type": "group",
+        "background_color": "vivid_purple",
+        "show_title": true,
+        "layout_type": "ordered",
+        "widgets": [
+          {
+            "definition": {
+              "title": "Latencia de ARCA vista desde el nodo (ms)",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "q1",
+                      "data_source": "metrics",
+                      "query": "avg:exchange.arca.latency.median{$host}"
+                    },
+                    {
+                      "name": "q2",
+                      "data_source": "metrics",
+                      "query": "avg:exchange.arca.latency.95percentile{$host}"
+                    },
+                    {
+                      "name": "q3",
+                      "data_source": "metrics",
+                      "query": "max:exchange.arca.latency.max{$host}"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "q1",
+                      "alias": "mediana"
+                    },
+                    {
+                      "formula": "q2",
+                      "alias": "p95"
+                    },
+                    {
+                      "formula": "q3",
+                      "alias": "max"
+                    }
+                  ],
+                  "display_type": "line",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ]
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "width": 6,
+              "height": 3
+            }
+          },
+          {
+            "definition": {
+              "title": "Resultado de las validaciones (por intervalo)",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "q1",
+                      "data_source": "metrics",
+                      "query": "sum:exchange.arca.validation.approved{$host}.as_count()"
+                    },
+                    {
+                      "name": "q2",
+                      "data_source": "metrics",
+                      "query": "sum:exchange.arca.validation.rejected{$host}.as_count()"
+                    },
+                    {
+                      "name": "q3",
+                      "data_source": "metrics",
+                      "query": "sum:exchange.arca.validation.error{$host}.as_count()"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "q1",
+                      "alias": "aprobadas"
+                    },
+                    {
+                      "formula": "q2",
+                      "alias": "rechazadas (403)"
+                    },
+                    {
+                      "formula": "q3",
+                      "alias": "error (503)"
+                    }
+                  ],
+                  "display_type": "bars",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ]
+            },
+            "layout": {
+              "x": 6,
+              "y": 0,
+              "width": 6,
+              "height": 3
+            }
+          },
+          {
+            "definition": {
+              "title": "Errores de ARCA por motivo",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "q1",
+                      "data_source": "metrics",
+                      "query": "sum:exchange.arca.error.bad_response{$host}.as_count()"
+                    },
+                    {
+                      "name": "q2",
+                      "data_source": "metrics",
+                      "query": "sum:exchange.arca.error.timeout{$host}.as_count()"
+                    },
+                    {
+                      "name": "q3",
+                      "data_source": "metrics",
+                      "query": "sum:exchange.arca.error.unreachable{$host}.as_count()"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "q1",
+                      "alias": "bad_response (HTTP 5xx)"
+                    },
+                    {
+                      "formula": "q2",
+                      "alias": "timeout"
+                    },
+                    {
+                      "formula": "q3",
+                      "alias": "unreachable"
+                    }
+                  ],
+                  "display_type": "bars",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ]
+            },
+            "layout": {
+              "x": 0,
+              "y": 3,
+              "width": 6,
+              "height": 3
+            }
+          },
+          {
+            "definition": {
+              "title": "% de validaciones con error",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "e",
+                      "data_source": "metrics",
+                      "query": "sum:exchange.arca.validation.error{$host}.as_count()"
+                    },
+                    {
+                      "name": "o",
+                      "data_source": "metrics",
+                      "query": "sum:exchange.arca.validation.approved{$host}.as_count()"
+                    },
+                    {
+                      "name": "r",
+                      "data_source": "metrics",
+                      "query": "sum:exchange.arca.validation.rejected{$host}.as_count()"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "100 * e / (e + o + r)",
+                      "alias": "% error"
+                    }
+                  ],
+                  "display_type": "line",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ]
+            },
+            "layout": {
+              "x": 6,
+              "y": 3,
+              "width": 6,
+              "height": 3
+            }
+          }
+        ]
+      }
+    },
+    {
+      "definition": {
+        "title": "Nodos del VMSS (agente de Datadog)",
+        "type": "group",
+        "background_color": "vivid_green",
+        "show_title": true,
+        "layout_type": "ordered",
+        "widgets": [
+          {
+            "definition": {
+              "title": "CPU por nodo (%)",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "i",
+                      "data_source": "metrics",
+                      "query": "avg:system.cpu.idle{$host} by {host}"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "100 - i",
+                      "alias": "CPU usada"
+                    }
+                  ],
+                  "display_type": "line",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ],
+              "yaxis": {
+                "min": "0",
+                "max": "100"
+              }
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "width": 6,
+              "height": 3
+            }
+          },
+          {
+            "definition": {
+              "title": "Memoria usada por nodo (%)",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "u",
+                      "data_source": "metrics",
+                      "query": "avg:system.mem.pct_usable{$host} by {host}"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "100 * (1 - u)",
+                      "alias": "memoria usada"
+                    }
+                  ],
+                  "display_type": "line",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ],
+              "yaxis": {
+                "min": "0",
+                "max": "100"
+              }
+            },
+            "layout": {
+              "x": 6,
+              "y": 0,
+              "width": 6,
+              "height": 3
+            }
+          },
+          {
+            "definition": {
+              "title": "Load average (1 min) por nodo",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "q1",
+                      "data_source": "metrics",
+                      "query": "avg:system.load.1{$host} by {host}"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "q1",
+                      "alias": "load 1m"
+                    }
+                  ],
+                  "display_type": "line",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ],
+              "markers": [
+                {
+                  "value": "y = 2",
+                  "display_type": "error dashed",
+                  "label": "2 vCPU"
+                }
+              ]
+            },
+            "layout": {
+              "x": 0,
+              "y": 3,
+              "width": 6,
+              "height": 3
+            }
+          },
+          {
+            "definition": {
+              "title": "Red por nodo (bytes/s)",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "q1",
+                      "data_source": "metrics",
+                      "query": "avg:system.net.bytes_rcvd{$host} by {host}"
+                    },
+                    {
+                      "name": "q2",
+                      "data_source": "metrics",
+                      "query": "avg:system.net.bytes_sent{$host} by {host}"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "q1",
+                      "alias": "recibidos"
+                    },
+                    {
+                      "formula": "q2",
+                      "alias": "enviados"
+                    }
+                  ],
+                  "display_type": "line",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ]
+            },
+            "layout": {
+              "x": 6,
+              "y": 3,
+              "width": 6,
+              "height": 3
+            }
+          },
+          {
+            "definition": {
+              "title": "Event loop utilization del hilo principal (1 = saturado)",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "q1",
+                      "data_source": "metrics",
+                      "query": "avg:exchange.node.event_loop_utilization{$host} by {host}"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "q1",
+                      "alias": "ELU"
+                    }
+                  ],
+                  "display_type": "line",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ],
+              "markers": [
+                {
+                  "value": "y = 1",
+                  "display_type": "error dashed",
+                  "label": "saturado"
+                }
+              ]
+            },
+            "layout": {
+              "x": 0,
+              "y": 6,
+              "width": 6,
+              "height": 3
+            }
+          },
+          {
+            "definition": {
+              "title": "CPU del proceso Node, todos los hilos (cores)",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "timeseries",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value"
+              ],
+              "requests": [
+                {
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "name": "q1",
+                      "data_source": "metrics",
+                      "query": "avg:exchange.node.process_cpu_cores{$host} by {host}"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "q1",
+                      "alias": "cores"
+                    }
+                  ],
+                  "display_type": "line",
+                  "style": {
+                    "palette": "dog_classic",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  }
+                }
+              ],
+              "markers": [
+                {
+                  "value": "y = 2",
+                  "display_type": "error dashed",
+                  "label": "2 vCPU"
+                }
+              ]
+            },
+            "layout": {
+              "x": 6,
+              "y": 6,
+              "width": 6,
+              "height": 3
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

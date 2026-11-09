@@ -1,0 +1,35 @@
+# Prueba manual de ARCA de punta a punta (sin carga)
+# Fecha: 2026-11-06T12:04Z (09:04 hora Argentina), 1 nodo Standard_D2as_v4, eastus
+# Origen: PC del generador de carga (CABA, Ethernet, IPLAN), mismo origen que la latencia de base
+# Qué se hizo: después de un deploy, 10 POST /exchange secuenciales con DNIs válidos
+#   distintos (ARS->USD), uno por vez, con curl. Los tiempos de curl son totales:
+#   incluyen el handshake TCP (~1 RTT extra, ver curl-timing.txt), a diferencia de
+#   http.response_time de Artillery, que mide desde el envío hasta el primer byte.
+# Se copian textualmente la salida de curl y las líneas de ARCA del log de pm2 del nodo.
+
+== POST /exchange con DNIs validos (curl: dni -> código HTTP, tiempo total)
+dni=40101235 -> HTTP 503 0.360445s "arca":{"status":"error","reason":"bad_response","detail":"HTTP 500, non-JSON body","latencyMs":65}
+dni=1000000 -> HTTP 200 1.041779s "arca":{"status":"approved","codigoAutorizacion":"8f041e87-e55d-4e78-bbac-2134c97b34fe","latencyMs":384}
+dni=99999999 -> HTTP 403 0.690406s "arca":{"status":"rejected","latencyMs":399}
+dni=12345678 -> HTTP 200 0.887562s "arca":{"status":"approved","codigoAutorizacion":"405c90d9-bd9f-4746-ab4d-59162206b62a","latencyMs":226}
+dni=20304050 -> HTTP 200 0.946312s "arca":{"status":"approved","codigoAutorizacion":"1a9cdb0d-c4f5-47cb-896a-069b7cc79301","latencyMs":266}
+dni=33444555 -> HTTP 200 0.933986s "arca":{"status":"approved","codigoAutorizacion":"bb8933eb-e59a-47f5-a126-46f143603d9d","latencyMs":262}
+dni=27123456 -> HTTP 403 0.496089s "arca":{"status":"rejected","latencyMs":206}
+dni=45678901 -> HTTP 403 0.794990s "arca":{"status":"rejected","latencyMs":499}
+dni=30111222 -> HTTP 503 0.295450s "arca":{"status":"error","reason":"bad_response","detail":"HTTP 500, non-JSON body","latencyMs":3}
+dni=18765432 -> HTTP 200 1.091304s "arca":{"status":"approved","codigoAutorizacion":"df8f70fc-f459-4b77-a027-88042fb694b3","latencyMs":433}
+
+== Log de la app (pm2 logs app) en el nodo 10.0.2.4
+ARCA dni=40101235 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=65
+ARCA dni=1000000 status=approved codigoAutorizacion=8f041e87-e55d-4e78-bbac-2134c97b34fe latencyMs=384
+ARCA dni=99999999 status=rejected latencyMs=399
+ARCA dni=12345678 status=approved codigoAutorizacion=405c90d9-bd9f-4746-ab4d-59162206b62a latencyMs=226
+ARCA dni=20304050 status=approved codigoAutorizacion=1a9cdb0d-c4f5-47cb-896a-069b7cc79301 latencyMs=266
+ARCA dni=33444555 status=approved codigoAutorizacion=bb8933eb-e59a-47f5-a126-46f143603d9d latencyMs=262
+ARCA dni=27123456 status=rejected latencyMs=206
+ARCA dni=45678901 status=rejected latencyMs=499
+ARCA dni=30111222 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=3
+ARCA dni=18765432 status=approved codigoAutorizacion=df8f70fc-f459-4b77-a027-88042fb694b3 latencyMs=433
+
+# Resumen (10 muestras): 5 aprobadas (latencia 226-433 ms), 3 rechazadas (206-499 ms),
+# 2 con HTTP 500 de ARCA, que responde rápido en ese caso (3 y 65 ms).

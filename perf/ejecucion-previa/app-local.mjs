@@ -1,0 +1,33 @@
+// Igual que node/app.js, pero con ARCA y Redis locales, y midiendo la CPU del proceso.
+import { performance as P } from "node:perf_hooks";
+const R = process.argv[2];
+const imp = (p) => import(`file:///${R}/${p}`);
+const { AccountsRepository } = await imp("repository/accounts.js");
+const { RatesRepository } = await imp("repository/rates.js");
+const { LogRepository } = await imp("repository/log.js");
+const { AccountsService } = await imp("services/accounts.js");
+const { RatesService } = await imp("services/rates.js");
+const { LogService } = await imp("services/log.js");
+const { ExchangeService } = await imp("services/exchange.js");
+const { connectRedis, getRedisClient } = await imp("repository/redisClient.js");
+const { StatsdClient } = await imp("metrics/statsd.js");
+const { ArcaClient } = await imp("external/arca.js");
+const { createApp } = await imp("createApp.js");
+await connectRedis({ url: process.env.REDIS_URL });
+await getRedisClient().flushDb();
+const a = new AccountsRepository(), r = new RatesRepository(), l = new LogRepository();
+await a.init(); await r.init(); await l.init();
+const metrics = new StatsdClient({ port: 18125 });
+const arcaClient = new ArcaClient({ baseUri: process.env.ARCA_URI, timeoutMs: 3000, metrics });
+const exchangeService = new ExchangeService(a, r, l, metrics, undefined, arcaClient);
+const app = createApp({ accountsService: new AccountsService(a), ratesService: new RatesService(r), logService: new LogService(l), exchangeService, metrics, ...(process.env.NO_LIMIT ? { rateLimits: { logWindowMs: 1000, logMax: 1e9, exchangeWindowMs: 1000, exchangeMax: 1e9 } } : {}) });
+let n = 0; app.use((q, s, nx) => nx());
+const srv = app.listen(3300, () => console.log("listening"));
+srv.on("request", (q, s) => s.on("finish", () => n++));
+let last = process.cpuUsage(), lastN = 0, lastT = performance.now(), lastE = P.eventLoopUtilization();
+setInterval(() => {
+  const c = process.cpuUsage(last), t = performance.now();
+  const cpuMs = (c.user + c.system) / 1000, dt = t - lastT, dn = n - lastN;
+  console.log(JSON.stringify({ t: Date.now(), rps: +(dn * 1000 / dt).toFixed(1), cpuPct: +(100 * cpuMs / dt).toFixed(1), cpuMsPerReq: dn ? +(cpuMs / dn).toFixed(3) : null, elu: +P.eventLoopUtilization(lastE).utilization.toFixed(3) }));
+  last = process.cpuUsage(); lastN = n; lastT = t; lastE = P.eventLoopUtilization();
+}, 2000).unref();

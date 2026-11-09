@@ -1,0 +1,4 @@
+== 5000 DNIs aleatorios, concurrencia 20 (corrida del 9/11)
+approved  n= 2461 (49.2%)  min=203 p50=359 p95=492 max=526 ms
+rejected  n= 1266 (25.3%)  min=202 p50=357 p95=493 max=514 ms
+error     n= 1273 (25.5%)  min=1 p50=6 p95=16 max=46 ms
