@@ -18,6 +18,12 @@ variable "region" {
   default = "eastus"
 }
 
+# Region for the jumpbox only (see network.tf): another region has its own
+# 4 vCPU Free Trial quota. SSH-only traffic, so the distance does not matter.
+variable "jumpbox_region" {
+  default = "eastus2"
+}
+
 variable "ssh_key_group_name" {
   default = "keys"
 }

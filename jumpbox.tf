@@ -9,7 +9,7 @@ resource "random_string" "jumpbox_name" {
 # Create a public IP address
 resource "azurerm_public_ip" "jumpbox_public_ip" {
   name                = "jumpbox_public_ip"
-  location            = azurerm_resource_group.tp2_resource_group.location
+  location            = var.jumpbox_region
   resource_group_name = azurerm_resource_group.tp2_resource_group.name
   allocation_method   = "Static"
   sku                 = "Standard"
@@ -19,7 +19,7 @@ resource "azurerm_public_ip" "jumpbox_public_ip" {
 # Configure NIC
 resource "azurerm_network_interface" "jumpbox_nic" {
   name                = "jumpbox_nic"
-  location            = azurerm_resource_group.tp2_resource_group.location
+  location            = var.jumpbox_region
   resource_group_name = azurerm_resource_group.tp2_resource_group.name
 
   ip_configuration {
@@ -40,7 +40,7 @@ resource "azurerm_network_interface_security_group_association" "jumpbox_nic_nsg
 resource "azurerm_linux_virtual_machine" "jumpbox" {
   name                  = "jumpbox"
   resource_group_name   = azurerm_resource_group.tp2_resource_group.name
-  location              = azurerm_resource_group.tp2_resource_group.location
+  location              = var.jumpbox_region
   size                  = var.machine_sku
   admin_username        = "azureuser"
   network_interface_ids = [azurerm_network_interface.jumpbox_nic.id]
