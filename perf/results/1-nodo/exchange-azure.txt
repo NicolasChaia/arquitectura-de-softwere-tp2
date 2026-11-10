@@ -1,0 +1,52 @@
+Azure Monitor para results/1-nodo/exchange.json
+Rango (UTC): 2026-11-09T22:43:45Z -> 2026-11-09T22:47:16Z, granularidad 1 minuto
+
+== ARCA (Container Instances, 0.5 vCPU = 500 millicores)
+-- CpuUsage (Count)
+   2026-11-09T22:43:00Z  avg=         0.0  max=         0.0   (max = 0% de 0.5 vCPU)
+   2026-11-09T22:44:00Z  avg=         0.0  max=         0.0   (max = 0% de 0.5 vCPU)
+   2026-11-09T22:45:00Z  avg=         0.0  max=         0.0   (max = 0% de 0.5 vCPU)
+   2026-11-09T22:46:00Z  avg=         1.5  max=         2.0   (max = 0% de 0.5 vCPU)
+-- MemoryUsage (Bytes)
+   2026-11-09T22:43:00Z  avg=  14958592.0  max=  14958592.0
+   2026-11-09T22:44:00Z  avg=  14964736.0  max=  14966784.0
+   2026-11-09T22:45:00Z  avg=  14968832.0  max=  14970880.0
+   2026-11-09T22:46:00Z  avg=  19269632.0  max=  21221376.0
+-- NetworkBytesReceivedPerSecond (Bytes)
+   2026-11-09T22:43:00Z  avg=         0.0  max=         0.0
+   2026-11-09T22:44:00Z  avg=         0.0  max=         0.0
+   2026-11-09T22:45:00Z  avg=         0.0  max=         0.0
+   2026-11-09T22:46:00Z  avg=      1315.5  max=      1880.0
+-- NetworkBytesTransmittedPerSecond (Bytes)
+   2026-11-09T22:43:00Z  avg=         0.0  max=         0.0
+   2026-11-09T22:44:00Z  avg=         0.0  max=         0.0
+   2026-11-09T22:45:00Z  avg=         0.0  max=         0.0
+   2026-11-09T22:46:00Z  avg=       841.0  max=      1211.0
+
+== Managed Redis
+-- percentProcessorTime (Percent)
+   2026-11-09T22:43:00Z  avg=        16.5  max=        19.0
+   2026-11-09T22:44:00Z  avg=        17.0  max=        19.0
+   2026-11-09T22:45:00Z  avg=        17.0  max=        19.0
+   2026-11-09T22:46:00Z  avg=        17.0  max=        19.0
+-- serverLoad (Percent)
+   2026-11-09T22:43:00Z  avg=        16.5  max=        19.0
+   2026-11-09T22:44:00Z  avg=        17.0  max=        19.0
+   2026-11-09T22:45:00Z  avg=        17.0  max=        19.0
+   2026-11-09T22:46:00Z  avg=        17.0  max=        19.0
+-- usedmemorypercentage (Percent)
+   2026-11-09T22:43:00Z  avg=         1.0  max=         1.0
+   2026-11-09T22:44:00Z  avg=         1.0  max=         1.0
+   2026-11-09T22:45:00Z  avg=         1.0  max=         1.0
+   2026-11-09T22:46:00Z  avg=         1.0  max=         1.0
+-- operationsPerSecond (CountPerSecond)
+   2026-11-09T22:43:00Z  avg=         1.0  max=         1.0
+   2026-11-09T22:44:00Z  avg=         1.0  max=         1.0
+   2026-11-09T22:45:00Z  avg=         1.0  max=         1.0
+   2026-11-09T22:46:00Z  avg=        28.0  max=        52.0
+-- connectedclients (Count)
+   2026-11-09T22:43:00Z  avg=         2.0  max=         2.0
+   2026-11-09T22:44:00Z  avg=         2.0  max=         2.0
+   2026-11-09T22:45:00Z  avg=         2.0  max=         2.0
+   2026-11-09T22:46:00Z  avg=         1.0  max=         1.0
+

@@ -1,0 +1,2336 @@
+
+> perf@1.0.0 artillery
+> artillery run exchange-capacity.yaml --output results/1-nodo/exchange-capacity.json
+
+Test run id: t8meq_cy4cmbyzann4t5a94bt8rffxx35pn_yngz
+2026-11-09T22:59:49.410Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T22:59:49.411Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265189410',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T22:59:49.412Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-09T22:59:59.700Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T22:59:59.700Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265199700',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T22:59:59.700Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-09T23:00:07.339Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T23:00:07.340Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265207339',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T23:00:07.340Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-09T23:00:15.446Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T23:00:15.448Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265215446',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T23:00:15.448Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-09T23:00:23.961Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T23:00:23.963Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265223961',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T23:00:23.963Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-09T23:00:32.150Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T23:00:32.152Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265232150',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T23:00:32.152Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-09T23:00:40.661Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T23:00:40.662Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265240661',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T23:00:40.663Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-09T23:00:49.019Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T23:00:49.020Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265249019',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T23:00:49.021Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-09T23:00:57.005Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T23:00:57.007Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265257005',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T23:00:57.007Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-09T23:01:04.998Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T23:01:04.999Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265264997',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T23:01:04.999Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-09T23:01:12.845Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T23:01:12.846Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265272844',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T23:01:12.846Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-09T23:01:20.322Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T23:01:20.324Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265280322',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T23:01:20.324Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-09T23:01:27.630Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T23:01:27.632Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265287630',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T23:01:27.632Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-09T23:01:34.863Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T23:01:34.864Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265294862',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T23:01:34.864Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-09T23:01:42.126Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T23:01:42.128Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265302126',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T23:01:42.128Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-09T23:01:49.305Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-09T23:01:49.306Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794265309304',
+    text: 'Target: http://ohcksbpxsp.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-capacity' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-09T23:01:49.306Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+Phase started: 150 rps (index: 0, duration: 30s) 20:01:49(-0300)
+
+2026-11-09T23:01:49.557Z plugin:publish-metrics:datadog-statsd sending start event
+2026-11-09T23:01:49.557Z plugin:publish-metrics:datadog-statsd sending event Target: http://ohcksbpxsp.eastus.cloudapp.azure.com
+--------------------------------------
+Metrics for period to: 20:01:50(-0300) (width: 0.331s)
+--------------------------------------
+
+http.request_rate: ............................................................. 14/sec
+http.requests: ................................................................. 14
+vusers.created: ................................................................ 14
+vusers.created_by_name.Exchange BRL to ARS: .................................... 2
+vusers.created_by_name.Exchange EUR to ARS: .................................... 3
+vusers.created_by_name.Exchange USD to ARS: .................................... 9
+
+
+--------------------------------------
+Metrics for period to: 20:02:00(-0300) (width: 9.987s)
+--------------------------------------
+
+http.codes.200: ................................................................ 700
+http.codes.403: ................................................................ 358
+http.codes.503: ................................................................ 343
+http.downloaded_bytes: ......................................................... 531452
+http.request_rate: ............................................................. 150/sec
+http.requests: ................................................................. 1479
+http.response_time:
+  min: ......................................................................... 144
+  max: ......................................................................... 1042
+  mean: ........................................................................ 577.6
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1002.4
+http.response_time.2xx:
+  min: ......................................................................... 573
+  max: ......................................................................... 1042
+  mean: ........................................................................ 829.5
+  median: ...................................................................... 820.7
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 346
+  max: ......................................................................... 650
+  mean: ........................................................................ 498.2
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 173
+  mean: ........................................................................ 146.6
+  median: ...................................................................... 147
+  p95: ......................................................................... 153
+  p99: ......................................................................... 156
+http.responses: ................................................................ 1401
+vusers.completed: .............................................................. 1401
+vusers.created: ................................................................ 1479
+vusers.created_by_name.Exchange BRL to ARS: .................................... 294
+vusers.created_by_name.Exchange EUR to ARS: .................................... 432
+vusers.created_by_name.Exchange USD to ARS: .................................... 753
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 145.1
+  max: ......................................................................... 1172.8
+  mean: ........................................................................ 593.5
+  median: ...................................................................... 658.6
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1064.4
+
+
+Phase completed: 150 rps (index: 0, duration: 30s) 20:02:19(-0300)
+
+Phase started: 200 rps (index: 1, duration: 30s) 20:02:19(-0300)
+
+--------------------------------------
+Metrics for period to: 20:02:10(-0300) (width: 9.996s)
+--------------------------------------
+
+http.codes.200: ................................................................ 753
+http.codes.403: ................................................................ 367
+http.codes.503: ................................................................ 390
+http.downloaded_bytes: ......................................................... 573694
+http.request_rate: ............................................................. 150/sec
+http.requests: ................................................................. 1500
+http.response_time:
+  min: ......................................................................... 144
+  max: ......................................................................... 1059
+  mean: ........................................................................ 575.6
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1002.4
+http.response_time.2xx:
+  min: ......................................................................... 564
+  max: ......................................................................... 1059
+  mean: ........................................................................ 835.8
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 345
+  max: ......................................................................... 655
+  mean: ........................................................................ 497.5
+  median: ...................................................................... 507.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 166
+  mean: ........................................................................ 146.6
+  median: ...................................................................... 147
+  p95: ......................................................................... 153
+  p99: ......................................................................... 159.2
+http.responses: ................................................................ 1510
+vusers.completed: .............................................................. 1510
+vusers.created: ................................................................ 1500
+vusers.created_by_name.Exchange BRL to ARS: .................................... 318
+vusers.created_by_name.Exchange EUR to ARS: .................................... 455
+vusers.created_by_name.Exchange USD to ARS: .................................... 727
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 145.1
+  max: ......................................................................... 1088.2
+  mean: ........................................................................ 578.6
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:02:20(-0300) (width: 9.993s)
+--------------------------------------
+
+http.codes.200: ................................................................ 758
+http.codes.403: ................................................................ 365
+http.codes.503: ................................................................ 371
+http.downloaded_bytes: ......................................................... 566851
+http.request_rate: ............................................................. 150/sec
+http.requests: ................................................................. 1507
+http.response_time:
+  min: ......................................................................... 144
+  max: ......................................................................... 1094
+  mean: ........................................................................ 582.6
+  median: ...................................................................... 645.6
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 578
+  max: ......................................................................... 1094
+  mean: ........................................................................ 835
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 345
+  max: ......................................................................... 653
+  mean: ........................................................................ 502.2
+  median: ...................................................................... 507.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 164
+  mean: ........................................................................ 146
+  median: ...................................................................... 144
+  p95: ......................................................................... 149.9
+  p99: ......................................................................... 153
+http.responses: ................................................................ 1494
+vusers.completed: .............................................................. 1494
+vusers.created: ................................................................ 1507
+vusers.created_by_name.Exchange BRL to ARS: .................................... 312
+vusers.created_by_name.Exchange EUR to ARS: .................................... 449
+vusers.created_by_name.Exchange USD to ARS: .................................... 746
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 145.1
+  max: ......................................................................... 1182.8
+  mean: ........................................................................ 585.9
+  median: ...................................................................... 645.6
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:02:30(-0300) (width: 9.987s)
+--------------------------------------
+
+http.codes.200: ................................................................ 943
+http.codes.403: ................................................................ 520
+http.codes.503: ................................................................ 507
+http.downloaded_bytes: ......................................................... 748761
+http.request_rate: ............................................................. 200/sec
+http.requests: ................................................................. 1994
+http.response_time:
+  min: ......................................................................... 144
+  max: ......................................................................... 1063
+  mean: ........................................................................ 570.8
+  median: ...................................................................... 608
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 587
+  max: ......................................................................... 1063
+  mean: ........................................................................ 838.4
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 348
+  max: ......................................................................... 650
+  mean: ........................................................................ 499
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 288
+  mean: ........................................................................ 146.8
+  median: ...................................................................... 144
+  p95: ......................................................................... 153
+  p99: ......................................................................... 162.4
+http.responses: ................................................................ 1970
+vusers.completed: .............................................................. 1970
+vusers.created: ................................................................ 1995
+vusers.created_by_name.Exchange BRL to ARS: .................................... 422
+vusers.created_by_name.Exchange EUR to ARS: .................................... 575
+vusers.created_by_name.Exchange USD to ARS: .................................... 998
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 144.8
+  max: ......................................................................... 1156.6
+  mean: ........................................................................ 575.2
+  median: ...................................................................... 620.3
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:02:40(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 1030
+http.codes.403: ................................................................ 490
+http.codes.503: ................................................................ 493
+http.downloaded_bytes: ......................................................... 763413
+http.request_rate: ............................................................. 200/sec
+http.requests: ................................................................. 2000
+http.response_time:
+  min: ......................................................................... 144
+  max: ......................................................................... 1047
+  mean: ........................................................................ 580.8
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 572
+  max: ......................................................................... 1047
+  mean: ........................................................................ 827.9
+  median: ...................................................................... 820.7
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 346
+  max: ......................................................................... 788
+  mean: ........................................................................ 497.7
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 448
+  mean: ........................................................................ 147.3
+  median: ...................................................................... 144
+  p95: ......................................................................... 153
+  p99: ......................................................................... 162.4
+http.responses: ................................................................ 2013
+vusers.completed: .............................................................. 2013
+vusers.created: ................................................................ 2000
+vusers.created_by_name.Exchange BRL to ARS: .................................... 399
+vusers.created_by_name.Exchange EUR to ARS: .................................... 587
+vusers.created_by_name.Exchange USD to ARS: .................................... 1014
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 144.8
+  max: ......................................................................... 1134.3
+  mean: ........................................................................ 583.6
+  median: ...................................................................... 645.6
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+Phase completed: 200 rps (index: 1, duration: 30s) 20:02:49(-0300)
+
+Phase started: 250 rps (index: 2, duration: 30s) 20:02:49(-0300)
+
+--------------------------------------
+Metrics for period to: 20:02:50(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 971
+http.codes.403: ................................................................ 528
+http.codes.503: ................................................................ 497
+http.downloaded_bytes: ......................................................... 757760
+http.request_rate: ............................................................. 200/sec
+http.requests: ................................................................. 2008
+http.response_time:
+  min: ......................................................................... 143
+  max: ......................................................................... 1054
+  mean: ........................................................................ 571.6
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1002.4
+http.response_time.2xx:
+  min: ......................................................................... 597
+  max: ......................................................................... 1054
+  mean: ........................................................................ 829.9
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 344
+  max: ......................................................................... 821
+  mean: ........................................................................ 495.2
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 143
+  max: ......................................................................... 453
+  mean: ........................................................................ 148.2
+  median: ...................................................................... 144
+  p95: ......................................................................... 153
+  p99: ......................................................................... 186.8
+http.responses: ................................................................ 1996
+vusers.completed: .............................................................. 1996
+vusers.created: ................................................................ 2007
+vusers.created_by_name.Exchange BRL to ARS: .................................... 418
+vusers.created_by_name.Exchange EUR to ARS: .................................... 600
+vusers.created_by_name.Exchange USD to ARS: .................................... 989
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 144.8
+  max: ......................................................................... 1150.8
+  mean: ........................................................................ 574.7
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:03:00(-0300) (width: 9.995s)
+--------------------------------------
+
+http.codes.200: ................................................................ 1183
+http.codes.403: ................................................................ 640
+http.codes.503: ................................................................ 641
+http.downloaded_bytes: ......................................................... 936799
+http.request_rate: ............................................................. 250/sec
+http.requests: ................................................................. 2491
+http.response_time:
+  min: ......................................................................... 144
+  max: ......................................................................... 1199
+  mean: ........................................................................ 571.6
+  median: ...................................................................... 620.3
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 588
+  max: ......................................................................... 1199
+  mean: ........................................................................ 838.9
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1043.3
+http.response_time.4xx:
+  min: ......................................................................... 346
+  max: ......................................................................... 694
+  mean: ........................................................................ 500.7
+  median: ...................................................................... 507.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 459
+  mean: ........................................................................ 148.9
+  median: ...................................................................... 147
+  p95: ......................................................................... 156
+  p99: ......................................................................... 183.1
+http.responses: ................................................................ 2464
+vusers.completed: .............................................................. 2464
+vusers.created: ................................................................ 2493
+vusers.created_by_name.Exchange BRL to ARS: .................................... 509
+vusers.created_by_name.Exchange EUR to ARS: .................................... 722
+vusers.created_by_name.Exchange USD to ARS: .................................... 1262
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 144.4
+  max: ......................................................................... 1199.6
+  mean: ........................................................................ 575.5
+  median: ...................................................................... 620.3
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1043.3
+
+
+--------------------------------------
+Metrics for period to: 20:03:10(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 1280
+http.codes.403: ................................................................ 613
+http.codes.503: ................................................................ 602
+http.downloaded_bytes: ......................................................... 945850
+http.request_rate: ............................................................. 250/sec
+http.requests: ................................................................. 2500
+http.response_time:
+  min: ......................................................................... 143
+  max: ......................................................................... 1133
+  mean: ........................................................................ 587.5
+  median: ...................................................................... 658.6
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 554
+  max: ......................................................................... 1133
+  mean: ........................................................................ 836.2
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 346
+  max: ......................................................................... 660
+  mean: ........................................................................ 500.4
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 143
+  max: ......................................................................... 180
+  mean: ........................................................................ 147.3
+  median: ...................................................................... 147
+  p95: ......................................................................... 156
+  p99: ......................................................................... 165.7
+http.responses: ................................................................ 2495
+vusers.completed: .............................................................. 2495
+vusers.created: ................................................................ 2500
+vusers.created_by_name.Exchange BRL to ARS: .................................... 485
+vusers.created_by_name.Exchange EUR to ARS: .................................... 720
+vusers.created_by_name.Exchange USD to ARS: .................................... 1295
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 144.6
+  max: ......................................................................... 1133.7
+  mean: ........................................................................ 589.6
+  median: ...................................................................... 658.6
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+
+
+Phase completed: 250 rps (index: 2, duration: 30s) 20:03:19(-0300)
+
+Phase started: 300 rps (index: 3, duration: 30s) 20:03:19(-0300)
+
+--------------------------------------
+Metrics for period to: 20:03:20(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 1260
+http.codes.403: ................................................................ 636
+http.codes.503: ................................................................ 612
+http.downloaded_bytes: ......................................................... 951215
+http.request_rate: ............................................................. 250/sec
+http.requests: ................................................................. 2503
+http.response_time:
+  min: ......................................................................... 144
+  max: ......................................................................... 1282
+  mean: ........................................................................ 579.1
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 601
+  max: ......................................................................... 1282
+  mean: ........................................................................ 831.7
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1043.3
+http.response_time.4xx:
+  min: ......................................................................... 345
+  max: ......................................................................... 654
+  mean: ........................................................................ 493.5
+  median: ...................................................................... 487.9
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 361
+  mean: ........................................................................ 147.9
+  median: ...................................................................... 147
+  p95: ......................................................................... 156
+  p99: ......................................................................... 172.5
+http.responses: ................................................................ 2508
+vusers.completed: .............................................................. 2508
+vusers.created: ................................................................ 2504
+vusers.created_by_name.Exchange BRL to ARS: .................................... 484
+vusers.created_by_name.Exchange EUR to ARS: .................................... 728
+vusers.created_by_name.Exchange USD to ARS: .................................... 1292
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 144.7
+  max: ......................................................................... 1302.8
+  mean: ........................................................................ 582.4
+  median: ...................................................................... 645.6
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:03:30(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 1468
+http.codes.403: ................................................................ 756
+http.codes.503: ................................................................ 746
+http.downloaded_bytes: ......................................................... 1127667
+http.request_rate: ............................................................. 300/sec
+http.requests: ................................................................. 2996
+http.response_time:
+  min: ......................................................................... 144
+  max: ......................................................................... 1048
+  mean: ........................................................................ 577.5
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 566
+  max: ......................................................................... 1048
+  mean: ........................................................................ 837
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 345
+  max: ......................................................................... 748
+  mean: ........................................................................ 497.4
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 176
+  mean: ........................................................................ 148.1
+  median: ...................................................................... 147
+  p95: ......................................................................... 156
+  p99: ......................................................................... 165.7
+http.responses: ................................................................ 2970
+vusers.completed: .............................................................. 2970
+vusers.created: ................................................................ 2994
+vusers.created_by_name.Exchange BRL to ARS: .................................... 599
+vusers.created_by_name.Exchange EUR to ARS: .................................... 871
+vusers.created_by_name.Exchange USD to ARS: .................................... 1524
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 144.7
+  max: ......................................................................... 1155
+  mean: ........................................................................ 581.2
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:03:40(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 1468
+http.codes.403: ................................................................ 768
+http.codes.503: ................................................................ 754
+http.downloaded_bytes: ......................................................... 1135432
+http.request_rate: ............................................................. 300/sec
+http.requests: ................................................................. 3000
+http.response_time:
+  min: ......................................................................... 144
+  max: ......................................................................... 1120
+  mean: ........................................................................ 573.8
+  median: ...................................................................... 620.3
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 555
+  max: ......................................................................... 1120
+  mean: ........................................................................ 833
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 345
+  max: ......................................................................... 647
+  mean: ........................................................................ 497.5
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 177
+  mean: ........................................................................ 147
+  median: ...................................................................... 147
+  p95: ......................................................................... 153
+  p99: ......................................................................... 162.4
+http.responses: ................................................................ 2990
+vusers.completed: .............................................................. 2990
+vusers.created: ................................................................ 3000
+vusers.created_by_name.Exchange BRL to ARS: .................................... 607
+vusers.created_by_name.Exchange EUR to ARS: .................................... 870
+vusers.created_by_name.Exchange USD to ARS: .................................... 1523
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 144.7
+  max: ......................................................................... 1176.5
+  mean: ........................................................................ 576.5
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+Phase completed: 300 rps (index: 3, duration: 30s) 20:03:49(-0300)
+
+Phase started: 350 rps (index: 4, duration: 30s) 20:03:49(-0300)
+
+--------------------------------------
+Metrics for period to: 20:03:50(-0300) (width: 9.998s)
+--------------------------------------
+
+http.codes.200: ................................................................ 1474
+http.codes.403: ................................................................ 782
+http.codes.503: ................................................................ 751
+http.downloaded_bytes: ......................................................... 1141514
+http.request_rate: ............................................................. 300/sec
+http.requests: ................................................................. 3007
+http.response_time:
+  min: ......................................................................... 145
+  max: ......................................................................... 1048
+  mean: ........................................................................ 578.3
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 565
+  max: ......................................................................... 1048
+  mean: ........................................................................ 838.4
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 347
+  max: ......................................................................... 879
+  mean: ........................................................................ 500.2
+  median: ...................................................................... 507.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 145
+  max: ......................................................................... 363
+  mean: ........................................................................ 149.2
+  median: ...................................................................... 147
+  p95: ......................................................................... 156
+  p99: ......................................................................... 162.4
+http.responses: ................................................................ 3007
+vusers.completed: .............................................................. 3007
+vusers.created: ................................................................ 3006
+vusers.created_by_name.Exchange BRL to ARS: .................................... 594
+vusers.created_by_name.Exchange EUR to ARS: .................................... 912
+vusers.created_by_name.Exchange USD to ARS: .................................... 1500
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 146.1
+  max: ......................................................................... 1049.2
+  mean: ........................................................................ 580.8
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:04:00(-0300) (width: 9.998s)
+--------------------------------------
+
+http.codes.200: ................................................................ 1736
+http.codes.403: ................................................................ 900
+http.codes.503: ................................................................ 825
+http.downloaded_bytes: ......................................................... 1311863
+http.request_rate: ............................................................. 350/sec
+http.requests: ................................................................. 3495
+http.response_time:
+  min: ......................................................................... 145
+  max: ......................................................................... 1164
+  mean: ........................................................................ 588.4
+  median: ...................................................................... 645.6
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 587
+  max: ......................................................................... 1164
+  mean: ........................................................................ 841
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1043.3
+http.response_time.4xx:
+  min: ......................................................................... 349
+  max: ......................................................................... 785
+  mean: ........................................................................ 501.1
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 658.6
+http.response_time.5xx:
+  min: ......................................................................... 145
+  max: ......................................................................... 563
+  mean: ........................................................................ 152.4
+  median: ...................................................................... 149.9
+  p95: ......................................................................... 162.4
+  p99: ......................................................................... 186.8
+http.responses: ................................................................ 3461
+vusers.completed: .............................................................. 3461
+vusers.created: ................................................................ 3495
+vusers.created_by_name.Exchange BRL to ARS: .................................... 695
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1057
+vusers.created_by_name.Exchange USD to ARS: .................................... 1743
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 145.6
+  max: ......................................................................... 1245.1
+  mean: ........................................................................ 592
+  median: ...................................................................... 645.6
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:04:10(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 1760
+http.codes.403: ................................................................ 905
+http.codes.503: ................................................................ 850
+http.downloaded_bytes: ......................................................... 1332871
+http.request_rate: ............................................................. 350/sec
+http.requests: ................................................................. 3500
+http.response_time:
+  min: ......................................................................... 144
+  max: ......................................................................... 1085
+  mean: ........................................................................ 587.9
+  median: ...................................................................... 645.6
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 572
+  max: ......................................................................... 1085
+  mean: ........................................................................ 843.5
+  median: ...................................................................... 854.2
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1043.3
+http.response_time.4xx:
+  min: ......................................................................... 350
+  max: ......................................................................... 660
+  mean: ........................................................................ 501.6
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 376
+  mean: ........................................................................ 150.6
+  median: ...................................................................... 149.9
+  p95: ......................................................................... 162.4
+  p99: ......................................................................... 172.5
+http.responses: ................................................................ 3515
+vusers.completed: .............................................................. 3515
+vusers.created: ................................................................ 3500
+vusers.created_by_name.Exchange BRL to ARS: .................................... 711
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1048
+vusers.created_by_name.Exchange USD to ARS: .................................... 1741
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 145.5
+  max: ......................................................................... 1172.7
+  mean: ........................................................................ 590.3
+  median: ...................................................................... 645.6
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+
+
+Phase completed: 350 rps (index: 4, duration: 30s) 20:04:19(-0300)
+
+Phase started: 400 rps (index: 5, duration: 30s) 20:04:19(-0300)
+
+--------------------------------------
+Metrics for period to: 20:04:20(-0300) (width: 9.997s)
+--------------------------------------
+
+http.codes.200: ................................................................ 1691
+http.codes.403: ................................................................ 917
+http.codes.503: ................................................................ 880
+http.downloaded_bytes: ......................................................... 1324683
+http.request_rate: ............................................................. 350/sec
+http.requests: ................................................................. 3505
+http.response_time:
+  min: ......................................................................... 144
+  max: ......................................................................... 1228
+  mean: ........................................................................ 574.3
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 581
+  max: ......................................................................... 1228
+  mean: ........................................................................ 835.5
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 348
+  max: ......................................................................... 666
+  mean: ........................................................................ 499.9
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 380
+  mean: ........................................................................ 150
+  median: ...................................................................... 149.9
+  p95: ......................................................................... 159.2
+  p99: ......................................................................... 169
+http.responses: ................................................................ 3488
+vusers.completed: .............................................................. 3488
+vusers.created: ................................................................ 3505
+vusers.created_by_name.Exchange BRL to ARS: .................................... 724
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1059
+vusers.created_by_name.Exchange USD to ARS: .................................... 1722
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 145.4
+  max: ......................................................................... 1228.9
+  mean: ........................................................................ 576.7
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:04:30(-0300) (width: 9.998s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2003
+http.codes.403: ................................................................ 1026
+http.codes.503: ................................................................ 956
+http.downloaded_bytes: ......................................................... 1510732
+http.request_rate: ............................................................. 400/sec
+http.requests: ................................................................. 3995
+http.response_time:
+  min: ......................................................................... 143
+  max: ......................................................................... 1282
+  mean: ........................................................................ 584.5
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 564
+  max: ......................................................................... 1282
+  mean: ........................................................................ 838.1
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 345
+  max: ......................................................................... 657
+  mean: ........................................................................ 495.8
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 143
+  max: ......................................................................... 451
+  mean: ........................................................................ 148.2
+  median: ...................................................................... 147
+  p95: ......................................................................... 159.2
+  p99: ......................................................................... 169
+http.responses: ................................................................ 3985
+vusers.completed: .............................................................. 3985
+vusers.created: ................................................................ 3995
+vusers.created_by_name.Exchange BRL to ARS: .................................... 793
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1197
+vusers.created_by_name.Exchange USD to ARS: .................................... 2005
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 144.6
+  max: ......................................................................... 1282.7
+  mean: ........................................................................ 587.5
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:04:40(-0300) (width: 9.997s)
+--------------------------------------
+
+http.codes.200: ................................................................ 1971
+http.codes.403: ................................................................ 997
+http.codes.503: ................................................................ 1025
+http.downloaded_bytes: ......................................................... 1517062
+http.request_rate: ............................................................. 400/sec
+http.requests: ................................................................. 4000
+http.response_time:
+  min: ......................................................................... 143
+  max: ......................................................................... 1115
+  mean: ........................................................................ 575.3
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 574
+  max: ......................................................................... 1115
+  mean: ........................................................................ 837.6
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 345
+  max: ......................................................................... 657
+  mean: ........................................................................ 496.3
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 143
+  max: ......................................................................... 460
+  mean: ........................................................................ 147.8
+  median: ...................................................................... 147
+  p95: ......................................................................... 156
+  p99: ......................................................................... 165.7
+http.responses: ................................................................ 3993
+vusers.completed: .............................................................. 3993
+vusers.created: ................................................................ 4000
+vusers.created_by_name.Exchange BRL to ARS: .................................... 831
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1138
+vusers.created_by_name.Exchange USD to ARS: .................................... 2031
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 144.5
+  max: ......................................................................... 1139.6
+  mean: ........................................................................ 577.9
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+Phase completed: 400 rps (index: 5, duration: 30s) 20:04:49(-0300)
+
+Phase started: 450 rps (index: 6, duration: 30s) 20:04:49(-0300)
+
+--------------------------------------
+Metrics for period to: 20:04:50(-0300) (width: 9.998s)
+--------------------------------------
+
+http.codes.200: ................................................................ 1962
+http.codes.403: ................................................................ 1067
+http.codes.503: ................................................................ 970
+http.downloaded_bytes: ......................................................... 1516895
+http.request_rate: ............................................................. 400/sec
+http.requests: ................................................................. 4005
+http.response_time:
+  min: ......................................................................... 143
+  max: ......................................................................... 1148
+  mean: ........................................................................ 576.9
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 573
+  max: ......................................................................... 1148
+  mean: ........................................................................ 832.5
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 345
+  max: ......................................................................... 647
+  mean: ........................................................................ 498
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 143
+  max: ......................................................................... 362
+  mean: ........................................................................ 146.7
+  median: ...................................................................... 144
+  p95: ......................................................................... 153
+  p99: ......................................................................... 165.7
+http.responses: ................................................................ 3999
+vusers.completed: .............................................................. 3999
+vusers.created: ................................................................ 4005
+vusers.created_by_name.Exchange BRL to ARS: .................................... 845
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1204
+vusers.created_by_name.Exchange USD to ARS: .................................... 1956
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 144.5
+  max: ......................................................................... 1170.5
+  mean: ........................................................................ 579.4
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:05:00(-0300) (width: 9.998s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2208
+http.codes.403: ................................................................ 1098
+http.codes.503: ................................................................ 1158
+http.downloaded_bytes: ......................................................... 1696399
+http.request_rate: ............................................................. 450/sec
+http.requests: ................................................................. 4492
+http.response_time:
+  min: ......................................................................... 143
+  max: ......................................................................... 1063
+  mean: ........................................................................ 572.1
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 583
+  max: ......................................................................... 1063
+  mean: ........................................................................ 833.3
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 345
+  max: ......................................................................... 658
+  mean: ........................................................................ 495.5
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 143
+  max: ......................................................................... 369
+  mean: ........................................................................ 146.9
+  median: ...................................................................... 147
+  p95: ......................................................................... 153
+  p99: ......................................................................... 165.7
+http.responses: ................................................................ 4464
+vusers.completed: .............................................................. 4464
+vusers.created: ................................................................ 4493
+vusers.created_by_name.Exchange BRL to ARS: .................................... 842
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1365
+vusers.created_by_name.Exchange USD to ARS: .................................... 2286
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 144.4
+  max: ......................................................................... 1151.3
+  mean: ........................................................................ 574.8
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:05:10(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2232
+http.codes.403: ................................................................ 1173
+http.codes.503: ................................................................ 1092
+http.downloaded_bytes: ......................................................... 1705704
+http.request_rate: ............................................................. 450/sec
+http.requests: ................................................................. 4500
+http.response_time:
+  min: ......................................................................... 143
+  max: ......................................................................... 1101
+  mean: ........................................................................ 582.2
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 567
+  max: ......................................................................... 1101
+  mean: ........................................................................ 837.7
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1043.3
+http.response_time.4xx:
+  min: ......................................................................... 347
+  max: ......................................................................... 679
+  mean: ........................................................................ 500.5
+  median: ...................................................................... 507.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 143
+  max: ......................................................................... 219
+  mean: ........................................................................ 148
+  median: ...................................................................... 147
+  p95: ......................................................................... 162.4
+  p99: ......................................................................... 172.5
+http.responses: ................................................................ 4497
+vusers.completed: .............................................................. 4497
+vusers.created: ................................................................ 4500
+vusers.created_by_name.Exchange BRL to ARS: .................................... 925
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1292
+vusers.created_by_name.Exchange USD to ARS: .................................... 2283
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 144.6
+  max: ......................................................................... 1132.5
+  mean: ........................................................................ 584.9
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+
+
+Phase completed: 450 rps (index: 6, duration: 30s) 20:05:19(-0300)
+
+Phase started: 500 rps (index: 7, duration: 30s) 20:05:19(-0300)
+
+--------------------------------------
+Metrics for period to: 20:05:20(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2220
+http.codes.403: ................................................................ 1125
+http.codes.503: ................................................................ 1176
+http.downloaded_bytes: ......................................................... 1718302
+http.request_rate: ............................................................. 450/sec
+http.requests: ................................................................. 4508
+http.response_time:
+  min: ......................................................................... 143
+  max: ......................................................................... 1072
+  mean: ........................................................................ 574.4
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 576
+  max: ......................................................................... 1072
+  mean: ........................................................................ 838.4
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 345
+  max: ......................................................................... 660
+  mean: ........................................................................ 500.3
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 143
+  max: ......................................................................... 447
+  mean: ........................................................................ 147.1
+  median: ...................................................................... 144
+  p95: ......................................................................... 153
+  p99: ......................................................................... 165.7
+http.responses: ................................................................ 4521
+vusers.completed: .............................................................. 4521
+vusers.created: ................................................................ 4507
+vusers.created_by_name.Exchange BRL to ARS: .................................... 878
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1384
+vusers.created_by_name.Exchange USD to ARS: .................................... 2245
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 144.3
+  max: ......................................................................... 1147.7
+  mean: ........................................................................ 576.1
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:05:30(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2429
+http.codes.403: ................................................................ 1269
+http.codes.429: ................................................................ 8
+http.codes.503: ................................................................ 1249
+http.downloaded_bytes: ......................................................... 1878892
+http.request_rate: ............................................................. 500/sec
+http.requests: ................................................................. 4993
+http.response_time:
+  min: ......................................................................... 142
+  max: ......................................................................... 1233
+  mean: ........................................................................ 575.1
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 569
+  max: ......................................................................... 1233
+  mean: ........................................................................ 836
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 142
+  max: ......................................................................... 660
+  mean: ........................................................................ 497.2
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 143
+  max: ......................................................................... 352
+  mean: ........................................................................ 147.4
+  median: ...................................................................... 144
+  p95: ......................................................................... 153
+  p99: ......................................................................... 183.1
+http.responses: ................................................................ 4955
+vusers.completed: .............................................................. 4955
+vusers.created: ................................................................ 4994
+vusers.created_by_name.Exchange BRL to ARS: .................................... 961
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1554
+vusers.created_by_name.Exchange USD to ARS: .................................... 2479
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 143.1
+  max: ......................................................................... 1233.6
+  mean: ........................................................................ 578.1
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:05:40(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2485
+http.codes.403: ................................................................ 1245
+http.codes.429: ................................................................ 17
+http.codes.503: ................................................................ 1263
+http.downloaded_bytes: ......................................................... 1896682
+http.request_rate: ............................................................. 500/sec
+http.requests: ................................................................. 5000
+http.response_time:
+  min: ......................................................................... 142
+  max: ......................................................................... 1267
+  mean: ........................................................................ 575.9
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 562
+  max: ......................................................................... 1267
+  mean: ........................................................................ 836
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 142
+  max: ......................................................................... 722
+  mean: ........................................................................ 492
+  median: ...................................................................... 487.9
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 143
+  max: ......................................................................... 523
+  mean: ........................................................................ 147.7
+  median: ...................................................................... 147
+  p95: ......................................................................... 156
+  p99: ......................................................................... 175.9
+http.responses: ................................................................ 5010
+vusers.completed: .............................................................. 5010
+vusers.created: ................................................................ 5000
+vusers.created_by_name.Exchange BRL to ARS: .................................... 984
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1509
+vusers.created_by_name.Exchange USD to ARS: .................................... 2507
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 142.7
+  max: ......................................................................... 1267.2
+  mean: ........................................................................ 578.1
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+Phase completed: 500 rps (index: 7, duration: 30s) 20:05:49(-0300)
+
+Phase started: 550 rps (index: 8, duration: 30s) 20:05:49(-0300)
+
+--------------------------------------
+Metrics for period to: 20:05:50(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2496
+http.codes.403: ................................................................ 1255
+http.codes.429: ................................................................ 12
+http.codes.503: ................................................................ 1242
+http.downloaded_bytes: ......................................................... 1895350
+http.request_rate: ............................................................. 500/sec
+http.requests: ................................................................. 5005
+http.response_time:
+  min: ......................................................................... 142
+  max: ......................................................................... 1086
+  mean: ........................................................................ 580
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 574
+  max: ......................................................................... 1086
+  mean: ........................................................................ 837.3
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 142
+  max: ......................................................................... 822
+  mean: ........................................................................ 497.6
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 143
+  max: ......................................................................... 208
+  mean: ........................................................................ 147
+  median: ...................................................................... 147
+  p95: ......................................................................... 153
+  p99: ......................................................................... 172.5
+http.responses: ................................................................ 5005
+vusers.completed: .............................................................. 5005
+vusers.created: ................................................................ 5005
+vusers.created_by_name.Exchange BRL to ARS: .................................... 952
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1573
+vusers.created_by_name.Exchange USD to ARS: .................................... 2480
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 143.2
+  max: ......................................................................... 1217.1
+  mean: ........................................................................ 582.2
+  median: ...................................................................... 632.8
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:06:00(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2504
+http.codes.403: ................................................................ 1277
+http.codes.429: ................................................................ 458
+http.codes.503: ................................................................ 1223
+http.downloaded_bytes: ......................................................... 1920080
+http.request_rate: ............................................................. 550/sec
+http.requests: ................................................................. 5496
+http.response_time:
+  min: ......................................................................... 141
+  max: ......................................................................... 1121
+  mean: ........................................................................ 546.4
+  median: ...................................................................... 596
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 578
+  max: ......................................................................... 1121
+  mean: ........................................................................ 838.9
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 141
+  max: ......................................................................... 665
+  mean: ........................................................................ 405.2
+  median: ...................................................................... 441.5
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 143
+  max: ......................................................................... 206
+  mean: ........................................................................ 148
+  median: ...................................................................... 147
+  p95: ......................................................................... 159.2
+  p99: ......................................................................... 169
+http.responses: ................................................................ 5462
+vusers.completed: .............................................................. 5462
+vusers.created: ................................................................ 5496
+vusers.created_by_name.Exchange BRL to ARS: .................................... 1128
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1676
+vusers.created_by_name.Exchange USD to ARS: .................................... 2692
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 142.3
+  max: ......................................................................... 1142
+  mean: ........................................................................ 549.3
+  median: ...................................................................... 596
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:06:10(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2560
+http.codes.403: ................................................................ 1246
+http.codes.429: ................................................................ 499
+http.codes.503: ................................................................ 1219
+http.downloaded_bytes: ......................................................... 1929266
+http.request_rate: ............................................................. 550/sec
+http.requests: ................................................................. 5500
+http.response_time:
+  min: ......................................................................... 141
+  max: ......................................................................... 1175
+  mean: ........................................................................ 550.4
+  median: ...................................................................... 596
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 573
+  max: ......................................................................... 1175
+  mean: ........................................................................ 843.8
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1043.3
+http.response_time.4xx:
+  min: ......................................................................... 141
+  max: ......................................................................... 716
+  mean: ........................................................................ 399.4
+  median: ...................................................................... 441.5
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 254
+  mean: ........................................................................ 150.2
+  median: ...................................................................... 147
+  p95: ......................................................................... 165.7
+  p99: ......................................................................... 219.2
+http.responses: ................................................................ 5524
+vusers.completed: .............................................................. 5524
+vusers.created: ................................................................ 5500
+vusers.created_by_name.Exchange BRL to ARS: .................................... 1109
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1617
+vusers.created_by_name.Exchange USD to ARS: .................................... 2774
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 142.4
+  max: ......................................................................... 1175.3
+  mean: ........................................................................ 552.6
+  median: ...................................................................... 596
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+
+
+Phase completed: 550 rps (index: 8, duration: 30s) 20:06:19(-0300)
+
+Phase started: 600 rps (index: 9, duration: 30s) 20:06:19(-0300)
+
+--------------------------------------
+Metrics for period to: 20:06:20(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2465
+http.codes.403: ................................................................ 1270
+http.codes.429: ................................................................ 506
+http.codes.503: ................................................................ 1244
+http.downloaded_bytes: ......................................................... 1914291
+http.request_rate: ............................................................. 550/sec
+http.requests: ................................................................. 5505
+http.response_time:
+  min: ......................................................................... 141
+  max: ......................................................................... 1086
+  mean: ........................................................................ 539.3
+  median: ...................................................................... 584.2
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 568
+  max: ......................................................................... 1086
+  mean: ........................................................................ 836.2
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1043.3
+http.response_time.4xx:
+  min: ......................................................................... 141
+  max: ......................................................................... 685
+  mean: ........................................................................ 401.2
+  median: ...................................................................... 450.4
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 365
+  mean: ........................................................................ 148.4
+  median: ...................................................................... 147
+  p95: ......................................................................... 156
+  p99: ......................................................................... 169
+http.responses: ................................................................ 5485
+vusers.completed: .............................................................. 5484
+vusers.created: ................................................................ 5505
+vusers.created_by_name.Exchange BRL to ARS: .................................... 1120
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1646
+vusers.created_by_name.Exchange USD to ARS: .................................... 2739
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 142.4
+  max: ......................................................................... 1137.2
+  mean: ........................................................................ 541.6
+  median: ...................................................................... 584.2
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:06:30(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2508
+http.codes.403: ................................................................ 1281
+http.codes.429: ................................................................ 958
+http.codes.503: ................................................................ 1223
+http.downloaded_bytes: ......................................................... 1947055
+http.request_rate: ............................................................. 600/sec
+http.requests: ................................................................. 5991
+http.response_time:
+  min: ......................................................................... 141
+  max: ......................................................................... 1095
+  mean: ........................................................................ 522.8
+  median: ...................................................................... 539.2
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 563
+  max: ......................................................................... 1095
+  mean: ........................................................................ 849.7
+  median: ...................................................................... 854.2
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1043.3
+http.response_time.4xx:
+  min: ......................................................................... 141
+  max: ......................................................................... 693
+  mean: ........................................................................ 355.7
+  median: ...................................................................... 399.5
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 658.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 234
+  mean: ........................................................................ 158.6
+  median: ...................................................................... 156
+  p95: ......................................................................... 183.1
+  p99: ......................................................................... 210.6
+http.responses: ................................................................ 5970
+vusers.completed: .............................................................. 5971
+vusers.created: ................................................................ 5991
+vusers.created_by_name.Exchange BRL to ARS: .................................... 1213
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1794
+vusers.created_by_name.Exchange USD to ARS: .................................... 2984
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 142.5
+  max: ......................................................................... 1241.7
+  mean: ........................................................................ 525.5
+  median: ...................................................................... 550.1
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:06:40(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2468
+http.codes.403: ................................................................ 1248
+http.codes.429: ................................................................ 1041
+http.codes.503: ................................................................ 1265
+http.downloaded_bytes: ......................................................... 1941711
+http.request_rate: ............................................................. 600/sec
+http.requests: ................................................................. 6001
+http.response_time:
+  min: ......................................................................... 142
+  max: ......................................................................... 1119
+  mean: ........................................................................ 504.9
+  median: ...................................................................... 518.1
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 571
+  max: ......................................................................... 1119
+  mean: ........................................................................ 838.3
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1043.3
+http.response_time.4xx:
+  min: ......................................................................... 142
+  max: ......................................................................... 850
+  mean: ........................................................................ 339.9
+  median: ...................................................................... 376.2
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 230
+  mean: ........................................................................ 153.2
+  median: ...................................................................... 149.9
+  p95: ......................................................................... 172.5
+  p99: ......................................................................... 202.4
+http.responses: ................................................................ 6022
+vusers.completed: .............................................................. 6022
+vusers.created: ................................................................ 6001
+vusers.created_by_name.Exchange BRL to ARS: .................................... 1279
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1791
+vusers.created_by_name.Exchange USD to ARS: .................................... 2931
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 142.6
+  max: ......................................................................... 1166.3
+  mean: ........................................................................ 506.8
+  median: ...................................................................... 518.1
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+Phase completed: 600 rps (index: 9, duration: 30s) 20:06:49(-0300)
+
+Phase started: 650 rps (index: 10, duration: 30s) 20:06:49(-0300)
+
+--------------------------------------
+Metrics for period to: 20:06:50(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2485
+http.codes.403: ................................................................ 1247
+http.codes.429: ................................................................ 1001
+http.codes.503: ................................................................ 1254
+http.downloaded_bytes: ......................................................... 1940994
+http.request_rate: ............................................................. 600/sec
+http.requests: ................................................................. 6007
+http.response_time:
+  min: ......................................................................... 141
+  max: ......................................................................... 1240
+  mean: ........................................................................ 514.4
+  median: ...................................................................... 528.6
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 567
+  max: ......................................................................... 1240
+  mean: ........................................................................ 844.4
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1043.3
+http.response_time.4xx:
+  min: ......................................................................... 141
+  max: ......................................................................... 685
+  mean: ........................................................................ 348.7
+  median: ...................................................................... 391.6
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 240
+  mean: ........................................................................ 157.4
+  median: ...................................................................... 156
+  p95: ......................................................................... 179.5
+  p99: ......................................................................... 190.6
+http.responses: ................................................................ 5987
+vusers.completed: .............................................................. 5987
+vusers.created: ................................................................ 6006
+vusers.created_by_name.Exchange BRL to ARS: .................................... 1224
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1828
+vusers.created_by_name.Exchange USD to ARS: .................................... 2954
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 142.3
+  max: ......................................................................... 1241
+  mean: ........................................................................ 516.9
+  median: ...................................................................... 528.6
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:07:00(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2492
+http.codes.403: ................................................................ 1247
+http.codes.429: ................................................................ 1479
+http.codes.503: ................................................................ 1258
+http.downloaded_bytes: ......................................................... 1968201
+http.request_rate: ............................................................. 650/sec
+http.requests: ................................................................. 6495
+http.response_time:
+  min: ......................................................................... 137
+  max: ......................................................................... 1133
+  mean: ........................................................................ 490.7
+  median: ...................................................................... 487.9
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 587
+  max: ......................................................................... 1133
+  mean: ........................................................................ 847.9
+  median: ...................................................................... 854.2
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1043.3
+http.response_time.4xx:
+  min: ......................................................................... 137
+  max: ......................................................................... 895
+  mean: ........................................................................ 317.1
+  median: ...................................................................... 172.5
+  p95: ......................................................................... 620.3
+  p99: ......................................................................... 658.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 387
+  mean: ........................................................................ 159.5
+  median: ...................................................................... 156
+  p95: ......................................................................... 183.1
+  p99: ......................................................................... 198.4
+http.responses: ................................................................ 6476
+vusers.completed: .............................................................. 6476
+vusers.created: ................................................................ 6496
+vusers.created_by_name.Exchange BRL to ARS: .................................... 1342
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1941
+vusers.created_by_name.Exchange USD to ARS: .................................... 3213
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 142.5
+  max: ......................................................................... 1152
+  mean: ........................................................................ 493.9
+  median: ...................................................................... 487.9
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:07:10(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2485
+http.codes.403: ................................................................ 1246
+http.codes.429: ................................................................ 1554
+http.codes.503: ................................................................ 1241
+http.downloaded_bytes: ......................................................... 1961650
+http.request_rate: ............................................................. 650/sec
+http.requests: ................................................................. 6501
+http.response_time:
+  min: ......................................................................... 140
+  max: ......................................................................... 1321
+  mean: ........................................................................ 491.6
+  median: ...................................................................... 478.3
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 587
+  max: ......................................................................... 1321
+  mean: ........................................................................ 851.7
+  median: ...................................................................... 854.2
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1043.3
+http.response_time.4xx:
+  min: ......................................................................... 140
+  max: ......................................................................... 698
+  mean: ........................................................................ 317.1
+  median: ...................................................................... 175.9
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 658.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 294
+  mean: ........................................................................ 164.2
+  median: ...................................................................... 162.4
+  p95: ......................................................................... 186.8
+  p99: ......................................................................... 202.4
+http.responses: ................................................................ 6526
+vusers.completed: .............................................................. 6526
+vusers.created: ................................................................ 6500
+vusers.created_by_name.Exchange BRL to ARS: .................................... 1230
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1993
+vusers.created_by_name.Exchange USD to ARS: .................................... 3277
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 143.1
+  max: ......................................................................... 1321.6
+  mean: ........................................................................ 493.9
+  median: ...................................................................... 478.3
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+Phase completed: 650 rps (index: 10, duration: 30s) 20:07:19(-0300)
+
+--------------------------------------
+Metrics for period to: 20:07:20(-0300) (width: 9.999s)
+--------------------------------------
+
+http.codes.200: ................................................................ 2514
+http.codes.403: ................................................................ 1291
+http.codes.429: ................................................................ 1519
+http.codes.503: ................................................................ 1190
+http.downloaded_bytes: ......................................................... 1966156
+http.request_rate: ............................................................. 650/sec
+http.requests: ................................................................. 6427
+http.response_time:
+  min: ......................................................................... 141
+  max: ......................................................................... 1176
+  mean: ........................................................................ 489.3
+  median: ...................................................................... 478.3
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 570
+  max: ......................................................................... 1176
+  mean: ........................................................................ 844.1
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1043.3
+http.response_time.4xx:
+  min: ......................................................................... 141
+  max: ......................................................................... 696
+  mean: ........................................................................ 313.1
+  median: ...................................................................... 165.7
+  p95: ......................................................................... 620.3
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 143
+  max: ......................................................................... 267
+  mean: ........................................................................ 155.5
+  median: ...................................................................... 149.9
+  p95: ......................................................................... 175.9
+  p99: ......................................................................... 219.2
+http.responses: ................................................................ 6514
+vusers.completed: .............................................................. 6514
+vusers.created: ................................................................ 6427
+vusers.created_by_name.Exchange BRL to ARS: .................................... 1275
+vusers.created_by_name.Exchange EUR to ARS: .................................... 1913
+vusers.created_by_name.Exchange USD to ARS: .................................... 3239
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 142.6
+  max: ......................................................................... 1176.6
+  mean: ........................................................................ 491.8
+  median: ...................................................................... 487.9
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+
+
+--------------------------------------
+Metrics for period to: 20:07:30(-0300) (width: 1.426s)
+--------------------------------------
+
+http.codes.200: ................................................................ 212
+http.codes.403: ................................................................ 77
+http.codes.503: ................................................................ 34
+http.downloaded_bytes: ......................................................... 120130
+http.request_rate: ............................................................. 80/sec
+http.requests: ................................................................. 80
+http.response_time:
+  min: ......................................................................... 144
+  max: ......................................................................... 1041
+  mean: ........................................................................ 695.8
+  median: ...................................................................... 757.6
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 642
+  max: ......................................................................... 1041
+  mean: ........................................................................ 850.5
+  median: ...................................................................... 854.2
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1022.7
+http.response_time.4xx:
+  min: ......................................................................... 347
+  max: ......................................................................... 642
+  mean: ........................................................................ 512.8
+  median: ...................................................................... 518.1
+  p95: ......................................................................... 620.3
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 144
+  max: ......................................................................... 150
+  mean: ........................................................................ 145.6
+  median: ...................................................................... 144
+  p95: ......................................................................... 147
+  p99: ......................................................................... 149.9
+http.responses: ................................................................ 323
+vusers.completed: .............................................................. 323
+vusers.created: ................................................................ 80
+vusers.created_by_name.Exchange BRL to ARS: .................................... 17
+vusers.created_by_name.Exchange EUR to ARS: .................................... 25
+vusers.created_by_name.Exchange USD to ARS: .................................... 38
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 144.8
+  max: ......................................................................... 1187.5
+  mean: ........................................................................ 701.4
+  median: ...................................................................... 772.9
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+
+
+All VUs finished. Total time: 5 minutes, 33 seconds
+
+--------------------------------
+Summary report @ 20:07:23(-0300)
+--------------------------------
+
+http.codes.200: ................................................................ 61174
+http.codes.403: ................................................................ 31230
+http.codes.429: ................................................................ 9052
+http.codes.503: ................................................................ 30544
+http.downloaded_bytes: ......................................................... 47095377
+http.request_rate: ............................................................. 388/sec
+http.requests: ................................................................. 132000
+http.response_time:
+  min: ......................................................................... 137
+  max: ......................................................................... 1321
+  mean: ........................................................................ 552.6
+  median: ...................................................................... 608
+  p95: ......................................................................... 963.1
+  p99: ......................................................................... 1022.7
+http.response_time.2xx:
+  min: ......................................................................... 554
+  max: ......................................................................... 1321
+  mean: ........................................................................ 839.1
+  median: ...................................................................... 837.3
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1043.3
+http.response_time.4xx:
+  min: ......................................................................... 137
+  max: ......................................................................... 895
+  mean: ........................................................................ 422.5
+  median: ...................................................................... 459.5
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 143
+  max: ......................................................................... 563
+  mean: ........................................................................ 150.5
+  median: ...................................................................... 147
+  p95: ......................................................................... 169
+  p99: ......................................................................... 186.8
+http.responses: ................................................................ 132000
+vusers.completed: .............................................................. 132000
+vusers.created: ................................................................ 132000
+vusers.created_by_name.Exchange BRL to ARS: .................................... 26521
+vusers.created_by_name.Exchange EUR to ARS: .................................... 39528
+vusers.created_by_name.Exchange USD to ARS: .................................... 65951
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 142.3
+  max: ......................................................................... 1321.6
+  mean: ........................................................................ 555.4
+  median: ...................................................................... 608
+  p95: ......................................................................... 982.6
+  p99: ......................................................................... 1022.7
+Log file: results/1-nodo/exchange-capacity.json
+2026-11-09T23:07:23.378Z plugin:publish-metrics:datadog-statsd sending event Target: http://ohcksbpxsp.eastus.cloudapp.azure.com
+2026-11-09T23:07:23.380Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-09T23:07:23.378Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-09T23:07:23.378Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-09T23:07:23.378Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-09T23:07:23.378Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-09T23:07:23.379Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-09T23:07:23.378Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-09T23:07:23.379Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-09T23:07:23.378Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-09T23:07:23.379Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-09T23:07:23.379Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-09T23:07:23.379Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-09T23:07:23.379Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-09T23:07:23.380Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-09T23:07:23.380Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-09T23:07:23.381Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.

@@ -1,0 +1,7 @@
+# Rango de cada prueba (1 nodo). 
+# prueba | inicio ART | fin ART | inicio UTC | fin UTC
+root | 19:39:57 | 19:41:30 | 2026-11-09T22:39:57Z | 2026-11-09T22:41:30Z | exit=0
+exchange | 19:42:30 | 19:46:19 | 2026-11-09T22:42:30Z | 2026-11-09T22:46:19Z | exit=0
+exchange-stress | 19:47:49 | 19:57:38 | 2026-11-09T22:47:49Z | 2026-11-09T22:57:38Z | exit=0
+exchange-capacity | 19:59:38 | 20:07:23 | 2026-11-09T22:59:38Z | 2026-11-09T23:07:23Z | exit=0
+exchange-concurrency-overdraft | 20:09:23 | 20:12:14 | 2026-11-09T23:09:23Z | 2026-11-09T23:12:14Z | exit=0

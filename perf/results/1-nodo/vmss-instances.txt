@@ -1,0 +1,4 @@
+# 2026-11-09T23:12:43Z - az vmss list-instances
+Name       Sku               State
+---------  ----------------  ---------
+tp2vmss_0  Standard_D2as_v4  Succeeded
