@@ -1,0 +1,9 @@
+# lscpu de la PC Linux (2026-11-10)
+CPU(s):                                   16
+Nombre del modelo:                        AMD Ryzen 7 8700G w/ Radeon 780M Graphics
+Hilo(s) de procesamiento por núcleo:      2
+CPU(s) factor de escala MHz:              64%
+CPU(s) del nodo NUMA 0:                   0-15
+Linux 7.0.0-34-generic
+Node v24.22.2 (nvm), el mismo para Artillery y la app
+Docker version 29.8.1, build 4a63305

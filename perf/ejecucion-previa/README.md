@@ -24,3 +24,19 @@ Variables de entorno de `app-local.mjs`: `REDIS_URL=redis://localhost:16379`, `A
 - **El hardware no es el de Azure.** Los ms de CPU se convierten con el factor k de `perf/predicciones.md` (sección 3), y en Azure se vuelven a medir con `exchange.node.event_loop_utilization` y `exchange.node.process_cpu_cores`.
 - **Redis local no usa TLS** y está en la misma máquina: subestima el costo de Redis.
 - **ARCA, Redis, la app y el generador comparten la PC** (16 hilos). No se midió la CPU de Artillery, así que no se descarta que le haya quitado algo de CPU a la app en los escalones altos.
+
+## Repetición en Linux (10/11/2026, después de medir 1 nodo en Azure)
+
+Se repitieron dos mediciones en una PC con Linux nativo (Ubuntu 24.04, Ryzen 7 8700G, 16 hilos; ver `resultados/linux/entorno.txt`), con los mismos comandos y contenedores. No son una predicción: sirven para explicar por qué P2 y P2.b fallaron (ver `perf/predicciones.md`).
+
+| Medición | PC original (Windows) | PC Linux | Azure, 1 nodo (`perf/results/1-nodo/`) |
+| --- | --- | --- | --- |
+| Techo del generador (`generador.yaml`) | 1.600 req/s, 0 errores | 1.600 req/s, 56.000/56.000 OK, p99 2 ms | — |
+| CPU del proceso por request (`app-saturacion.yaml`, `NO_LIMIT=1`) | 3,2–3,6 ms | **1,0–1,3 ms** | — |
+| Hilo principal por request (ELU / req/s) | 1,6–1,8 ms | **1,0–1,3 ms** | ≈ 1,2 ms (ELU ≈ 0,6 con 500 req/s) |
+| ELU con ~400 / ~500 / ~600 / ~700 req/s | 0,73 / 0,79 / 1,0 (colapso) | 0,41 / 0,60 / 0,75 / 0,87 | — |
+| Errores en `app-saturacion` (66.000 requests) | 24.521 VUs fallidos (timeouts, `ECONNREFUSED`, `EADDRINUSE`) | **0** | — |
+
+Archivos: `resultados/linux/generador.json`, `app-saturacion.json` y `app-saturacion-proceso.jsonl`, con el mismo formato que los originales.
+
+**Lectura:** el costo por request en Linux coincide con el de Azure (~1,2 ms de hilo principal) y es un tercio del de Windows en CPU. El C₁ de las predicciones salió de la medición en Windows, por eso la subestimó. Los `EADDRINUSE` de Windows indican que, además, ahí se agotaban los puertos efímeros del lado del generador. El generador de las dos PCs llega a las mismas tasas.
