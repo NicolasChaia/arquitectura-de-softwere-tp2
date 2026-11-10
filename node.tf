@@ -2,8 +2,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "tp2_vmss" {
   name                = "tp2vmss"
   resource_group_name = azurerm_resource_group.tp2_resource_group.name
   location            = azurerm_resource_group.tp2_resource_group.location
-  sku                 = var.machine_sku
-  instances           = 2
+  sku                 = var.node_sku
+  instances           = 1
   admin_username      = "azureuser"
   depends_on          = [azurerm_lb_rule.lb_rule]
   upgrade_mode        = "Automatic"
