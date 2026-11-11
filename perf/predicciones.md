@@ -131,155 +131,54 @@ En ningún escalón hay timeouts. La mediana total de Artillery baja en los esca
 
 ---
 
-# P4 y P5. Nodos de 1 vCPU (`Standard_F1as_v7`)
+# Cambios en el tamaño del vCPU
 
-Escrito el 10/11, **antes** de levantar la infraestructura con el SKU nuevo. P1–P3 quedan como estaban: P1 y P2 se midieron con `Standard_D2as_v4` (`results/1-nodo/`). P3 no se pudo medir porque el `apply` con 2 nodos `D2as_v4` superó la cuota de 4 vCPU de la región (`results/2-nodos/apply-error-cuota.txt`).
+Se debió reestructurar por el motivo de que no se podía escalar a dos nodos en las pruebas de la segunda instancia debido al tamaño que estos tenían. Por esto es que se bajo a 1 el vCPU
 
-## Por qué cambia la máquina
-
-| Hecho | Fuente |
-| --- | --- |
-| Cuota Free Trial: **4 vCPU por región**. 2 nodos `D2as_v4` + jumpbox `D2as_v4` = 6 | `results/2-nodos/apply-error-cuota.txt` |
-| Jumpbox `D2as_v4` (2 vCPU) + 2 nodos de 1 vCPU = **4** | `variables.tf` (`machine_sku`, `node_sku`) |
-| En `eastus` la suscripción no ofrece `DS1_v2`, `F1s`, `A1_v2` ni la serie B. Los únicos SKU de 1 vCPU son de la familia F v7 de AMD | `results/2-nodos/sku-1vcpu-eastus.txt` |
-| `F1as_v7` se pudo crear como VMSS en `eastus` (prueba descartable, 50 s, disco NVMe elegido por Azure) | `results/2-nodos/sku-1vcpu-eastus.txt` |
+| Hecho                                                                                                                               | Fuente                                     |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| Cuota Free Trial: **4 vCPU por región**. 2 nodos `D2as_v4` + jumpbox `D2as_v4` = 6                                                  | `results/2-nodos/apply-error-cuota.txt`    |
+| Jumpbox `D2as_v4` (2 vCPU) + 2 nodos de 1 vCPU = **4**                                                                              | `variables.tf` (`machine_sku`, `node_sku`) |
+| En `eastus` la suscripción no ofrece `DS1_v2`, `F1s`, `A1_v2` ni la serie B. Los únicos SKU de 1 vCPU son de la familia F v7 de AMD | `results/2-nodos/sku-1vcpu-eastus.txt`     |
+| `F1as_v7` se pudo crear como VMSS en `eastus` (prueba descartable, 50 s, disco NVMe elegido por Azure)                              | `results/2-nodos/sku-1vcpu-eastus.txt`     |
 
 Para comparar 1 contra 2 nodos con la misma máquina, se vuelve a medir 1 nodo con `F1as_v7` (`results/1-nodo-f1as/`). El caso escalado va a `results/2-nodos-f1as/`.
 
-## Las dos máquinas
+## Capacidad de 1 nodo `F1as_v7`
 
-| | `D2as_v4` (medido) | `F1as_v7` (nuevo) |
-| --- | --- | --- |
-| Procesador | AMD EPYC 7452, Zen 2, hasta 3,35 GHz | AMD EPYC 9005 (Turin), Zen 5, hasta 4,5 GHz |
-| vCPU | **2 hilos SMT de un mismo core físico** | **1 core físico entero, sin SMT** |
-| Memoria | 8 GiB | 4 GiB |
-| Créditos de CPU | no | no |
-| Fuente | `results/1-nodo/nodos-lscpu.txt`; Microsoft Learn, serie Dasv4 | Microsoft Learn, serie Fasv7 |
+Con 1 nodo `D2as_v4`, el nodo llegó al rate limit de **500 req/s** sin colapsar. En ese punto la VM usaba ~45 % de sus 2 vCPU, o sea, **~0,9 vCPU** (`results/1-nodo/exchange-capacity-4.png`).
 
-La expectativa inicial del grupo era "un costo mayor y una capacidad menor, posiblemente por debajo del rate limit de 500". Eso supone que 1 vCPU de `F1as_v7` rinde como 1 vCPU de `D2as_v4`, y no es así. Un vCPU de `D2as_v4` es medio core Zen 2 compartido con otro hilo; el de `F1as_v7` es un core Zen 5 entero con más frecuencia. Lo que se pierde es la posibilidad de correr dos cosas a la vez: el hilo principal de Node, los hilos del recolector de basura y de libuv, el agente de Datadog y el kernel (red y TLS) se turnan en un solo core.
+`F1as_v7` tiene 1 vCPU. En `D2as_v4`, en cambio, cada vCPU es medio core compartido (`results/1-nodo/nodos-lscpu.txt`). Por eso estimamos que el mismo trabajo ocupa **~70 % del único vCPU**: alcanza para llegar a 500 req/s con margen.
 
-## Datos medidos con 1 nodo `D2as_v4` que se usan acá
-
-CPU del host como fracción de **1 vCPU** (el gráfico muestra % de 2 vCPU). Leídos de los screenshots de Datadog.
-
-| Carga | CPU del host | Proceso Node (todos los hilos) | ELU | Fuente |
-| --- | --- | --- | --- | --- |
-| 400 req/s, 0 429 | 36 % de 2 → **0,72** | ≈ 0,6 | 0,47 | `results/1-nodo/exchange-stress-4.png` |
-| 200 req/s, 0 429 | 23 % de 2 → **0,47** | — | — | `results/1-nodo/exchange-stress-4.png` |
-| ~500 aceptadas + ~150 429/s | 45 % de 2 → **0,90** | 0,73 | 0,60 | `results/1-nodo/exchange-capacity-4.png` |
-| ~500 aceptadas + ~300 429/s | 47 % de 2 → **0,95** | ≈ 0,78 | ≈ 0,62 | `results/1-nodo/exchange-stress-4.png` |
-| ~500 aceptadas + ~1.100 429/s | 57 % de 2 → **1,14** | 0,95 | 0,78 | `results/1-nodo/exchange-stress-4.png` |
-
-Entre el proceso Node y el host hay **≈ 0,17–0,19 vCPU** de otros procesos (agente de Datadog, pm2, kernel).
-
-## Factor de conversión entre máquinas (f)
-
-**f ≈ 1,5** (rango **1,2–2,0**): un segundo de CPU de `D2as_v4` equivale a 1 / f segundos de CPU de `F1as_v7`.
-
-- Frecuencia máxima: 4,5 / 3,35 ≈ 1,34.
-- Tres generaciones de microarquitectura (Zen 2 → 5) con mejoras de IPC del orden de 15–20 % cada una, según AMD.
-- En `D2as_v4`, cuando los dos hilos SMT trabajan a la vez, cada uno rinde menos que un core entero, así que la CPU medida ahí está inflada.
-
-Multiplicados darían más de 2. Usamos **1,5** porque buena parte del trabajo por request (syscalls, red virtualizada, TLS hacia Redis, accesos a memoria) no escala con IPC ni con frecuencia. **f no está medido: es la mayor incertidumbre de estas predicciones.** Se puede despejar después comparando la CPU de `results/1-nodo-f1as/` con la de `results/1-nodo/` a la misma carga.
-
-## Capacidad de 1 nodo `F1as_v7` (C₁')
-
-CPU esperada del host (fracción de 1 vCPU) = CPU medida en `D2as_v4` / f:
-
-| Carga | f = 1,2 | **f = 1,5** | f = 2,0 |
-| --- | --- | --- | --- |
-| 400 req/s | 0,60 | **0,48** | 0,36 |
-| 500 + 150 429/s | 0,75 | **0,60** | 0,45 |
-| 500 + 1.100 429/s | 0,95 | **0,76** | 0,57 |
-
-Con 500 aceptadas, cada request cuesta ≈ 0,60 / 500 = **1,2 ms de CPU del nodo**. Saturar el único core daría ≈ 830 req/s; con un margen del 15 % para que la cola de CPU no crezca, **C₁' ≈ 700 req/s** (570 con f = 1,2; 940 con f = 2,0).
-
-**El techo de 1 nodo sigue siendo el rate limit de 500 req/s, no la CPU.** Para que el nodo se sature antes de 500 req/s, f tendría que ser < 1,06 (0,90 / 0,85), o sea, que un core Zen 5 entero no rinda más que un hilo SMT de Zen 2.
-
-**ELU esperado.** Con 1 vCPU el ELU deja de medir solo el trabajo del hilo principal. Si el kernel le saca el core en medio de un callback para correr otro hilo, ese tiempo cuenta como "ocupado". Aproximación: ELU' ≈ (ELU / f) / (1 − otros), donde otros = (CPU del host − ELU) / f es la parte del core que usan los demás hilos y procesos.
-
-- 400 req/s: (0,47 / 1,5) / (1 − 0,17) ≈ **0,38**
-- 500 + 150 429/s: (0,60 / 1,5) / (1 − 0,20) ≈ **0,50**
-- 500 + 1.100 429/s: (0,78 / 1,5) / (1 − 0,24) ≈ **0,68**
-
-**Latencia.** Con 1,2 ms por request y el core al 60 %, la espera por CPU es del orden de 1,2 × 0,6 / 0,4 ≈ 2 ms, despreciable frente a los ~600 ms de ARCA y la red. Al 76 % (escalón de 1.600) sube a ~4 ms. La latencia no cambia respecto de `D2as_v4` mientras la CPU no se acerque al 100 %.
+**El límite de 1 nodo va a ser el rate limit de 500 req/s, no la CPU.**
 
 ## P4.a. 1 nodo `F1as_v7`, `root` (GET `/`, 1 req/s)
 
-- **p50 144 ms, p95 ≤ 150 ms**, igual que `results/1-nodo/root.json` (144 / 147). Es pura red: L = 144 ms.
+- **p50 145 ms**, igual que con `D2as_v4`. Es solo la red.
 
 ## P4.b. 1 nodo `F1as_v7`, carga normal (`exchange`, 5 req/s)
 
 | Métrica | Predicción | Por qué |
 | --- | --- | --- |
-| Códigos | 200 ≈ 49 %, 403 ≈ 25 %, 503 ≈ 26 % | lo define ARCA (con `D2as_v4` se midió 52 / 23 / 25) |
+| Códigos | 200: **50 %**, 403: **25 %**, 503: **25 %** | lo define ARCA, no la máquina |
 | 409, 429, 500, timeouts | **0** | 5 req/s ≪ 500 |
-| Latencia Artillery | p50 **659 ms ± 5 %**, p95 **983 ms ± 5 %** | igual que P1 medido: con 5 req/s la CPU del nodo no aparece en la latencia |
-| CPU del nodo | **< 5 %** | 5 × 1,2 ms ≈ 0,6 % + el agente de Datadog |
+| Latencia Artillery | p50 **660 ms**, p95 **985 ms** | igual que P1 medido: con 5 req/s la CPU no influye |
+| CPU del nodo | **< 5 %** | la carga es mínima |
 
 ## P4.c. 1 nodo `F1as_v7`, estrés (`exchange-stress`: 50, 100, 200, 400, 800 y 1.600 req/s)
 
-| Escalón | Predicción | `D2as_v4` (medido) |
+| Escalón | Predicción | Por qué |
 | --- | --- | --- |
-| ≤ 400 | 0 429, sin timeouts, latencias ± 5 % de las medidas. Con 400: **CPU ≈ 48 %** (36–60 %), **ELU ≈ 0,38** | CPU 36 % de 2 vCPU, ELU 0,47 |
-| 800 | **~500 resp/s no-429** + ~300 429/s, igual que con `D2as_v4`. **CPU ≈ 63 %** (48–79 %) | ~500 no-429 + ~300 429/s |
-| 1.600 | **~500 resp/s no-429** + ~1.100 429/s. **CPU ≈ 76 %** (57–95 %), **ELU ≈ 0,68**. Sin timeouts; p95 de los 200 a ≤ +5 % del medido | ~500 no-429 + ~1.100 429/s, CPU 57 % de 2 vCPU, ELU 0,78 |
-
-La CPU sube al pasar de 2 vCPU a 1 (45 % de 2 → ~60 % de 1 con 500 aceptadas), pero el throughput no-429 es el mismo. **Señal de que la predicción falla:** con f ≤ 1,2, en el escalón de 1.600 la CPU llega a ~95 %. Ahí aparecerían cola de CPU, timeouts y menos de 500 resp/s no-429, y el cuello de botella pasaría a ser el nodo.
+| ≤ 400 | latencias iguales a P4.b, 0 429, sin timeouts. CPU ≈ **55 %** con 400 | 400 < 500 del rate limit, y la CPU alcanza |
+| 800 y 1.600 | **~500 resp/s** atendidas con latencia normal, el resto **429**. CPU ≈ **70 %** con 800 y ≈ **80 %** con 1.600 | el rate limit corta en 500, igual que con `D2as_v4`. Los 429 también cuestan algo de CPU |
+| Recuperación | vuelve a P4.b enseguida | no queda cola |
 
 ## P4.d. 1 nodo `F1as_v7`, capacidad (`exchange-capacity`: 150 a 650 req/s)
 
-- **Igual que con `D2as_v4`:** estable hasta 500; los primeros 429 en el escalón de 550 (con `D2as_v4`: 1 en el de 500 y 51/s en el de 550); desde ahí, **no-429 plano en ~500 resp/s**. Latencia plana: p50 ≈ 630 ms, p95 ≈ 965 ms.
-- CPU al final (650 de entrada) ≈ **60 %** (45–75 %).
+- **Estable hasta 500 req/s; desde 550, el excedente sale como 429** y las atendidas quedan en ~500 resp/s.
+- **Por qué:** el rate limit corta en 500 antes de que se llene la CPU (~70 %).
 
 ## P4.e. 1 nodo `F1as_v7`, consistencia (`exchange-concurrency-overdraft`)
 
-- **Exactamente 51 respuestas 200** y saldo final de **1.011,4 USD**, como se midió con `D2as_v4`. La cantidad la definen el saldo y la tasa, no la máquina.
-
----
-
-# P5. Caso escalado: 2 nodos `F1as_v7`
-
-## Capacidad con 2 nodos (C₂')
-
-| Componente | ¿Se replica al escalar? | Límite estimado | Uso con 1.000 req/s aceptadas |
-| --- | --- | --- | --- |
-| Rate limit | sí, uno por nodo | 2 × 500 = **1.000 req/s** | 100 % → **limita** |
-| CPU del nodo (1 vCPU) | sí | 2 × ~700 ≈ **1.400 req/s** (1.140–1.880) | ≈ 60 % por nodo |
-| ARCA (ACI, 0,5 vCPU) | **no**, compartido | ≈ 2.100 req/s (P3) | ≈ 230 milicores (~46 %) |
-| Managed Redis B0 | **no**, compartido | sin dato de techo | ~9.400 ops/s, CPU ≈ 40 % (P3) |
-| Generador (PC de las mediciones) | — | ≥ 1.600 req/s probado | — |
-
-**C₂' ≈ 1.000 req/s.**
-
-## Hipótesis central: ¿escala ×2 el throughput?
-
-**Sí: ×2, de ~500 a ~1.000 resp/s no-429, con un margen de −3 %** por el reparto por conexión del Load Balancer (ver P3).
-
-El argumento es más fuerte que en P3. Aunque f resultara bajo y cada nodo de 1 vCPU se saturara por CPU antes de 500 req/s, **la CPU también se replica con cada nodo**: el throughput seguiría duplicándose, solo que a partir de un valor menor. Lo único que puede impedir el ×2 son los componentes compartidos, y ARCA y Redis quedan por debajo del 50 % con el doble de carga.
-
-Sin rate limit, el próximo límite con 2 nodos `F1as_v7` sería la **CPU de los nodos, cerca de 1.400 req/s**, antes que la degradación de ARCA (~1.600, ejecución previa). Con 2 nodos `D2as_v4`, P3 lo ubicaba en 1.600–1.700.
-
-## P5.a. 2 nodos, carga normal (`exchange`, 5 req/s)
-
-- Igual que P4.b: códigos 49 / 25 / 26 %, 0 429/409/500/timeouts, p50 **659 ms ± 5 %**, p95 **983 ms ± 5 %**.
-- Los 2 nodos reciben tráfico, cada uno entre **30 % y 70 %** (pocas conexiones con `pool: 50`).
-
-## P5.b. 2 nodos, estrés (`exchange-stress`)
-
-| Escalón | Predicción | 1 nodo `F1as_v7` (P4.c) |
-| --- | --- | --- |
-| ≤ 400 | 0 429; con 400, CPU por nodo ≈ **31 %** (200 req/s cada uno: 0,47 / 1,5). No es la mitad de 48 % porque hay un costo fijo (agente de Datadog, kernel) | ≈ 48 % con 400 |
-| 800 | **0 429**, ~800 resp/s no-429; CPU por nodo ≈ **48 %** (400 req/s cada uno) | ~500 no-429 + ~300 429/s |
-| 1.600 | **~1.000 resp/s no-429** + ~600 429/s; CPU por nodo ≈ **63 %** (48–79 %: 500 aceptadas + 300 429/s cada uno); ARCA ≈ 45–50 %; Redis ≈ 40 % | ~500 no-429 + ~1.100 429/s |
-
-En ningún escalón hay timeouts.
-
-## P5.c. 2 nodos, capacidad (`exchange-capacity` y `exchange-capacity-2n`)
-
-- **`exchange-capacity` (150 a 650): 0 429 en todos los escalones** y latencia plana (p50 ≈ 630, p95 ≈ 965 ms). Cada nodo recibe ≤ ~340 req/s.
-- **`exchange-capacity-2n` (600 a 1.400): estable hasta 900, primeros 429 en el escalón de 1.000 (≤ 5 %) y desde 1.100 no-429 plano en 970–1.000 resp/s.** CPU por nodo con 1.400 de entrada (500 aceptadas + 200 429/s cada uno) ≈ **62 %**. Sin timeouts.
-
-## P5.d. 2 nodos, consistencia (`exchange-concurrency-overdraft`)
-
-- **Exactamente 51 respuestas 200 y saldo final de 1.011,4 USD**, igual que P3.d: la reserva es un script Lua atómico en el Redis compartido.
+- ** ~50 respuestas 200** y saldo final de **1.095 USD**, nunca negativo. La cantidad la definen el saldo y la tasa, no la máquina.
+- **Por qué:** la tasa ARS → USD efectiva es 0,00066, porque `PUT /rates` redondea la recíproca a 5 decimales (`node/services/rates.js` l. 23). Cada exchange pide 1.750.000 × 0,00066 = 1.155 USD: alcanzan para ⌊60.000 / 1.155⌋ = 51 y sobran 60.000 − 51 × 1.155 = 1.095.

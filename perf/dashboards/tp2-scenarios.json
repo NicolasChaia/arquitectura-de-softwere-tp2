@@ -929,9 +929,9 @@
               ],
               "markers": [
                 {
-                  "value": "y = 2",
+                  "value": "y = 1",
                   "display_type": "error dashed",
-                  "label": "2 vCPU"
+                  "label": "1 vCPU (F1as_v7)"
                 }
               ]
             },
@@ -1090,9 +1090,9 @@
               ],
               "markers": [
                 {
-                  "value": "y = 2",
+                  "value": "y = 1",
                   "display_type": "error dashed",
-                  "label": "2 vCPU"
+                  "label": "1 vCPU (F1as_v7)"
                 }
               ]
             },
