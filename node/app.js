@@ -11,6 +11,7 @@ import { connectRedis } from "./repository/redisClient.js";
 import { StatsdClient } from "./metrics/statsd.js";
 import { startRuntimeMetrics } from "./metrics/runtime.js";
 import { ArcaClient } from "./external/arca.js";
+import { RedisWindowStore } from "./middleware/redisWindowStore.js";
 import { createApp } from "./createApp.js";
 import config from "./config.js";
 
@@ -48,12 +49,24 @@ const exchangeService = new ExchangeService(
   arcaClient
 );
 
-const app = createApp({ accountsService, ratesService, logService, exchangeService, metrics });
+const rateLimits = {
+  logWindowMs: 1000,
+  logMax: 300,
+  exchangeWindowMs: 1000,
+  exchangeMax: config.exchangeRateLimit,
+  exchangeStore:
+    config.rateLimitMode === "global" ? new RedisWindowStore({ prefix: "ratelimit:exchange:" }) : undefined,
+};
+
+const app = createApp({ accountsService, ratesService, logService, exchangeService, metrics, rateLimits });
 
 const port = 3000;
 
 app.listen(port, () => {
-  console.log(`Exchange API listening on port ${port} (ARCA retries: ${config.arcaRetries})`);
+  console.log(
+    `Exchange API listening on port ${port} (ARCA retries: ${config.arcaRetries}, ` +
+      `exchange rate limit: ${config.exchangeRateLimit} req/s ${config.rateLimitMode})`
+  );
 });
 
 export default app;

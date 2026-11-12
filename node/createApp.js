@@ -37,6 +37,8 @@ export function createApp({
   const exchangeLimiter = createRateLimiter({
     windowMs: rateLimits.exchangeWindowMs,
     max: rateLimits.exchangeMax,
+    // shared store -> one limit for all the nodes (tactic 2)
+    store: rateLimits.exchangeStore,
   });
 
   app.get("/", (req, res) => {
