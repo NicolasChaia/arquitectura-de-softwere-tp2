@@ -295,3 +295,74 @@ Se gana **disponibilidad** (un 503 de cada 4 pasa a 1 de cada 14) a costa de **~
 - Escenarios: `root` (L), `exchange`, `exchange-capacity-2n` y `exchange-concurrency-overdraft`, en `results/tactica-reintento/`, desde la misma ubicación que `2-nodos-f1as`.
 - Métrica propia nueva: `exchange.arca.retry` (reintentos por segundo) en Datadog; debería dar ~26 % de las validaciones.
 - Azure Monitor (`azure-metrics.sh`) para la CPU de ARCA y la carga de Redis.
+
+---
+
+# P7. Táctica 2: rate limit global en Redis, dimensionado por ARCA (2 nodos `F1as_v7`)
+
+Escrito el 12/11, en la rama `tactica-ratelimit-global`, **antes** de implementar la táctica. Se mide sola: con `ARCA_RETRIES=0`, para separar su efecto del de la táctica 1.
+
+## Problema observado
+
+1. **El límite de entrada crece con la cantidad de nodos.** Con 1 nodo entran ~498 req/s y con 2, ~998 (`results/1-nodo-f1as/exchange-capacity.json`, `results/2-nodos-f1as/exchange-capacity-2n.json`): exactamente 500 × N, porque cada proceso cuenta en su memoria (`node/createApp.js`, `exchangeMax: 500`).
+2. **Además, cuenta por IP del cliente.** `node/middleware/rateLimit.js` no define `keyGenerator` ni `store`, así que `express-rate-limit` usa la IP del cliente como clave. En las pruebas toda la carga sale de una sola IP (el generador). Con muchos clientes reales, cada uno tendría su propio cupo de 500 req/s en cada nodo: **el límite no acota la carga total del sistema**.
+3. **ARCA no crece con los nodos.** Su CPU sube en proporción a la carga total: ~25 % con ~500 req/s (`results/1-nodo-f1as/exchange-capacity-azure.txt`) y 50 % con ~1.000 (`results/2-nodos-f1as/exchange-capacity-2n-azure.txt`). Proyectado, se satura cerca de **~2.000 req/s**, y con la táctica 1 (1,26 llamadas por request, P6) cerca de **~1.600**.
+
+Con el límite actual, nada impide que entre más carga de la que ARCA puede atender: alcanza con 4 nodos, o con varios clientes.
+
+## Qué se cambia
+
+- El rate limit de `POST /exchange` pasa a ser **uno solo para todo el sistema**: un contador en el Redis compartido, con **una clave única** (no por IP), ventana de 1 s.
+- **Límite total: 1.200 req/s.** Es ~75 % del techo proyectado de ARCA con reintento (~1.600): deja margen para la imprecisión de la proyección y para picos.
+- Se activa por Ansible: `rate_limit_mode=global` y `exchange_rate_limit=1200`. Con `rate_limit_mode=local` (por defecto) queda como en `2-nodos-f1as`.
+- En modo global no queda limitador por nodo: el límite global reemplaza al local.
+
+## Datos que se usan
+
+| Dato | Valor | Fuente |
+| --- | --- | --- |
+| Atendidas con límite local y 2 nodos | **~998 req/s**; 429 desde el escalón de 1.000 | `results/2-nodos-f1as/exchange-capacity-2n.json` |
+| Nodos con ~500 req/s cada uno | CPU ≈ **45 %**, ELU ≈ 0,44; reparto del LB parejo | `results/2-nodos-f1as/exchange-capacity(2n)-2n-4.png` |
+| ARCA con ~1.000 req/s | **50 %** de CPU | `results/2-nodos-f1as/exchange-capacity-2n-azure.txt` |
+| Redis con ~1.000 req/s | ~9.400 ops/s (≈ 9,4 por request), CPU 34 % (14 % en reposo) | ídem |
+| Latencia con 5 req/s | Artillery p50 659 ms, p95 963 ms | `results/2-nodos-f1as/exchange.json` |
+
+## P7.a. Carga normal (`exchange`, 5 req/s)
+
+| Métrica | Predicción | Por qué |
+| --- | --- | --- |
+| Códigos | 200 ≈ 50 %, 403 ≈ 25 %, 503 ≈ 25 % (igual que `2-nodos-f1as`) | `ARCA_RETRIES=0`: la táctica no toca ARCA |
+| 429, timeouts | **0** | 5 ≪ 1.200 |
+| Latencia Artillery | p50 **~660 ms**, p95 **~965 ms** (± 5 %) | se suma una ida y vuelta a Redis dentro de la misma región (~1 ms): no se distingue del ruido |
+
+## P7.b. Capacidad (`exchange-capacity-2n`: 600 a 1.400 req/s)
+
+| Escalón | Predicción | Con límite local (medido) |
+| --- | --- | --- |
+| 600 a 1.100 | **0 429**: entra todo | 429 desde 1.000; plano en ~998 |
+| 1.200 | entra casi todo (**≥ 1.150 req/s**), pocos 429 | ~998 + ~200 429/s |
+| 1.300 y 1.400 | **~1.200 req/s** atendidas (± 3 %), el resto 429 | ~998 |
+
+- **El tope pasa de 2 × 500 a 1.200**, y no depende de cómo reparta el LB: los dos nodos descuentan del mismo contador.
+- **Nodos en el tope:** ~600 req/s cada uno → CPU **~55 %** por nodo, ELU **~0,53**.
+- **ARCA en el tope:** **~60 %** de CPU (50 % × 1.200 / 1.000). Sigue con margen.
+- **Redis en el tope:** ~9,4 ops por request atendido más ~1 por cada request, incluidos los 429 → ~**13.000 ops/s** (antes ~9.400), CPU **~43 %**.
+- **Latencia de los 200:** igual que con límite local (p50 ~630 ms). Los 429 tardan ~1 ms más, porque ahora consultan Redis.
+- **Sin timeouts.**
+
+## Tradeoffs que se esperan
+
+- **A favor:** el límite queda en **un número que se decide según la capacidad del recurso compartido**, no según N ni según cuántos clientes haya. Con estos 2 nodos, además, entran **+20 %** de requests (1.200 contra ~998) sin acercar a ARCA a su techo.
+- **En contra:**
+  - +1 operación de Redis por request, también para los 429 (~+11 % por request atendido). En el tope, Redis pasa de ~9.400 a ~13.000 ops/s, sobre todo porque entran más requests.
+  - ~1 ms más por request.
+  - Redis pasa a decidir qué requests entran: si se cae, el límite deja de funcionar. Se elige dejar pasar todo (*fail open*): si Redis se cae, de todos modos fallan las reservas.
+  - Un límite global no protege a cada nodo por separado: con 1 solo nodo, ese nodo recibiría 1.200 req/s (~110 % de su CPU, proyectado). El límite tiene que revisarse si cambia la cantidad de nodos.
+  - Un único contador da el mismo cupo a todos los clientes: uno solo puede agotarlo.
+
+## Cómo se mide
+
+- 2 nodos `F1as_v7`, `./ansible/deploy.sh -e rate_limit_mode=global -e exchange_rate_limit=1200` (con `arca_retries=0`).
+- Escenarios: `root` (L), `exchange` y `exchange-capacity-2n`, en `results/tactica-ratelimit-global/`, desde la misma ubicación que `2-nodos-f1as`.
+- Datadog: códigos por segundo y CPU/ELU por nodo. Azure Monitor (`azure-metrics.sh`): CPU de ARCA y operaciones de Redis.
+- La línea de arranque de pm2 muestra el modo y el límite de cada nodo, como evidencia de la configuración.
