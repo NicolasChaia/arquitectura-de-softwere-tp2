@@ -95,3 +95,87 @@ describe("ArcaClient", () => {
     assert.equal(result.detail, "ECONNREFUSED");
   });
 });
+
+// answers each call with the next response of the list, and counts the calls
+function sequence(...responses) {
+  const fn = async () => responses[Math.min(fn.calls++, responses.length - 1)]();
+  fn.calls = 0;
+  return fn;
+}
+const http500 = () => ({ ok: false, status: 500, json: async () => { throw new SyntaxError("x"); } });
+const approved = () => jsonResponse(200, { ok: true, codigoAutorizacion: "abc" });
+
+function retryingClient(fetchFn, retries, metrics) {
+  return new ArcaClient({ baseUri: "http://arca:8080", timeoutMs: 50, metrics, fetchFn, retries });
+}
+
+describe("ArcaClient retries (tactic 1)", () => {
+  test("by default (retries = 0) a 5xx is not retried", async () => {
+    const fetchFn = sequence(http500, approved);
+
+    const result = await client(fetchFn).validar("40101235");
+
+    assert.equal(result.status, "error");
+    assert.equal(fetchFn.calls, 1);
+    assert.equal(result.attempts, 1);
+  });
+
+  test("a 5xx followed by an answer -> the answer, after 2 calls", async () => {
+    const metrics = fakeMetrics();
+    const fetchFn = sequence(http500, approved);
+
+    const result = await retryingClient(fetchFn, 1, metrics).validar("40101235");
+
+    assert.equal(result.status, "approved");
+    assert.equal(result.codigoAutorizacion, "abc");
+    assert.equal(fetchFn.calls, 2);
+    assert.equal(result.attempts, 2);
+    assert.ok(metrics.events.includes("arca.retry"));
+    // only the final result is counted as a validation
+    assert.deepEqual(metrics.events.filter((e) => e.startsWith("arca.validation.")), ["arca.validation.approved"]);
+  });
+
+  test("gives up after `retries` extra calls", async () => {
+    const fetchFn = sequence(http500);
+
+    const result = await retryingClient(fetchFn, 1).validar("40101235");
+
+    assert.equal(result.status, "error");
+    assert.equal(fetchFn.calls, 2);
+    assert.equal(result.attempts, 2);
+  });
+
+  test("a rejection is final: not retried", async () => {
+    const fetchFn = sequence(() => jsonResponse(200, { ok: false }), approved);
+
+    const result = await retryingClient(fetchFn, 1).validar("40101235");
+
+    assert.equal(result.status, "rejected");
+    assert.equal(fetchFn.calls, 1);
+  });
+
+  test("a timeout is not retried", async () => {
+    let calls = 0;
+    const fetchFn = (url, { signal }) => {
+      calls++;
+      return new Promise((_, reject) => signal.addEventListener("abort", () => reject(signal.reason)));
+    };
+
+    const result = await retryingClient(fetchFn, 1).validar("40101235");
+
+    assert.equal(result.reason, "timeout");
+    assert.equal(calls, 1);
+  });
+
+  test("unreachable is not retried", async () => {
+    const fetchFn = sequence(
+      () => { throw new TypeError("fetch failed", { cause: { code: "ECONNREFUSED" } }); },
+      approved
+    );
+
+    const result = await retryingClient(fetchFn, 1).validar("40101235");
+
+    assert.equal(result.reason, "unreachable");
+    assert.equal(fetchFn.calls, 1);
+  });
+});

@@ -1,16 +1,29 @@
 // Client for ARCA's fiscal validation API (POST /validar).
 
 export class ArcaClient {
-  constructor({ baseUri, timeoutMs, metrics, fetchFn = fetch }) {
+  // `retries`: extra attempts after an HTTP 5xx from ARCA (tactic 1, see
+  // perf/predicciones.md P6). ARCA's 5xx are random per call (~26 %, not tied
+  // to the DNI) and come back in ~6 ms, so retrying is cheap and usually
+  // succeeds. Timeouts and unreachable are not retried: when ARCA does not
+  // answer, another call only adds load to a resource that is already behind.
+  constructor({ baseUri, timeoutMs, metrics, fetchFn = fetch, retries = 0 }) {
     this.url = `${baseUri}/validar`;
     this.timeoutMs = timeoutMs;
     this.metrics = metrics;
     this.fetch = fetchFn;
+    this.retries = retries;
   }
 
   async validar(dni) {
     const start = performance.now();
-    const result = await this.call(dni);
+    let result = await this.call(dni);
+    let attempts = 1;
+    while (isRetryable(result) && attempts <= this.retries) {
+      this.metrics?.increment("arca.retry");
+      result = await this.call(dni);
+      attempts++;
+    }
+    result.attempts = attempts;
     result.latencyMs = Math.round(performance.now() - start);
 
     if (this.metrics) {
@@ -42,7 +55,12 @@ export class ArcaClient {
     try {
       body = await res.json();
     } catch {
-      return { status: "error", reason: "bad_response", detail: `HTTP ${res.status}, non-JSON body` };
+      return {
+        status: "error",
+        reason: "bad_response",
+        detail: `HTTP ${res.status}, non-JSON body`,
+        httpStatus: res.status,
+      };
     }
 
     if (body?.ok === true && res.ok) {
@@ -52,6 +70,10 @@ export class ArcaClient {
     if (body?.ok === false && res.status < 500) {
       return { status: "rejected" };
     }
-    return { status: "error", reason: "bad_response", detail: `HTTP ${res.status}` };
+    return { status: "error", reason: "bad_response", detail: `HTTP ${res.status}`, httpStatus: res.status };
   }
+}
+
+function isRetryable(result) {
+  return result.status === "error" && result.httpStatus >= 500;
 }

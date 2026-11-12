@@ -1,6 +1,11 @@
 - name: Update app
   hosts: all
   gather_facts: yes
+  vars:
+    # Tactic 1 (perf/predicciones.md P6): retries after an ARCA 5xx.
+    # 0 = as measured in results/2-nodos-f1as. Override with:
+    #   ./ansible/deploy.sh -e arca_retries=1
+    arca_retries: 0
   tasks:
     - name: Stop old version
       command: pm2 delete app
@@ -15,3 +20,5 @@
       command: npm install
     - name: Start new version
       command: pm2 start app.js --name app
+      environment:
+        ARCA_RETRIES: "{{ arca_retries }}"

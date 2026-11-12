@@ -18,5 +18,7 @@ export default {
   // Base uri for ARCA service
   arcaUri: '',
   arcaTimeoutMs: Number(process.env.ARCA_TIMEOUT_MS) || 3000,
+  // Retries after an ARCA 5xx (tactic 1). Set per deploy by Ansible (arca_retries).
+  arcaRetries: Number(process.env.ARCA_RETRIES) || 0,
   redis: readRedisOptions(),
 };

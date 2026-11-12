@@ -35,6 +35,7 @@ startRuntimeMetrics(metrics);
 const arcaClient = new ArcaClient({
   baseUri: config.arcaUri,
   timeoutMs: config.arcaTimeoutMs,
+  retries: config.arcaRetries,
   metrics,
 });
 
@@ -52,7 +53,7 @@ const app = createApp({ accountsService, ratesService, logService, exchangeServi
 const port = 3000;
 
 app.listen(port, () => {
-  console.log(`Exchange API listening on port ${port}`);
+  console.log(`Exchange API listening on port ${port} (ARCA retries: ${config.arcaRetries})`);
 });
 
 export default app;
