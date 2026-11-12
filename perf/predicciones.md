@@ -288,7 +288,7 @@ Con 2 nodos y 5 req/s, el **22–26 % de los clientes recibe 503** porque ARCA r
 
 ## Tradeoff que se espera ver
 
-Se gana **disponibilidad** (un 503 de cada 4 pasa a 1 de cada 14) a costa de **~26 % más de carga en ARCA**, que es el recurso compartido que no escala. Con el rate limit actual (1.000 req/s) sobra margen. Pero el techo de ARCA, medido en requests de clientes, baja **≈ 1,26 veces**: si ARCA se satura cerca de ~2.300 req/s sin reintento (corrida sin rate limit, pendiente de commitear), con reintento se saturaría cerca de **~1.800**. Ese número se usa para dimensionar la táctica 2.
+Se gana **disponibilidad** (un 503 de cada 4 pasa a 1 de cada 14) a costa de **~26 % más de carga en ARCA**, que es el recurso compartido que no escala. Con el rate limit actual (1.000 req/s) sobra margen. Pero el techo de ARCA, medido en requests de clientes, baja **≈ 1,26 veces**: con 1.000 req/s ARCA está al 50 % de su CPU (`results/2-nodos-f1as/exchange-capacity-2n-azure.txt`), así que sin reintento se saturaría cerca de ~2.000 req/s, y con reintento cerca de **~1.600**.
 
 ## Cómo se mide
 
