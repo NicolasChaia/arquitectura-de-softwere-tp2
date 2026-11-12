@@ -182,3 +182,44 @@ Con 1 nodo `D2as_v4`, el nodo llegó al rate limit de **500 req/s** sin colapsar
 
 - ** ~50 respuestas 200** y saldo final de **1.095 USD**, nunca negativo. La cantidad la definen el saldo y la tasa, no la máquina.
 - **Por qué:** la tasa ARS → USD efectiva es 0,00066, porque `PUT /rates` redondea la recíproca a 5 decimales (`node/services/rates.js` l. 23). Cada exchange pide 1.750.000 × 0,00066 = 1.155 USD: alcanzan para ⌊60.000 / 1.155⌋ = 51 y sobran 60.000 − 51 × 1.155 = 1.095.
+
+---
+
+# P5. Caso escalado: 2 nodos `F1as_v7`
+
+## ¿Escala ×2 el throughput?
+
+**Sí: de ~500 a ~1.000 req/s atendidas.**
+
+- **Por qué:** con 1 nodo lo que limita es el rate limit, y cada nodo tiene el suyo. Con 2 nodos, el límite pasa a **2 × 500 = 1.000 req/s**. La CPU también se duplica: cada nodo tiene su vCPU y atiende lo mismo que con 1 nodo (~50 % de CPU). Pero hay que tener cuidado porque como no se duplican ni ARCA ni Redis sino que se comparten. El otro riesgo es el **Load Balancer**: reparte conexiones, no requests. Si un nodo recibe más de la mitad, llega a su límite de 500 antes que el otro y el total queda un poco por debajo de 1.000. Por eso la predicción es 900 a 1.000.
+
+## P5.a. 2 nodos, `root` y carga normal (`exchange`, 5 req/s)
+
+| Métrica                 | Predicción                                                       | Por qué                                                           |
+| ----------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `root` p50              | **145 ms**                                                       | es solo la red                                                    |
+| Códigos                 | 200: **50 %**, 403: **25 %**, 503: **25 %**                      | lo define ARCA                                                    |
+| 409, 429, 500, timeouts | **0**                                                            | 5 req/s ≪ 1.000                                                   |
+| Latencia Artillery      | p50 **620 ms**, p95 **965 ms**                                   | igual que con 1 nodo: con 5 req/s la cantidad de nodos no influye |
+
+
+## P5.b. 2 nodos, estrés (`exchange-stress`: 50, 100, 200, 400, 800 y 1.600 req/s)
+
+| Escalón      | Predicción                                                                                                           | Por qué                                                                                                |
+| ------------ | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| ≤ 400        | latencia como P5.a, 0 429. CPU por nodo ≈ **25 %** con 400                                                           | cada nodo recibe ~200 req/s: lo mismo que 1 nodo con 200                                               |
+| **800**      | **0 429**, ~800 req/s atendidas. CPU por nodo ≈ **40 %**                                                             | 800 < 1.000; cada nodo recibe ~400 (con 1 nodo, en 800 ya había 300/s de 429)                          |
+| **1.600**    | **~1.000 req/s atendidas** y ~600/s de 429, sin timeouts. CPU por nodo ≈ **55 %**. ARCA ≈ **50 %**, Redis ≈ **30 %** | el rate limit corta en 2 × 500. Cada nodo recibe ~800: lo mismo que 1 nodo en el escalón de 800 (52 %) |
+
+
+## P5.c. 2 nodos, capacidad (`exchange-capacity` y `exchange-capacity-2n`)
+
+- **`exchange-capacity` (150 a 650): 0 429 en todos los escalones**, latencia plana (p50 ≈ 620 ms, p95 ≈ 965 ms). Con 1 nodo aparecían desde 550.
+  - **Por qué:** con 650 de entrada, cada nodo recibe ~325, por debajo de su límite de 500.
+- **`exchange-capacity-2n` (600 a 1.400): estable hasta 900; los 429 aparecen entre 1.000 y 1.100**, y desde ahí las atendidas quedan planas en **~1.000 req/s**. Sin timeouts. CPU por nodo ≈ **55 %** al final.
+  - **Por qué:** 2 × 500 = 1.000. Si el reparto del LB no es parejo, los primeros 429 pueden aparecer un escalón antes.
+
+## P5.d. 2 nodos, consistencia (`exchange-concurrency-overdraft`)
+
+- **51 respuestas 200** y saldo final de **1.095 USD**, nunca negativo. Igual que con 1 nodo.
+- **Por qué:** la reserva es un script Lua atómico en el Redis compartido. Da igual a qué nodo llegue cada request: los dos descuentan del mismo saldo.

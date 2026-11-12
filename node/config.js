@@ -16,7 +16,7 @@ function readRedisOptions() {
 
 export default {
   // Base uri for ARCA service
-  arcaUri: 'http://10.0.4.69:8080',
+  arcaUri: '',
   arcaTimeoutMs: Number(process.env.ARCA_TIMEOUT_MS) || 3000,
   redis: readRedisOptions(),
 };
