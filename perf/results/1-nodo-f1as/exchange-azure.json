@@ -1,0 +1,327 @@
+{"arca":
+{
+  "cost": 16,
+  "interval": "PT1M",
+  "namespace": "Microsoft.ContainerInstance/containerGroups",
+  "resourceregion": "eastus",
+  "timespan": "2026-11-11T12:12:29Z/2026-11-11T12:15:59Z",
+  "value": [
+    {
+      "displayDescription": "CPU usage on all cores in millicores.",
+      "errorCode": "Success",
+      "id": "/subscriptions/0115e612-de41-4949-9734-67df3f88dfc2/resourceGroups/tp2_resource_group/providers/Microsoft.ContainerInstance/containerGroups/tkugnbwkwrlqaaebvwatvzmot/providers/Microsoft.Insights/metrics/CpuUsage",
+      "name": {
+        "localizedValue": "CPU Usage",
+        "value": "CpuUsage"
+      },
+      "resourceGroup": "tp2_resource_group",
+      "timeseries": [
+        {
+          "data": [
+            {
+              "average": 0.0,
+              "maximum": 0.0,
+              "timeStamp": "2026-11-11T12:12:00Z"
+            },
+            {
+              "average": 0.0,
+              "maximum": 0.0,
+              "timeStamp": "2026-11-11T12:13:00Z"
+            },
+            {
+              "average": 1.0,
+              "maximum": 2.0,
+              "timeStamp": "2026-11-11T12:14:00Z"
+            }
+          ],
+          "metadatavalues": []
+        }
+      ],
+      "type": "Microsoft.Insights/metrics",
+      "unit": "Count"
+    },
+    {
+      "displayDescription": "Total memory usage in byte.",
+      "errorCode": "Success",
+      "id": "/subscriptions/0115e612-de41-4949-9734-67df3f88dfc2/resourceGroups/tp2_resource_group/providers/Microsoft.ContainerInstance/containerGroups/tkugnbwkwrlqaaebvwatvzmot/providers/Microsoft.Insights/metrics/MemoryUsage",
+      "name": {
+        "localizedValue": "Memory Usage",
+        "value": "MemoryUsage"
+      },
+      "resourceGroup": "tp2_resource_group",
+      "timeseries": [
+        {
+          "data": [
+            {
+              "average": 9553920.0,
+              "maximum": 9555968.0,
+              "timeStamp": "2026-11-11T12:12:00Z"
+            },
+            {
+              "average": 9558016.0,
+              "maximum": 9560064.0,
+              "timeStamp": "2026-11-11T12:13:00Z"
+            },
+            {
+              "average": 11558912.0,
+              "maximum": 13553664.0,
+              "timeStamp": "2026-11-11T12:14:00Z"
+            }
+          ],
+          "metadatavalues": []
+        }
+      ],
+      "type": "Microsoft.Insights/metrics",
+      "unit": "Bytes"
+    },
+    {
+      "displayDescription": "The network bytes received per second.",
+      "errorCode": "Success",
+      "id": "/subscriptions/0115e612-de41-4949-9734-67df3f88dfc2/resourceGroups/tp2_resource_group/providers/Microsoft.ContainerInstance/containerGroups/tkugnbwkwrlqaaebvwatvzmot/providers/Microsoft.Insights/metrics/NetworkBytesReceivedPerSecond",
+      "name": {
+        "localizedValue": "Network Bytes Received Per Second",
+        "value": "NetworkBytesReceivedPerSecond"
+      },
+      "resourceGroup": "tp2_resource_group",
+      "timeseries": [
+        {
+          "data": [
+            {
+              "average": 0.0,
+              "maximum": 0.0,
+              "timeStamp": "2026-11-11T12:12:00Z"
+            },
+            {
+              "average": 0.0,
+              "maximum": 0.0,
+              "timeStamp": "2026-11-11T12:13:00Z"
+            },
+            {
+              "average": 91.5,
+              "maximum": 183.0,
+              "timeStamp": "2026-11-11T12:14:00Z"
+            }
+          ],
+          "metadatavalues": []
+        }
+      ],
+      "type": "Microsoft.Insights/metrics",
+      "unit": "Bytes"
+    },
+    {
+      "displayDescription": "The network bytes transmitted per second.",
+      "errorCode": "Success",
+      "id": "/subscriptions/0115e612-de41-4949-9734-67df3f88dfc2/resourceGroups/tp2_resource_group/providers/Microsoft.ContainerInstance/containerGroups/tkugnbwkwrlqaaebvwatvzmot/providers/Microsoft.Insights/metrics/NetworkBytesTransmittedPerSecond",
+      "name": {
+        "localizedValue": "Network Bytes Transmitted Per Second",
+        "value": "NetworkBytesTransmittedPerSecond"
+      },
+      "resourceGroup": "tp2_resource_group",
+      "timeseries": [
+        {
+          "data": [
+            {
+              "average": 0.0,
+              "maximum": 0.0,
+              "timeStamp": "2026-11-11T12:12:00Z"
+            },
+            {
+              "average": 0.0,
+              "maximum": 0.0,
+              "timeStamp": "2026-11-11T12:13:00Z"
+            },
+            {
+              "average": 56.5,
+              "maximum": 113.0,
+              "timeStamp": "2026-11-11T12:14:00Z"
+            }
+          ],
+          "metadatavalues": []
+        }
+      ],
+      "type": "Microsoft.Insights/metrics",
+      "unit": "Bytes"
+    }
+  ]
+}
+,"redis":
+{
+  "cost": 20,
+  "interval": "PT1M",
+  "namespace": "Microsoft.Cache/redisEnterprise",
+  "resourceregion": "eastus",
+  "timespan": "2026-11-11T12:12:29Z/2026-11-11T12:15:59Z",
+  "value": [
+    {
+      "displayDescription": "The CPU utilization of the cache as a percentage.",
+      "errorCode": "Success",
+      "id": "/subscriptions/0115e612-de41-4949-9734-67df3f88dfc2/resourceGroups/tp2_resource_group/providers/Microsoft.Cache/redisEnterprise/tp2redis-nzednlimbq/providers/Microsoft.Insights/metrics/percentProcessorTime",
+      "name": {
+        "localizedValue": "CPU",
+        "value": "percentProcessorTime"
+      },
+      "resourceGroup": "tp2_resource_group",
+      "timeseries": [
+        {
+          "data": [
+            {
+              "average": 11.5,
+              "maximum": 12.0,
+              "timeStamp": "2026-11-11T12:12:00Z"
+            },
+            {
+              "average": 11.5,
+              "maximum": 12.0,
+              "timeStamp": "2026-11-11T12:13:00Z"
+            },
+            {
+              "average": 12.5,
+              "maximum": 13.0,
+              "timeStamp": "2026-11-11T12:14:00Z"
+            }
+          ],
+          "metadatavalues": []
+        }
+      ],
+      "type": "Microsoft.Insights/metrics",
+      "unit": "Percent"
+    },
+    {
+      "displayDescription": "The percentage of time the cluster is busy and not waiting idle.",
+      "errorCode": "Success",
+      "id": "/subscriptions/0115e612-de41-4949-9734-67df3f88dfc2/resourceGroups/tp2_resource_group/providers/Microsoft.Cache/redisEnterprise/tp2redis-nzednlimbq/providers/Microsoft.Insights/metrics/serverLoad",
+      "name": {
+        "localizedValue": "Server Load",
+        "value": "serverLoad"
+      },
+      "resourceGroup": "tp2_resource_group",
+      "timeseries": [
+        {
+          "data": [
+            {
+              "average": 11.5,
+              "maximum": 12.0,
+              "timeStamp": "2026-11-11T12:12:00Z"
+            },
+            {
+              "average": 11.5,
+              "maximum": 12.0,
+              "timeStamp": "2026-11-11T12:13:00Z"
+            },
+            {
+              "average": 12.5,
+              "maximum": 13.0,
+              "timeStamp": "2026-11-11T12:14:00Z"
+            }
+          ],
+          "metadatavalues": []
+        }
+      ],
+      "type": "Microsoft.Insights/metrics",
+      "unit": "Percent"
+    },
+    {
+      "displayDescription": "The percentage of cache memory used for key/value pairs.",
+      "errorCode": "Success",
+      "id": "/subscriptions/0115e612-de41-4949-9734-67df3f88dfc2/resourceGroups/tp2_resource_group/providers/Microsoft.Cache/redisEnterprise/tp2redis-nzednlimbq/providers/Microsoft.Insights/metrics/usedmemorypercentage",
+      "name": {
+        "localizedValue": "Used Memory Percentage",
+        "value": "usedmemorypercentage"
+      },
+      "resourceGroup": "tp2_resource_group",
+      "timeseries": [
+        {
+          "data": [
+            {
+              "average": 0.5,
+              "maximum": 1.0,
+              "timeStamp": "2026-11-11T12:12:00Z"
+            },
+            {
+              "average": 1.0,
+              "maximum": 1.0,
+              "timeStamp": "2026-11-11T12:13:00Z"
+            },
+            {
+              "average": 1.0,
+              "maximum": 1.0,
+              "timeStamp": "2026-11-11T12:14:00Z"
+            }
+          ],
+          "metadatavalues": []
+        }
+      ],
+      "type": "Microsoft.Insights/metrics",
+      "unit": "Percent"
+    },
+    {
+      "displayDescription": "The rate of operations executed on the cache, in operations per second.",
+      "errorCode": "Success",
+      "id": "/subscriptions/0115e612-de41-4949-9734-67df3f88dfc2/resourceGroups/tp2_resource_group/providers/Microsoft.Cache/redisEnterprise/tp2redis-nzednlimbq/providers/Microsoft.Insights/metrics/operationsPerSecond",
+      "name": {
+        "localizedValue": "Operations Per Second",
+        "value": "operationsPerSecond"
+      },
+      "resourceGroup": "tp2_resource_group",
+      "timeseries": [
+        {
+          "data": [
+            {
+              "average": 1.0,
+              "maximum": 1.0,
+              "timeStamp": "2026-11-11T12:12:00Z"
+            },
+            {
+              "average": 1.0,
+              "maximum": 1.0,
+              "timeStamp": "2026-11-11T12:13:00Z"
+            },
+            {
+              "average": 1.0,
+              "maximum": 1.0,
+              "timeStamp": "2026-11-11T12:14:00Z"
+            }
+          ],
+          "metadatavalues": []
+        }
+      ],
+      "type": "Microsoft.Insights/metrics",
+      "unit": "CountPerSecond"
+    },
+    {
+      "displayDescription": "The number of client connections to the cache.",
+      "errorCode": "Success",
+      "id": "/subscriptions/0115e612-de41-4949-9734-67df3f88dfc2/resourceGroups/tp2_resource_group/providers/Microsoft.Cache/redisEnterprise/tp2redis-nzednlimbq/providers/Microsoft.Insights/metrics/connectedclients",
+      "name": {
+        "localizedValue": "Connected Clients",
+        "value": "connectedclients"
+      },
+      "resourceGroup": "tp2_resource_group",
+      "timeseries": [
+        {
+          "data": [
+            {
+              "average": 2.0,
+              "maximum": 2.0,
+              "timeStamp": "2026-11-11T12:12:00Z"
+            },
+            {
+              "average": 2.0,
+              "maximum": 2.0,
+              "timeStamp": "2026-11-11T12:13:00Z"
+            },
+            {
+              "average": 2.0,
+              "maximum": 2.0,
+              "timeStamp": "2026-11-11T12:14:00Z"
+            }
+          ],
+          "metadatavalues": []
+        }
+      ],
+      "type": "Microsoft.Insights/metrics",
+      "unit": "Count"
+    }
+  ]
+}
+}
