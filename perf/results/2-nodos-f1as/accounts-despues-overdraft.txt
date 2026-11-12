@@ -1,0 +1,2 @@
+# GET /accounts después de exchange-concurrency-overdraft (2 nodos F1as_v7), 2026-11-12T13:30:39Z
+[{"id":1,"currency":"ARS","balance":986571460378},{"id":2,"currency":"USD","balance":1095},{"id":3,"currency":"EUR","balance":3943700},{"id":4,"currency":"BRL","balance":10502600}]

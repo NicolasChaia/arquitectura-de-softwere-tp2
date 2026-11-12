@@ -1,0 +1,25 @@
+# Extracto del log de la app (pm2, ~/.pm2/logs/app-out.log), 2026-11-12T13:35:09Z
+# Por nodo: líneas ARCA y las 3 primeras de cada estado
+
+10.0.2.5 | CHANGED | rc=0 >>
+líneas ARCA: 264349
+ARCA dni=69298146 status=approved codigoAutorizacion=af1e643c-5eae-40f1-922e-622c61fb1a65 latencyMs=459
+ARCA dni=51204244 status=approved codigoAutorizacion=95cd022a-89f2-474e-817a-a12fd0967fab latencyMs=341
+ARCA dni=21548414 status=approved codigoAutorizacion=fd56ab5a-7ccf-4b4e-9da2-06221c4fb61d latencyMs=422
+ARCA dni=4491823 status=rejected latencyMs=370
+ARCA dni=92920640 status=rejected latencyMs=337
+ARCA dni=46191089 status=rejected latencyMs=447
+ARCA dni=57306611 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=7
+ARCA dni=96197088 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=3
+ARCA dni=22208183 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=2
+10.0.2.4 | CHANGED | rc=0 >>
+líneas ARCA: 263217
+ARCA dni=19313482 status=approved codigoAutorizacion=1b80b638-9e18-4d7e-8519-822cd521b95e latencyMs=438
+ARCA dni=76866552 status=approved codigoAutorizacion=bc3b0039-d301-47c2-a542-5da89c99d573 latencyMs=421
+ARCA dni=44838964 status=approved codigoAutorizacion=6890887b-b841-4617-acad-29ba9bf07369 latencyMs=413
+ARCA dni=63106447 status=rejected latencyMs=419
+ARCA dni=91462858 status=rejected latencyMs=250
+ARCA dni=63830460 status=rejected latencyMs=416
+ARCA dni=81124501 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=4
+ARCA dni=34675265 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=2
+ARCA dni=50742513 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=2
