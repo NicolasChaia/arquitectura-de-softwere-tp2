@@ -223,3 +223,75 @@ Con 1 nodo `D2as_v4`, el nodo llegó al rate limit de **500 req/s** sin colapsar
 
 - **51 respuestas 200** y saldo final de **1.095 USD**, nunca negativo. Igual que con 1 nodo.
 - **Por qué:** la reserva es un script Lua atómico en el Redis compartido. Da igual a qué nodo llegue cada request: los dos descuentan del mismo saldo.
+
+---
+
+# P6. Táctica 1: reintento ante errores de ARCA (2 nodos `F1as_v7`)
+
+Escrito el 12/11, después de medir 2 nodos (`results/2-nodos-f1as/`) y **antes** de implementar la táctica.
+
+## Problema observado
+
+Con 2 nodos y 5 req/s, el **22–26 % de los clientes recibe 503** porque ARCA respondió HTTP 500 (`results/2-nodos-f1as/exchange.json`; `results/1-nodo-f1as/exchange.json`). No es falta de capacidad: pasa igual con 5 req/s que con 1.000.
+
+## Qué se cambia
+
+- Si ARCA responde **HTTP 5xx**, la app la vuelve a llamar **1 vez** (`ARCA_RETRIES=1`, configurado por Ansible). **No se reintentan los timeouts** (3 s): si ARCA está saturada y no responde, reintentar le sumaría carga justo cuando no puede atenderla.
+- Es seguro reintentar: validar no tiene efectos y ocurre **antes** de reservar fondos (`node/services/exchange.js`), así que no hay riesgo de cobrar dos veces.
+- Todo lo demás queda como en `2-nodos-f1as`: 2 nodos `F1as_v7`, rate limit local de 500 req/s por nodo.
+
+## Datos que se usan
+
+| Dato | Valor | Fuente |
+| --- | --- | --- |
+| Errores de ARCA | **26 % por llamada, al azar**: un mismo DNI falla en una llamada y responde bien en la siguiente | `ejecucion-previa/resultados/arca-determinismo.txt` |
+| Aprobado o rechazado | depende siempre del DNI (0 casos mezclados en 200) → el reintento no cambia la proporción 2:1 entre 200 y 403 | ídem; `results/2-nodos-f1as/exchange.json` (51,8 % / 25,9 %) |
+| Latencia de un error de ARCA | p50 **6 ms** | `ejecucion-previa/resultados/arca-distribucion-5000.txt` |
+| ARCA con ~1.000 req/s (2 nodos) | **50 %** de su CPU | `results/2-nodos-f1as/exchange-capacity-2n-azure.txt` |
+| Redis con ~1.000 req/s | ~9.400 ops/s (≈ 9,4 por request), CPU 34 % (14 % en reposo) | ídem |
+| Nodos con ~500 req/s cada uno | CPU ≈ **45 %**, ELU ≈ 0,44 | `results/2-nodos-f1as/exchange-capacity(2n)-2n-4.png` |
+
+## Cuentas
+
+- **503:** ahora solo si fallan las 2 llamadas: 0,26² ≈ **7 %** (antes 26 %).
+- **El resto se reparte 2:1**, como antes: 200 ≈ 0,93 × 2/3 ≈ **62 %**, 403 ≈ 0,93 × 1/3 ≈ **31 %**.
+- **Llamadas a ARCA por request:** 1 + 0,26 = **1,26**.
+- **Exchanges exitosos:** pasan de ~50 % a ~62 % de lo atendido (**+25 %**). Un 200 hace más trabajo que un 403 o un 503 (reserva Lua, 2 transferencias, más operaciones de Redis), así que los nodos y Redis trabajan más con la misma cantidad de requests.
+
+## P6.a. Carga normal (`exchange`, 5 req/s)
+
+| Métrica | Predicción | Antes (`2-nodos-f1as`) | Por qué |
+| --- | --- | --- | --- |
+| 503 | **7 % ± 3** | 22,3 % | 0,26² |
+| 200 / 403 | **62 % / 31 %** (± 4) | 51,8 % / 25,9 % | los que antes eran 503 se reparten 2:1 |
+| 409, 429, 500, timeouts | **0** | 0 | 5 req/s ≪ 1.000 |
+| Latencia Artillery p50 | **~750 ms** (+90) | 659 ms | hay menos 503 rápidos (~10 ms) que tiren la mediana para abajo; el que se reintenta suma solo ~6 ms |
+| Latencia Artillery p95 | **~1.000 ms** (+40) | 963 ms | la cola la siguen definiendo los 200; ahora hay más |
+
+## P6.b. Capacidad con 2 nodos (`exchange-capacity-2n`: 600 a 1.400 req/s)
+
+| Métrica | Predicción | Antes | Por qué |
+| --- | --- | --- | --- |
+| Atendidas (no-429) | **~1.000 req/s**, igual | ~998 | el reintento ocurre después del rate limit: no cambia cuántas entran |
+| **200 por segundo** en el tope | **~620** (+25 %) | ~495 | 62 % de 1.000 |
+| Llamadas a ARCA en el tope | **~1.260/s** | ~1.000/s | 1,26 por request |
+| CPU de ARCA en el tope | **~63 %** (± 5) | 50 % | 50 % × 1,26 |
+| Redis en el tope | ~**10.800 ops/s**, CPU **~37 %** | 9.400 ops/s, 34 % | +16 % de operaciones por los 200 de más |
+| CPU por nodo en el tope | **~50 %**, ELU ~0,5 | 45 %, 0,44 | más 200 y las llamadas extra a ARCA |
+| Timeouts | **0** | 0 | ARCA al 63 % sigue con margen |
+
+## P6.c. Consistencia (`exchange-concurrency-overdraft`)
+
+- **51 respuestas 200 y saldo final de 1.095 USD**, igual que antes: lo que limita es el saldo, no ARCA.
+- De las 600: 503 ≈ **40** (7 %; antes 154), 403 ≈ **185** (antes 152) y 409 ≈ **325** (antes 243). Los 409 suben porque ahora hay más aprobados por ARCA que se quedan sin fondos.
+- Ningún saldo negativo ni descontado dos veces: el reintento ocurre antes de reservar.
+
+## Tradeoff que se espera ver
+
+Se gana **disponibilidad** (un 503 de cada 4 pasa a 1 de cada 14) a costa de **~26 % más de carga en ARCA**, que es el recurso compartido que no escala. Con el rate limit actual (1.000 req/s) sobra margen. Pero el techo de ARCA, medido en requests de clientes, baja **≈ 1,26 veces**: si ARCA se satura cerca de ~2.300 req/s sin reintento (corrida sin rate limit, pendiente de commitear), con reintento se saturaría cerca de **~1.800**. Ese número se usa para dimensionar la táctica 2.
+
+## Cómo se mide
+
+- Escenarios: `root` (L), `exchange`, `exchange-capacity-2n` y `exchange-concurrency-overdraft`, en `results/tactica-reintento/`, desde la misma ubicación que `2-nodos-f1as`.
+- Métrica propia nueva: `exchange.arca.retry` (reintentos por segundo) en Datadog; debería dar ~26 % de las validaciones.
+- Azure Monitor (`azure-metrics.sh`) para la CPU de ARCA y la carga de Redis.

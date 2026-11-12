@@ -1,0 +1,14 @@
+# 2026-11-12T21:21:45Z - ARCA local: docker run --cpus 0.5 --memory 512m -p 18080:8080 arqsoft/arca:1.0.0
+# Comando: node arca-determinismo.mjs http://localhost:18080/validar  (200 DNIs al azar, 6 llamadas cada uno; E=error 500, A=aprobado, R=rechazado)
+errores sobre 1200 llamadas: 312 26.0%
+DNIs (sin contar los E): siempre aprobado 142 | siempre rechazado 58 | mezclado 0
+patrones más comunes: [
+  [ 'AAAAAE', 59 ],
+  [ 'AAAAEE', 45 ],
+  [ 'ERRRRR', 23 ],
+  [ 'AAAEEE', 18 ],
+  [ 'AAAAAA', 17 ],
+  [ 'EERRRR', 14 ],
+  [ 'EEERRR', 11 ],
+  [ 'RRRRRR', 7 ]
+]
