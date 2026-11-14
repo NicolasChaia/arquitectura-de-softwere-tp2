@@ -1,0 +1,27 @@
+# Extracto del log de la app (pm2, ~/.pm2/logs/app-out.log), 2026-11-14T21:24:38Z
+# Por nodo: solo lo posterior al último arranque (deploy con respaldo): línea de arranque, líneas ARCA y las 3 primeras de cada estado
+
+10.0.2.4 | CHANGED | rc=0 >>
+Exchange API listening on port 3000 (ARCA retries: 0, exchange rate limit: 1200 req/s global, local backstop: 700 req/s per node)
+líneas ARCA: 143492
+ARCA dni=39369416 status=approved codigoAutorizacion=0f949141-36e6-4358-b81c-9e253a968075 latencyMs=262
+ARCA dni=33642471 status=approved codigoAutorizacion=8cfb5c59-07ef-43fc-af9b-a7587a7e53e1 latencyMs=247
+ARCA dni=10757988 status=approved codigoAutorizacion=2669dadf-3396-499f-890e-49ce32cb4af5 latencyMs=279
+ARCA dni=5924547 status=rejected latencyMs=216
+ARCA dni=26760141 status=rejected latencyMs=244
+ARCA dni=32954502 status=rejected latencyMs=457
+ARCA dni=6484847 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=9
+ARCA dni=47864120 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=6
+ARCA dni=60591113 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=5
+10.0.2.5 | CHANGED | rc=0 >>
+Exchange API listening on port 3000 (ARCA retries: 0, exchange rate limit: 1200 req/s global, local backstop: 700 req/s per node)
+líneas ARCA: 144483
+ARCA dni=26862195 status=approved codigoAutorizacion=5a13ccd1-e020-4636-a5c0-fb7a609c520b latencyMs=312
+ARCA dni=72208558 status=approved codigoAutorizacion=0eac9af1-f96f-4d35-aed4-bd6d09d2a6e5 latencyMs=354
+ARCA dni=30748381 status=approved codigoAutorizacion=c99249ce-99fe-43b5-ab02-f9a514a5cd08 latencyMs=214
+ARCA dni=67094574 status=rejected latencyMs=297
+ARCA dni=57776723 status=rejected latencyMs=229
+ARCA dni=55518768 status=rejected latencyMs=370
+ARCA dni=97447841 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=10
+ARCA dni=86425948 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=6
+ARCA dni=91131455 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=4

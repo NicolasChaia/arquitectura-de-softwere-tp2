@@ -1,0 +1,3 @@
+# INFO commandstats de Redis (tomado desde el nodo 10.0.2.4 con el cliente de la app), 2026-11-14T21:25:55Z, después de las dos avalanchas.
+# Acumulado desde el apply del 14/11. 'incr' solo lo usa el script del rate limit global (redisWindowStore.js): cada request que llega al límite global = 1 eval + 1 incr.
+{"total_commands_processed":8718065,"pexpire":845,"hincrbyfloat":1126110,"dbsize":1,"set":6,"exec":1077844,"acl|setuser":2,"scan":1,"hgetall":1126769,"ping":4042,"eval":1589741,"incr":1026373,"hget":1126736,"lrange":8,"ltrim":1077843,"hello":872,"exists":1126752,"rpush":1077847,"get":1126736,"hset":13,"multi":1077844}
