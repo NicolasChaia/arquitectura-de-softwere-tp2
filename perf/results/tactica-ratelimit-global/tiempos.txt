@@ -1,0 +1,5 @@
+# Rango de cada prueba (táctica 2: rate limit global en Redis 1200 req/s, 2 nodos F1as_v7, ARCA_RETRIES=0). Origen: PC del generador (CABA).
+# prueba | inicio ART | fin ART | inicio UTC | fin UTC
+root | 16:40:47 | 16:42:08 | 2026-11-14T19:40:47Z | 2026-11-14T19:42:08Z | exit=0
+exchange | 16:44:08 | 16:47:44 | 2026-11-14T19:44:08Z | 2026-11-14T19:47:44Z | exit=0
+exchange-capacity-2n | 16:49:44 | 16:56:17 | 2026-11-14T19:49:44Z | 2026-11-14T19:56:17Z | exit=0

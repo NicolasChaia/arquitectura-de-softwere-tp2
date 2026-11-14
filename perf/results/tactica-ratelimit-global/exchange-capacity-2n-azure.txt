@@ -1,0 +1,79 @@
+Azure Monitor para results/tactica-ratelimit-global/exchange-capacity-2n.json
+Rango (UTC): 2026-11-14T19:50:44Z -> 2026-11-14T19:57:16Z, granularidad 1 minuto
+
+== ARCA (Container Instances, 0.5 vCPU = 500 millicores)
+-- CpuUsage (Count)
+   2026-11-14T19:50:00Z  avg=         0.0  max=         0.0   (max = 0% de 0.5 vCPU)
+   2026-11-14T19:51:00Z  avg=         0.0  max=         0.0   (max = 0% de 0.5 vCPU)
+   2026-11-14T19:52:00Z  avg=        29.0  max=        58.0   (max = 12% de 0.5 vCPU)
+   2026-11-14T19:53:00Z  avg=       154.0  max=       163.0   (max = 33% de 0.5 vCPU)
+   2026-11-14T19:54:00Z  avg=       187.5  max=       197.0   (max = 39% de 0.5 vCPU)
+   2026-11-14T19:55:00Z  avg=       231.5  max=       249.0   (max = 50% de 0.5 vCPU)
+   2026-11-14T19:56:00Z  avg=       251.0  max=       255.0   (max = 51% de 0.5 vCPU)
+-- MemoryUsage (Bytes)
+   2026-11-14T19:50:00Z  avg=  32829440.0  max=  32829440.0
+   2026-11-14T19:51:00Z  avg=  32829440.0  max=  32829440.0
+   2026-11-14T19:52:00Z  avg=  28835840.0  max=  32829440.0
+   2026-11-14T19:53:00Z  avg=  31324160.0  max=  32866304.0
+   2026-11-14T19:54:00Z  avg=  31940608.0  max=  32931840.0
+   2026-11-14T19:55:00Z  avg=  41420800.0  max=  44490752.0
+   2026-11-14T19:56:00Z  avg=  42504192.0  max=  42917888.0
+-- NetworkBytesReceivedPerSecond (Bytes)
+   2026-11-14T19:50:00Z  avg=         0.0  max=         0.0
+   2026-11-14T19:51:00Z  avg=         0.0  max=         0.0
+   2026-11-14T19:52:00Z  avg=     44098.5  max=     88197.0
+   2026-11-14T19:53:00Z  avg=    228584.5  max=    244433.0
+   2026-11-14T19:54:00Z  avg=    292979.5  max=    309232.0
+   2026-11-14T19:55:00Z  avg=    357962.0  max=    374320.0
+   2026-11-14T19:56:00Z  avg=    402460.0  max=    408040.0
+-- NetworkBytesTransmittedPerSecond (Bytes)
+   2026-11-14T19:50:00Z  avg=         0.0  max=         0.0
+   2026-11-14T19:51:00Z  avg=         0.0  max=         0.0
+   2026-11-14T19:52:00Z  avg=     32553.0  max=     65106.0
+   2026-11-14T19:53:00Z  avg=    172339.0  max=    184611.0
+   2026-11-14T19:54:00Z  avg=    222102.0  max=    234729.0
+   2026-11-14T19:55:00Z  avg=    271825.5  max=    284232.0
+   2026-11-14T19:56:00Z  avg=    298063.0  max=    298487.0
+
+== Managed Redis
+-- percentProcessorTime (Percent)
+   2026-11-14T19:50:00Z  avg=        23.5  max=        26.0
+   2026-11-14T19:51:00Z  avg=        24.0  max=        26.0
+   2026-11-14T19:52:00Z  avg=        24.0  max=        25.0
+   2026-11-14T19:53:00Z  avg=        29.0  max=        37.0
+   2026-11-14T19:54:00Z  avg=        40.0  max=        42.0
+   2026-11-14T19:55:00Z  avg=        44.5  max=        47.0
+   2026-11-14T19:56:00Z  avg=        47.5  max=        49.0
+-- serverLoad (Percent)
+   2026-11-14T19:50:00Z  avg=        23.5  max=        26.0
+   2026-11-14T19:51:00Z  avg=        24.0  max=        26.0
+   2026-11-14T19:52:00Z  avg=        24.0  max=        25.0
+   2026-11-14T19:53:00Z  avg=        29.0  max=        37.0
+   2026-11-14T19:54:00Z  avg=        40.0  max=        42.0
+   2026-11-14T19:55:00Z  avg=        44.5  max=        47.0
+   2026-11-14T19:56:00Z  avg=        47.5  max=        49.0
+-- usedmemorypercentage (Percent)
+   2026-11-14T19:50:00Z  avg=         1.0  max=         1.0
+   2026-11-14T19:51:00Z  avg=         1.0  max=         1.0
+   2026-11-14T19:52:00Z  avg=         2.0  max=         2.0
+   2026-11-14T19:53:00Z  avg=         2.0  max=         2.0
+   2026-11-14T19:54:00Z  avg=         2.0  max=         2.0
+   2026-11-14T19:55:00Z  avg=         2.0  max=         2.0
+   2026-11-14T19:56:00Z  avg=         2.0  max=         2.0
+-- operationsPerSecond (CountPerSecond)
+   2026-11-14T19:50:00Z  avg=         1.0  max=         1.0
+   2026-11-14T19:51:00Z  avg=         1.0  max=         1.0
+   2026-11-14T19:52:00Z  avg=         1.0  max=         1.0
+   2026-11-14T19:53:00Z  avg=      3449.5  max=      6898.0
+   2026-11-14T19:54:00Z  avg=      8523.0  max=      9075.0
+   2026-11-14T19:55:00Z  avg=     10834.0  max=     11368.0
+   2026-11-14T19:56:00Z  avg=     13118.5  max=     13687.0
+-- connectedclients (Count)
+   2026-11-14T19:50:00Z  avg=         3.0  max=         3.0
+   2026-11-14T19:51:00Z  avg=         3.0  max=         3.0
+   2026-11-14T19:52:00Z  avg=         3.0  max=         3.0
+   2026-11-14T19:53:00Z  avg=         2.5  max=         3.0
+   2026-11-14T19:54:00Z  avg=         2.0  max=         2.0
+   2026-11-14T19:55:00Z  avg=         2.0  max=         2.0
+   2026-11-14T19:56:00Z  avg=         2.0  max=         2.0
+

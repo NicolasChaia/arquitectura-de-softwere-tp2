@@ -1,0 +1,5 @@
+# 2026-11-14T19:57:10Z - az vmss list-instances
+Name       Sku               State
+---------  ----------------  ---------
+tp2vmss_0  Standard_F1as_v7  Succeeded
+tp2vmss_1  Standard_F1as_v7  Succeeded

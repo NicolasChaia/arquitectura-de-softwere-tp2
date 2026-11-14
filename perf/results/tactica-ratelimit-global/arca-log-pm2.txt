@@ -1,0 +1,29 @@
+# Extracto del log de la app (pm2, ~/.pm2/logs/app-out.log), 2026-11-14T20:27:12Z
+# Por nodo: solo lo posterior al último arranque (deploy de la táctica 2): línea de arranque, cantidad de líneas ARCA, reintentos y las 3 primeras de cada estado
+
+10.0.2.4 | CHANGED | rc=0 >>
+Exchange API listening on port 3000 (ARCA retries: 0, exchange rate limit: 1200 req/s global)
+líneas ARCA: 130122
+con attempts=2: 0
+ARCA dni=84402974 status=approved codigoAutorizacion=f2ab38c8-81f2-4ef0-8311-5c1ca55407ca latencyMs=234
+ARCA dni=55092363 status=approved codigoAutorizacion=1c54607a-9e45-4941-af87-9425c86f2f6c latencyMs=500
+ARCA dni=18243877 status=approved codigoAutorizacion=b07875c3-c160-4a90-829f-9719aab99ce1 latencyMs=478
+ARCA dni=83968573 status=rejected latencyMs=296
+ARCA dni=66573343 status=rejected latencyMs=473
+ARCA dni=75567083 status=rejected latencyMs=409
+ARCA dni=34714222 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=27
+ARCA dni=37137936 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=3
+ARCA dni=46757713 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=4
+10.0.2.5 | CHANGED | rc=0 >>
+Exchange API listening on port 3000 (ARCA retries: 0, exchange rate limit: 1200 req/s global)
+líneas ARCA: 131241
+con attempts=2: 0
+ARCA dni=45098383 status=approved codigoAutorizacion=f5719672-bf56-491f-b8bb-3bf8483fe561 latencyMs=370
+ARCA dni=89181585 status=approved codigoAutorizacion=aa2dd3d7-6e60-4180-b432-7d003ca8e283 latencyMs=283
+ARCA dni=39054394 status=approved codigoAutorizacion=2a75fae3-b4cf-43c3-a1f9-db3f899665fe latencyMs=491
+ARCA dni=88760182 status=rejected latencyMs=376
+ARCA dni=57192437 status=rejected latencyMs=486
+ARCA dni=80377924 status=rejected latencyMs=329
+ARCA dni=10518731 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=3
+ARCA dni=62407389 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=3
+ARCA dni=12292732 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=3
