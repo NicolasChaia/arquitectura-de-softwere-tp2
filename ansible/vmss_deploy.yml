@@ -12,6 +12,11 @@
     #   ./ansible/deploy.sh -e rate_limit_mode=global -e exchange_rate_limit=1200
     rate_limit_mode: local
     exchange_rate_limit: 500
+    # Tactic 2, second iteration: local backstop per node, in memory, in front
+    # of the global limit (only with rate_limit_mode=global). 0 = off, as
+    # measured in results/tactica-ratelimit-global. Override with:
+    #   ./ansible/deploy.sh -e rate_limit_mode=global -e exchange_rate_limit=1200 -e exchange_local_rate_limit=700
+    exchange_local_rate_limit: 0
   tasks:
     - name: Stop old version
       command: pm2 delete app
@@ -30,3 +35,4 @@
         ARCA_RETRIES: "{{ arca_retries }}"
         RATE_LIMIT_MODE: "{{ rate_limit_mode }}"
         EXCHANGE_RATE_LIMIT: "{{ exchange_rate_limit }}"
+        EXCHANGE_LOCAL_RATE_LIMIT: "{{ exchange_local_rate_limit }}"

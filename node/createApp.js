@@ -34,12 +34,25 @@ export function createApp({
     windowMs: rateLimits.logWindowMs,
     max: rateLimits.logMax,
   });
-  const exchangeLimiter = createRateLimiter({
-    windowMs: rateLimits.exchangeWindowMs,
-    max: rateLimits.exchangeMax,
-    // shared store -> one limit for all the nodes (tactic 2)
-    store: rateLimits.exchangeStore,
-  });
+  const exchangeLimiters = [];
+  // Local backstop (tactic 2)
+  if (rateLimits.exchangeStore && rateLimits.exchangeLocalMax > 0) {
+    exchangeLimiters.push(
+      createRateLimiter({
+        windowMs: rateLimits.exchangeWindowMs,
+        max: rateLimits.exchangeLocalMax,
+        perProcess: true,
+      })
+    );
+  }
+  exchangeLimiters.push(
+    createRateLimiter({
+      windowMs: rateLimits.exchangeWindowMs,
+      max: rateLimits.exchangeMax,
+      // shared store -> one limit for all the nodes (tactic 2)
+      store: rateLimits.exchangeStore,
+    })
+  );
 
   app.get("/", (req, res) => {
     res.type("text/plain").send("Server is up.");
@@ -49,7 +62,7 @@ export function createApp({
   app.use("/accounts", createAccountsRouter(accountsService));
   app.use("/rates", createRatesRouter(ratesService));
   app.use("/log", logLimiter, createLogRouter(logService));
-  app.use("/exchange", exchangeLimiter, createExchangeRouter(exchangeService));
+  app.use("/exchange", ...exchangeLimiters, createExchangeRouter(exchangeService));
 
   app.use((err, req, res, next) => {
     if (err instanceof DomainError) {

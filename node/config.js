@@ -25,5 +25,6 @@ export default {
   // in Redis for the whole system. Set per deploy by Ansible.
   rateLimitMode: process.env.RATE_LIMIT_MODE === 'global' ? 'global' : 'local',
   exchangeRateLimit: Number(process.env.EXCHANGE_RATE_LIMIT) || 500,
+  exchangeLocalRateLimit: Number(process.env.EXCHANGE_LOCAL_RATE_LIMIT) || 0,
   redis: readRedisOptions(),
 };

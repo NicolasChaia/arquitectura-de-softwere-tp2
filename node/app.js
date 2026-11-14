@@ -54,6 +54,7 @@ const rateLimits = {
   logMax: 300,
   exchangeWindowMs: 1000,
   exchangeMax: config.exchangeRateLimit,
+  exchangeLocalMax: config.exchangeLocalRateLimit,
   exchangeStore:
     config.rateLimitMode === "global" ? new RedisWindowStore({ prefix: "ratelimit:exchange:" }) : undefined,
 };
@@ -65,7 +66,10 @@ const port = 3000;
 app.listen(port, () => {
   console.log(
     `Exchange API listening on port ${port} (ARCA retries: ${config.arcaRetries}, ` +
-      `exchange rate limit: ${config.exchangeRateLimit} req/s ${config.rateLimitMode})`
+      `exchange rate limit: ${config.exchangeRateLimit} req/s ${config.rateLimitMode}` +
+      (config.rateLimitMode === "global" && config.exchangeLocalRateLimit > 0
+        ? `, local backstop: ${config.exchangeLocalRateLimit} req/s per node)`
+        : ")")
   );
 });
 

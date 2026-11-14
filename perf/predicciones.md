@@ -366,3 +366,43 @@ Con el límite actual, nada impide que entre más carga de la que ARCA puede ate
 - Escenarios: `root` (L), `exchange` y `exchange-capacity-2n`, en `results/tactica-ratelimit-global/`, desde la misma ubicación que `2-nodos-f1as`.
 - Datadog: códigos por segundo y CPU/ELU por nodo. Azure Monitor (`azure-metrics.sh`): CPU de ARCA y operaciones de Redis.
 - La línea de arranque de pm2 muestra el modo y el límite de cada nodo, como evidencia de la configuración.
+
+---
+
+# P8. Táctica 2, segunda iteración: respaldo local por nodo delante del límite global (`F1as_v7`)
+
+## Problema observado en la primera iteración
+
+1. **El límite global no protege a cada nodo.**
+2. **Cada request ofrecida hace un `EVAL` en Redis, incluso las que terminan en 429.** Ante una avalancha de tráfico, el limitador mismo carga al recurso compartido.
+
+## Qué se cambia
+
+- Delante del límite global, cada nodo tiene un **respaldo local en memoria de 700 req/s**, con una sola clave para todo el nodo (no por IP). Lo que rechaza el respaldo local no llega a Redis.
+- Por qué 700: con 2 nodos, a cada uno le corresponden 1.200 / 2 = 600. 700 deja ~15 % de margen para un reparto desparejo del LB.
+- El límite global sigue en 1.200 req/s. 
+
+## P8.a. Avalancha con 2 nodos (`exchange-avalancha`: 1.200, 1.600, 2.000 y 2.400 req/s, 60 s cada escalón)
+
+Se corre dos veces en la misma sesión: **solo global** (como la primera iteración) y **global + respaldo de 700**.
+
+Predicciones:
+- **Redis:** solo global crece con lo ofrecido; con respaldo se queda medianamente estable en ~14.000 ops/s desde 1.600.
+- **Nodos:** cada uno atiende ~600 req/s  y rechaza ~600 en 2.400.
+- **Latencia de los 200:** igual que en la primera iteración con rate limit global.
+- **ARCA:** ~50 %, igual que en la primera iteración, porque las atendidas no cambian.
+
+**Por qué alcanza con la avalancha.** Los escenarios que ya corrimos con 2 nodos (`exchange`, `exchange-stress`, `exchange-capacity`, `exchange-capacity-2n`, overdraft) ofrecen como mucho 1.600 req/s. La avalancha cubre ese rango (1.200 a 2.400) y lo supera. El respaldo de 700 por nodo solo actúa cuando entran más de 1.400 req/s en total. Por debajo de eso, el sistema se comporta igual que en la primera iteración (`results/tactica-ratelimit-global/`), que ya está medida. Por eso no se vuelven a correr.
+
+**Con un solo nodo no se mide.** Que el nodo corte en 700 sale directamente del límite que se le pone.
+
+## Cómo se mide
+
+Todo en la misma sesión de infraestructura (la de las tácticas 1 y 2), desde la misma ubicación. Resultados en `results/tactica-ratelimit-respaldo/`.
+
+1. 2 nodos, `deploy.sh -e rate_limit_mode=global -e exchange_rate_limit=1200`: `root` y `exchange-avalancha` (solo global).
+2. 2 nodos, el mismo deploy más `-e exchange_local_rate_limit=700`: `exchange-avalancha` (con respaldo).
+**Métricas:**
+- Datadog: códigos por segundo, CPU y ELU por nodo.
+- Azure Monitor: ops/s y CPU de Redis, y CPU de ARCA.
+- La línea de arranque de pm2 muestra el límite global y el respaldo de cada nodo, como evidencia de la configuración.

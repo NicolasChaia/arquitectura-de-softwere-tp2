@@ -5,13 +5,19 @@ import { rateLimit } from "express-rate-limit";
 // With a shared `store` (RedisWindowStore): a single key for every request,
 // so `max` is the limit of the whole system (tactic 2, perf/predicciones.md P7).
 // If the store fails (Redis down) the request goes through (fail open).
-export function createRateLimiter({ windowMs, max, store }) {
+export function createRateLimiter({ windowMs, max, store, perProcess = false }) {
+  let scope = {};
+  if (store) {
+    scope = { store, keyGenerator: () => "global", passOnStoreError: true };
+  } else if (perProcess) {
+    scope = { keyGenerator: () => "node" };
+  }
   return rateLimit({
     windowMs,
     limit: max,
     standardHeaders: true,
     legacyHeaders: false,
-    ...(store ? { store, keyGenerator: () => "global", passOnStoreError: true } : {}),
+    ...scope,
     handler: (req, res) => {
       res.status(429).json({ error: "Too many requests, try again shortly" });
     },
