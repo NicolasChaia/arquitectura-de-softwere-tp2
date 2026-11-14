@@ -1,0 +1,1 @@
+[{"id":1,"currency":"ARS","balance":983231931718},{"id":2,"currency":"USD","balance":1095},{"id":3,"currency":"EUR","balance":2272950},{"id":4,"currency":"BRL","balance":6008400}]
