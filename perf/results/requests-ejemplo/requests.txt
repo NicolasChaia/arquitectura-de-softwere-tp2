@@ -1,0 +1,358 @@
+# Entorno: app real (node/app.js vía perf/requests-ejemplo/app-local.mjs, Node v24.18.1) en la PC del grupo,
+# ARCA arqsoft/arca:1.0.0 en Docker (--cpus 0.5 --memory 512m, como arca.tf), Redis 7.4 en Docker (sin TLS).
+# Rate limit de /exchange: 500 req/s local (valor por defecto de node/config.js).
+# Requests de ejemplo contra http://localhost:3000
+# Fecha: 2026-11-18T12:41:36Z
+
+### 1. GET / responde sin tocar Redis ni ARCA (node/createApp.js)
+$ curl -s -i -X GET http://localhost:3000/
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/plain; charset=utf-8
+Content-Length: 13
+ETag: W/"d-aGTv12Omx4QelmA2daCP+sXihWo"
+Date: Wed, 18 Nov 2026 12:41:36 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+Server is up.
+
+### 2. GET /health hace ping a Redis (node/api/health.js)
+$ curl -s -i -X GET http://localhost:3000/health
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 47
+ETag: W/"2f-88QVl4KZu87I0PcnYurKhOPb0q4"
+Date: Wed, 18 Nov 2026 12:41:36 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"status":"ok","redis":"up","uptime":2.9584241}
+
+### 3. PUT /rates guarda el par y su recíproco redondeado a 5 decimales: USD/ARS 1513 -> ARS/USD 0.00066 (node/services/rates.js)
+$ curl -s -i -X PUT http://localhost:3000/rates -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","rate":1513}'
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 109
+ETag: W/"6d-/e/DUswVPPcgKzDlhhNnWzy7OZw"
+Date: Wed, 18 Nov 2026 12:41:36 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"ARS":{"BRL":0.0034,"EUR":0.00057,"USD":0.00066},"BRL":{"ARS":297.06},"EUR":{"ARS":1761},"USD":{"ARS":1513}}
+
+### 4. DNI fuera de rango -> 400, sin llamar a ARCA (node/api/exchange.js)
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"123"}'
+HTTP/1.1 400 Bad Request
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 499
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 71
+ETag: W/"47-2qw5yoN+grw0fjXtc7isYxf4r7g"
+Date: Wed, 18 Nov 2026 12:41:36 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"dni must be a string of digits between 1000000 and 99999999"}
+
+### 5. DNI con caracteres no numéricos -> 400
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"12a45678"}'
+HTTP/1.1 400 Bad Request
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 498
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 71
+ETag: W/"47-2qw5yoN+grw0fjXtc7isYxf4r7g"
+Date: Wed, 18 Nov 2026 12:41:36 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"dni must be a string of digits between 1000000 and 99999999"}
+
+### 6. Exchange sin el campo dni -> 400
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100}'
+HTTP/1.1 400 Bad Request
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 497
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 71
+ETag: W/"47-2qw5yoN+grw0fjXtc7isYxf4r7g"
+Date: Wed, 18 Nov 2026 12:41:36 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"dni must be a string of digits between 1000000 and 99999999"}
+
+### 7. Exchanges con DNIs válidos: 200 (aprobado, con codigoAutorizacion), 403 (rechazado) o 503 (ARCA devolvió 500)
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"1000000"}'
+HTTP/1.1 200 OK
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 496
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 377
+ETag: W/"179-wBqxoiSbUd35sm4V91c1jU23Wsg"
+Date: Wed, 18 Nov 2026 12:41:37 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":"8F6CauiMsZ-jWp_HjkIPi","ts":"2026-11-18T12:41:37.063Z","ok":true,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"1000000"},"exchangeRate":1513,"counterAmount":151300,"obs":null,"arca":{"status":"approved","codigoAutorizacion":"b9dcaa3a-4d2c-4e1d-ba9f-18eaddbeb999","attempts":1,"latencyMs":265}}
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"99999999"}'
+HTTP/1.1 503 Service Unavailable
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 495
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 448
+ETag: W/"1c0-FXzmX9GO02cC1e8ByMTX4u54o3o"
+Date: Wed, 18 Nov 2026 12:41:37 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":"FHI8qJnO4k0pMgzWvQRsd","ts":"2026-11-18T12:41:37.388Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"99999999"},"exchangeRate":null,"counterAmount":0,"obs":"Could not validate client with ARCA","failure":"arca_unavailable","arca":{"status":"error","reason":"bad_response","detail":"HTTP 500, non-JSON body","httpStatus":500,"attempts":1,"latencyMs":11}}
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"12345678"}'
+HTTP/1.1 200 OK
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 494
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 378
+ETag: W/"17a-35yNCHiA18PkifBD/uExLj/spaw"
+Date: Wed, 18 Nov 2026 12:41:38 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":"Sl6FW4cR_nWnTqZ5Fnue7","ts":"2026-11-18T12:41:37.830Z","ok":true,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"12345678"},"exchangeRate":1513,"counterAmount":151300,"obs":null,"arca":{"status":"approved","codigoAutorizacion":"f7eff8a8-9163-418e-a1b2-07574e954608","attempts":1,"latencyMs":407}}
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"20304050"}'
+HTTP/1.1 200 OK
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 499
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 378
+ETag: W/"17a-fSYE8DympS0QyhbdZegRS2FBLdQ"
+Date: Wed, 18 Nov 2026 12:41:38 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":"R6NNcKcyH40EzYL6EUw0a","ts":"2026-11-18T12:41:38.584Z","ok":true,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"20304050"},"exchangeRate":1513,"counterAmount":151300,"obs":null,"arca":{"status":"approved","codigoAutorizacion":"c9a7cfe8-dfce-4ef2-b520-53c7d5fbfc01","attempts":1,"latencyMs":375}}
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"33444555"}'
+HTTP/1.1 200 OK
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 498
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 378
+ETag: W/"17a-YQhz8TpRcIMjpKFIqdewLNz0tUA"
+Date: Wed, 18 Nov 2026 12:41:39 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":"pvo2JO3lNiGAI12hAN2Jm","ts":"2026-11-18T12:41:39.404Z","ok":true,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"33444555"},"exchangeRate":1513,"counterAmount":151300,"obs":null,"arca":{"status":"approved","codigoAutorizacion":"8529f4c6-de02-479e-8420-a16ff716d72d","attempts":1,"latencyMs":415}}
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"27123456"}'
+HTTP/1.1 403 Forbidden
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 499
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 386
+ETag: W/"182-Q4kcmMkS87UA4er4qpn8e+M3+tk"
+Date: Wed, 18 Nov 2026 12:41:40 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":"NtI7XxWUMCoHVo4IVytK7","ts":"2026-11-18T12:41:40.173Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"27123456"},"exchangeRate":null,"counterAmount":0,"obs":"Client has fiscal restrictions according to ARCA","failure":"arca_rejected","arca":{"status":"rejected","attempts":1,"latencyMs":373}}
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"45678901"}'
+HTTP/1.1 503 Service Unavailable
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 498
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 448
+ETag: W/"1c0-Yqv8caW7++B2H2mlWJfur+kwg+M"
+Date: Wed, 18 Nov 2026 12:41:40 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":"pWSajYlIlbbUuokIRyryU","ts":"2026-11-18T12:41:40.223Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"45678901"},"exchangeRate":null,"counterAmount":0,"obs":"Could not validate client with ARCA","failure":"arca_unavailable","arca":{"status":"error","reason":"bad_response","detail":"HTTP 500, non-JSON body","httpStatus":500,"attempts":1,"latencyMs":18}}
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"30111222"}'
+HTTP/1.1 503 Service Unavailable
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 497
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 448
+ETag: W/"1c0-CwxAGMUi/P00BhNEp2f4SbSEq7Q"
+Date: Wed, 18 Nov 2026 12:41:40 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":"Qf_kKAVlPKUjtZsHxrIoj","ts":"2026-11-18T12:41:40.268Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"30111222"},"exchangeRate":null,"counterAmount":0,"obs":"Could not validate client with ARCA","failure":"arca_unavailable","arca":{"status":"error","reason":"bad_response","detail":"HTTP 500, non-JSON body","httpStatus":500,"attempts":1,"latencyMs":14}}
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"18765432"}'
+HTTP/1.1 503 Service Unavailable
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 496
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 448
+ETag: W/"1c0-tt9oJlJVPTsFcBn0cT3/MXHogNY"
+Date: Wed, 18 Nov 2026 12:41:40 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":"PkhVRuaovk5R8UXLXH2zv","ts":"2026-11-18T12:41:40.316Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"18765432"},"exchangeRate":null,"counterAmount":0,"obs":"Could not validate client with ARCA","failure":"arca_unavailable","arca":{"status":"error","reason":"bad_response","detail":"HTTP 500, non-JSON body","httpStatus":500,"attempts":1,"latencyMs":16}}
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"40101235"}'
+HTTP/1.1 503 Service Unavailable
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 495
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 448
+ETag: W/"1c0-/nrh6ycv2wenIba8IMxZ6N1sPn4"
+Date: Wed, 18 Nov 2026 12:41:40 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":"E0PfMb2DzRuEv84ejCI-F","ts":"2026-11-18T12:41:40.362Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"40101235"},"exchangeRate":null,"counterAmount":0,"obs":"Could not validate client with ARCA","failure":"arca_unavailable","arca":{"status":"error","reason":"bad_response","detail":"HTTP 500, non-JSON body","httpStatus":500,"attempts":1,"latencyMs":14}}
+
+### 8. El mismo DNI repetido: el veredicto (aprobado/rechazado) se mantiene; el 500 de ARCA es al azar
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"27123456"}'
+HTTP/1.1 403 Forbidden
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 494
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 386
+ETag: W/"182-vxiGNxEkdErHIE1kig0x4Uj3U2s"
+Date: Wed, 18 Nov 2026 12:41:40 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":"0164MZDYsCGv5G-9fYJW-","ts":"2026-11-18T12:41:40.870Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"27123456"},"exchangeRate":null,"counterAmount":0,"obs":"Client has fiscal restrictions according to ARCA","failure":"arca_rejected","arca":{"status":"rejected","attempts":1,"latencyMs":475}}
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"27123456"}'
+HTTP/1.1 503 Service Unavailable
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 499
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 448
+ETag: W/"1c0-7lgSO4P58eR27K/fqZDvy+IeOBA"
+Date: Wed, 18 Nov 2026 12:41:40 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":"BNDj1TDwM1H7JJ3NZRqXa","ts":"2026-11-18T12:41:40.912Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"27123456"},"exchangeRate":null,"counterAmount":0,"obs":"Could not validate client with ARCA","failure":"arca_unavailable","arca":{"status":"error","reason":"bad_response","detail":"HTTP 500, non-JSON body","httpStatus":500,"attempts":1,"latencyMs":11}}
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"27123456"}'
+HTTP/1.1 403 Forbidden
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 498
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 386
+ETag: W/"182-N4biGQf802PPyQ825ALU8Wwvsig"
+Date: Wed, 18 Nov 2026 12:41:41 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":"UNBtwlCxyTYWI6A_2bvfd","ts":"2026-11-18T12:41:41.309Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"27123456"},"exchangeRate":null,"counterAmount":0,"obs":"Client has fiscal restrictions according to ARCA","failure":"arca_rejected","arca":{"status":"rejected","attempts":1,"latencyMs":365}}
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"27123456"}'
+HTTP/1.1 403 Forbidden
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 497
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 386
+ETag: W/"182-sD4BZEOaQaepMvqqdS5B2TS0o08"
+Date: Wed, 18 Nov 2026 12:41:41 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":"Hlqbp54VemzxBNZERzlBC","ts":"2026-11-18T12:41:41.822Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"27123456"},"exchangeRate":null,"counterAmount":0,"obs":"Client has fiscal restrictions according to ARCA","failure":"arca_rejected","arca":{"status":"rejected","attempts":1,"latencyMs":480}}
+
+### 9. GET /log?limit=5: las últimas operaciones, leídas de Redis (node/repository/log.js)
+$ curl -s -i -X GET http://localhost:3000/log?limit=5
+HTTP/1.1 200 OK
+X-Powered-By: Express
+RateLimit-Policy: 300;w=1
+RateLimit-Limit: 300
+RateLimit-Remaining: 299
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 2060
+ETag: W/"80c-wtp5AFTkapDLn8fsYbzIIdGrkB0"
+Date: Wed, 18 Nov 2026 12:41:41 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+[{"id":"E0PfMb2DzRuEv84ejCI-F","ts":"2026-11-18T12:41:40.362Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"40101235"},"exchangeRate":null,"counterAmount":0,"obs":"Could not validate client with ARCA","failure":"arca_unavailable","arca":{"status":"error","reason":"bad_response","detail":"HTTP 500, non-JSON body","httpStatus":500,"attempts":1,"latencyMs":14}},{"id":"0164MZDYsCGv5G-9fYJW-","ts":"2026-11-18T12:41:40.870Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"27123456"},"exchangeRate":null,"counterAmount":0,"obs":"Client has fiscal restrictions according to ARCA","failure":"arca_rejected","arca":{"status":"rejected","attempts":1,"latencyMs":475}},{"id":"BNDj1TDwM1H7JJ3NZRqXa","ts":"2026-11-18T12:41:40.912Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"27123456"},"exchangeRate":null,"counterAmount":0,"obs":"Could not validate client with ARCA","failure":"arca_unavailable","arca":{"status":"error","reason":"bad_response","detail":"HTTP 500, non-JSON body","httpStatus":500,"attempts":1,"latencyMs":11}},{"id":"UNBtwlCxyTYWI6A_2bvfd","ts":"2026-11-18T12:41:41.309Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"27123456"},"exchangeRate":null,"counterAmount":0,"obs":"Client has fiscal restrictions according to ARCA","failure":"arca_rejected","arca":{"status":"rejected","attempts":1,"latencyMs":365}},{"id":"Hlqbp54VemzxBNZERzlBC","ts":"2026-11-18T12:41:41.822Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"27123456"},"exchangeRate":null,"counterAmount":0,"obs":"Client has fiscal restrictions according to ARCA","failure":"arca_rejected","arca":{"status":"rejected","attempts":1,"latencyMs":480}}]
+
+### 10. GET /accounts: saldos después de los exchanges aprobados
+$ curl -s -i -X GET http://localhost:3000/accounts
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 173
+ETag: W/"ad-Ncm6ow2bmsICA8jQNsfjfqe4K2M"
+Date: Wed, 18 Nov 2026 12:41:41 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+[{"id":1,"currency":"ARS","balance":119394800},{"id":2,"currency":"USD","balance":60400},{"id":3,"currency":"EUR","balance":40000},{"id":4,"currency":"BRL","balance":60000}]
+
+### 11. Ráfaga de 700 POST /exchange concurrentes contra un límite de 500 req/s -> el excedente recibe 429 (node/createApp.js)
+$ node perf/requests-ejemplo/burst.mjs http://localhost:3000 700
+700 POST /exchange concurrentes, respondidos en 1718 ms
+códigos: {"200":297,"403":82,"429":200,"503":121}
+
+una de las respuestas 429:
+HTTP 429
+content-length: 48
+content-type: application/json; charset=utf-8
+etag: W/"30-KiJ7SfJ0LA3szQYq1DqRKNvCLak"
+ratelimit-limit: 500
+ratelimit-policy: 500;w=1
+ratelimit-remaining: 0
+ratelimit-reset: 1
+retry-after: 1
+x-powered-by: Express
+
+{"error":"Too many requests, try again shortly"}
