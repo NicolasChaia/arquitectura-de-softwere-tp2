@@ -406,3 +406,50 @@ Todo en la misma sesión de infraestructura (la de las tácticas 1 y 2), desde l
 - Datadog: códigos por segundo, CPU y ELU por nodo.
 - Azure Monitor: ops/s y CPU de Redis, y CPU de ARCA.
 - La línea de arranque de pm2 muestra el límite global y el respaldo de cada nodo, como evidencia de la configuración.
+
+---
+
+# P9. Tácticas 1 y 2 juntas: reintento + rate limit global con respaldo local (2 nodos `F1as_v7`)
+
+Escrito el 19/11, **antes** de medir. TS1 se midió con límite local (1.000 req/s) y TS2 con `ARCA_RETRIES=0`, así que la combinación no está medida. Hay que medirla antes de recomendarla.
+
+## Qué se cambia
+
+`./ansible/deploy.sh -e arca_retries=1 -e rate_limit_mode=global -e exchange_rate_limit=1200 -e exchange_local_rate_limit=700`. No cambia el código.
+
+## P9.a. Carga normal (`exchange`, 5 req/s)
+
+| Métrica | Predicción | Por qué |
+| --- | --- | --- |
+| 503 | **6 % ± 3** | como TS1: 0,25² |
+| 200 / 403 | **62 % / 31 %** (± 4) | como TS1 |
+| 429, timeouts | **0** | 5 ≪ 700 |
+| Latencia Artillery p50 / p95 | **~745 / ~985 ms** | como TS1|
+
+## P9.b. Capacidad (`exchange-capacity-2n`: 600 a 1.400 req/s)
+
+| Métrica | Predicción | Por qué |
+| --- | --- | --- |
+| Atendidas (no-429) | **~1.200 req/s**; 429 desde el escalón de 1.300 | cupo global |
+| 503 sobre no-429 | **~6 %** | reintento; ARCA no satura |
+| 200 por segundo en el tope | **~740** (contra ~620 en TS1 y ~595 en TS2) | 62 % de 1.200 |
+| Llamadas a ARCA en el tope | **~1.500/s**; red recibida **~530 KB/s** | 1.200 × 1,25; ~354 B por llamada, medido en TS1 y TS2 |
+| CPU de ARCA en el tope | **~60 % (± 8)** | 52 % × 1.500 / 1.250; con margen amplio por la variación entre sesiones |
+| Redis en el tope | **~15.000 ops/s**, CPU ~40–45 % | capacidad de Redis |
+| CPU por nodo en el tope | **~60 %** | ~600 req/s cada uno, con más 200 que en TS2 |
+| Timeouts | **0** | ARCA lejos del 100 % |
+
+## P9.c. Avalancha (`exchange-avalancha`: 1.200 a 2.400 req/s)
+
+- **Atendidas:** ~1.200 req/s en todos los escalones; el resto, 429.
+- **Redis:** estable en **~15.000 ops/s** desde 1.600 (el respaldo corta antes de Redis).
+- **ARCA:** igual que en P9.b (~60 %, ~1.500 llamadas/s): las atendidas no crecen con lo ofrecido.
+- **503:** ~6 % de no-429.
+
+## P9.d. Consistencia (`exchange-concurrency-overdraft`)
+
+- **51 respuestas 200 y saldo final de 1.095 USD**, como siempre. Ni el reintento ni el rate limit tocan la reserva.
+
+## Cómo se mide
+
+Infra nueva, 2 nodos `F1as_v7`, desde la misma ubicación (CABA). Resultados en `results/tacticas-combinadas/`: `root`, `exchange`, `exchange-capacity-2n`, `exchange-avalancha` y `exchange-concurrency-overdraft`, con `azure-metrics.sh` para ARCA y Redis, y `evidencia-infra.sh` para la configuración.
