@@ -1,0 +1,17 @@
+# 2026-11-19T12:30:22Z - Conteo de validaciones de ARCA en ~/.pm2/logs/app-out.log de cada nodo
+# El log arranca en el deploy con ARCA_RETRIES=1 (antes de root) y cubre las 5 pruebas de P9
+# total = líneas ARCA (1 por request validado); attempts2 = requests que se reintentaron; abajo, resultado del 2do intento
+10.0.2.4 | CHANGED | rc=0 >>
+total 277641 approved 171613 rejected 88597 error 17431 attempts2 69768
+  34437 status=approved
+  17431 status=error
+  17900 status=rejected
+motivos de error:
+  17431 reason=bad_response
+10.0.2.5 | CHANGED | rc=0 >>
+total 272315 approved 168091 rejected 87147 error 17077 attempts2 68142
+  33722 status=approved
+  17077 status=error
+  17343 status=rejected
+motivos de error:
+  17077 reason=bad_response

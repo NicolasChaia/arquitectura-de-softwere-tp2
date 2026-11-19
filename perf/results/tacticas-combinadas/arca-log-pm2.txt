@@ -1,0 +1,32 @@
+# 2026-11-19T12:30:31Z - Extracto del log de la app (pm2, ~/.pm2/logs/app-out.log)
+# Por nodo: línea de arranque, líneas ARCA y las 3 primeras de cada estado
+10.0.2.4 | CHANGED | rc=0 >>
+Exchange API listening on port 3000 (ARCA retries: 1, exchange rate limit: 1200 req/s global, local backstop: 700 req/s per node)
+líneas ARCA: 277641
+ARCA dni=86220860 status=approved codigoAutorizacion=425b847b-d120-41e0-be1b-e86ed7946ad7 latencyMs=395
+ARCA dni=54162207 status=approved codigoAutorizacion=23da1497-cb75-42a0-a9ef-fb388c928587 latencyMs=217
+ARCA dni=39987214 status=approved codigoAutorizacion=03ad313a-0d38-4c54-b9e8-4df74403781a latencyMs=239
+ARCA dni=80985972 status=rejected latencyMs=303
+ARCA dni=2677820 status=rejected latencyMs=379
+ARCA dni=34335997 status=rejected latencyMs=343
+ARCA dni=32313783 status=error reason=bad_response detail=HTTP 500, non-JSON body attempts=2 latencyMs=5
+ARCA dni=88691052 status=error reason=bad_response detail=HTTP 500, non-JSON body attempts=2 latencyMs=3
+ARCA dni=10519788 status=error reason=bad_response detail=HTTP 500, non-JSON body attempts=2 latencyMs=3
+ARCA dni=2512291 status=approved codigoAutorizacion=baee3836-a84f-485b-b922-fbaed893694c attempts=2 latencyMs=473
+ARCA dni=32313783 status=error reason=bad_response detail=HTTP 500, non-JSON body attempts=2 latencyMs=5
+ARCA dni=1348170 status=approved codigoAutorizacion=19c3e0cf-5c43-4aa8-9f80-6a1445d0ddd9 attempts=2 latencyMs=213
+10.0.2.5 | CHANGED | rc=0 >>
+Exchange API listening on port 3000 (ARCA retries: 1, exchange rate limit: 1200 req/s global, local backstop: 700 req/s per node)
+líneas ARCA: 272315
+ARCA dni=78550586 status=approved codigoAutorizacion=134e0ec8-4fc6-4821-8c19-92767f2203bc latencyMs=442
+ARCA dni=11240493 status=approved codigoAutorizacion=866e8eb5-37ab-4063-9566-0110c43cfcc8 attempts=2 latencyMs=296
+ARCA dni=14235949 status=approved codigoAutorizacion=bc10d5e4-45ff-456b-b84b-350c26ecd5bf latencyMs=304
+ARCA dni=94875693 status=rejected attempts=2 latencyMs=433
+ARCA dni=69446164 status=rejected latencyMs=474
+ARCA dni=79067808 status=rejected latencyMs=417
+ARCA dni=66441245 status=error reason=bad_response detail=HTTP 500, non-JSON body attempts=2 latencyMs=4
+ARCA dni=42765748 status=error reason=bad_response detail=HTTP 500, non-JSON body attempts=2 latencyMs=4
+ARCA dni=20606114 status=error reason=bad_response detail=HTTP 500, non-JSON body attempts=2 latencyMs=4
+ARCA dni=11240493 status=approved codigoAutorizacion=866e8eb5-37ab-4063-9566-0110c43cfcc8 attempts=2 latencyMs=296
+ARCA dni=94875693 status=rejected attempts=2 latencyMs=433
+ARCA dni=76573430 status=approved codigoAutorizacion=705f45cd-ebf4-4468-bed2-682a296397af attempts=2 latencyMs=348

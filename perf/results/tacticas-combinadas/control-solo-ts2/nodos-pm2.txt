@@ -1,0 +1,16 @@
+10.0.2.4 | CHANGED | rc=0 >>
+┌────┬────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name   │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 0  │ app    │ default     │ 1.0.0   │ fork    │ 7600     │ 21m    │ 0    │ online    │ 0%       │ 132.8mb  │ azureus… │ disabled │
+└────┴────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+host metrics | cpu: 0.5% | ram usage: 19.1% | eth0: ⇓ 1kb/s ⇑ 2kb/s | disk: ⇓ 0mb/s ⇑ 2kb/s
+Exchange API listening on port 3000 (ARCA retries: 0, exchange rate limit: 1200 req/s global, local backstop: 700 req/s per node)
+10.0.2.5 | CHANGED | rc=0 >>
+┌────┬────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name   │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 0  │ app    │ default     │ 1.0.0   │ fork    │ 7623     │ 21m    │ 0    │ online    │ 0%       │ 135.1mb  │ azureus… │ disabled │
+└────┴────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+host metrics | cpu: 0.8% | ram usage: 19.5% | eth0: ⇓ 1kb/s ⇑ 2kb/s | disk: ⇓ 0mb/s ⇑ 2kb/s
+Exchange API listening on port 3000 (ARCA retries: 0, exchange rate limit: 1200 req/s global, local backstop: 700 req/s per node)
