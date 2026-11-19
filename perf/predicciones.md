@@ -453,3 +453,11 @@ Escrito el 19/11, **antes** de medir. TS1 se midió con límite local (1.000 req
 ## Cómo se mide
 
 Infra nueva, 2 nodos `F1as_v7`, desde la misma ubicación (CABA). Resultados en `results/tacticas-combinadas/`: `root`, `exchange`, `exchange-capacity-2n`, `exchange-avalancha` y `exchange-concurrency-overdraft`, con `azure-metrics.sh` para ARCA y Redis, y `evidencia-infra.sh` para la configuración.
+
+## P9.e. Control en la misma sesión: TS2 sola (`arca_retries=0`), `exchange-capacity-2n`
+
+Escrito el 19/11 a las 09:31, después de medir P9.b y **antes** de correr el control. En P9.b la red que recibió ARCA fue la prevista (~495 KB/s en el tope), pero su CPU llegó a ~100 %, contra ~60 % predicho. Este contenedor gasta ~1,0 milicores por KB/s, contra ~0,64 en la sesión de TS1. Para separar el efecto de la combinación del de la sesión, se repite TS2 sola sobre la misma infraestructura.
+
+- **Llamadas a ARCA en el tope:** ~1.200/s, con red recibida **~400 KB/s** (1.200 / 1,25 de P9.b).
+- **CPU de ARCA en el tope:** **~80 %** (≈ 100 % / 1,25). Si da eso, la diferencia con P9 es el +25 % de llamadas del reintento, y la CPU absoluta depende de la sesión.
+- **503:** ~25 % de no-429 (sin reintento). Admisión ~1.200 req/s.
