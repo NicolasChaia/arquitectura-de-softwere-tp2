@@ -1,0 +1,7 @@
+# Rango de cada prueba (P9: táctica 1 + táctica 2, 2 nodos F1as_v7, ARCA_RETRIES=1, global 1200 req/s + respaldo local 700 req/s por nodo). Origen: PC del generador (CABA).
+# prueba | inicio ART | fin ART | inicio UTC | fin UTC
+root | 08:59:51 | 09:01:23 | 2026-11-19T11:59:51Z | 2026-11-19T12:01:23Z | exit=0
+exchange | 09:03:23 | 09:07:00 | 2026-11-19T12:03:23Z | 2026-11-19T12:07:00Z | exit=0
+exchange-capacity-2n | 09:09:00 | 09:15:37 | 2026-11-19T12:09:00Z | 2026-11-19T12:15:37Z | exit=0
+exchange-concurrency-overdraft | 09:17:37 | 09:20:14 | 2026-11-19T12:17:37Z | 2026-11-19T12:20:14Z | exit=0
+exchange-avalancha | 09:22:14 | 09:28:49 | 2026-11-19T12:22:14Z | 2026-11-19T12:28:49Z | exit=0

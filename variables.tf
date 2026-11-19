@@ -45,3 +45,10 @@ variable "os_version" {
 variable "machine_sku" {
   default = "Standard_D2as_v4"
 }
+
+# Free Trial: 4 vCPU por región. Jumpbox (machine_sku, 2 vCPU) + 2 nodos de 1 vCPU = 4.
+# Es el único SKU de 1 vCPU sin créditos de CPU que eastus ofrece a la suscripción
+# (perf/results/2-nodos/sku-1vcpu-eastus.txt). Solo admite disco NVMe e imagen Gen2.
+variable "node_sku" {
+  default = "Standard_F1as_v7"
+}

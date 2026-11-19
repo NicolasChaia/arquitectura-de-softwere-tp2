@@ -1,0 +1,6 @@
+# Rango de cada prueba (táctica 1: reintento ARCA, 2 nodos F1as_v7, ARCA_RETRIES=1). Origen: PC del generador (CABA).
+# prueba | inicio ART | fin ART | inicio UTC | fin UTC
+root | 16:00:15 | 16:01:48 | 2026-11-14T19:00:15Z | 2026-11-14T19:01:48Z | exit=0
+exchange | 16:03:48 | 16:07:34 | 2026-11-14T19:03:48Z | 2026-11-14T19:07:34Z | exit=0
+exchange-capacity-2n | 16:09:34 | 16:16:11 | 2026-11-14T19:09:34Z | 2026-11-14T19:16:11Z | exit=0
+exchange-concurrency-overdraft | 16:18:11 | 16:20:51 | 2026-11-14T19:18:11Z | 2026-11-14T19:20:51Z | exit=0

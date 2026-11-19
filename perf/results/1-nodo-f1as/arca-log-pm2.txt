@@ -1,0 +1,14 @@
+# Extracto del log de la app (pm2, ~/.pm2/logs/app-out.log), 2026-11-11T12:46:08Z
+# Por nodo: líneas ARCA y las 3 primeras de cada estado
+
+10.0.2.4 | CHANGED | rc=0 >>
+líneas ARCA: 230827
+ARCA dni=6656539 status=approved codigoAutorizacion=c15496b4-f332-40cc-935c-a50591d44c18 latencyMs=429
+ARCA dni=56525164 status=approved codigoAutorizacion=720c9e8b-60f3-48ce-8a5c-7e74511d9241 latencyMs=249
+ARCA dni=32443545 status=approved codigoAutorizacion=bb5d5fef-5be9-4664-9cdd-ae233141c815 latencyMs=419
+ARCA dni=8806754 status=rejected latencyMs=344
+ARCA dni=11666278 status=rejected latencyMs=266
+ARCA dni=33333561 status=rejected latencyMs=236
+ARCA dni=41262887 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=6
+ARCA dni=55930481 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=4
+ARCA dni=49053955 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=3

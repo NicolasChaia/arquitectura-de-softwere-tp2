@@ -1,0 +1,72 @@
+# Avalancha sobre POST /exchange: mucho más de lo que deja pasar el rate limit
+# global (1200 req/s). Escalones de 60 s (uno por minuto de Azure Monitor),
+# de 1200 a 2400 req/s. Sirve para comparar "solo global" contra "global +
+# respaldo local por nodo" (táctica 2, segunda iteración): qué llega a Redis y
+# cuánto le cuesta al nodo rechazar. Mismo flujo, pesos y montos que
+# exchange-capacity-2n.yaml; pool más grande porque se ofrecen hasta 2400 req/s.
+# Predicción en perf/predicciones.md (P8).
+config:
+  target: "{{ $processEnvironment.TARGET }}"
+  plugins:
+    publish-metrics:
+      - type: datadog
+        apiKey: "{{ $processEnvironment.DATADOG_API_KEY }}"
+        apiHost: "us5.datadoghq.com"
+        prefix: "artillery."
+        tags:
+          - "test:exchange-avalancha"
+
+  http:
+    pool: 4000
+    timeout: 10
+
+  phases:
+    - { name: "1200 rps", duration: 60, arrivalRate: 1200 }
+    - { name: "1600 rps", duration: 60, arrivalRate: 1600 }
+    - { name: "2000 rps", duration: 60, arrivalRate: 2000 }
+    - { name: "2400 rps", duration: 60, arrivalRate: 2400 }
+
+before:
+  flow:
+    - put:
+        url: '/accounts/1/balance'
+        json:
+          balance: 1000000000000 # ARS interna, para que no se agote durante la prueba
+
+scenarios:
+  - name: Exchange USD to ARS
+    weight: 5
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: USD
+            counterCurrency: ARS
+            baseAccountId: 100
+            counterAccountId: 101
+            baseAmount: 100
+            dni: "{{ $randomNumber(1000000, 99999999) }}"
+  - name: Exchange EUR to ARS
+    weight: 3
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: EUR
+            counterCurrency: ARS
+            baseAccountId: 100
+            counterAccountId: 101
+            baseAmount: 50
+            dni: "{{ $randomNumber(1000000, 99999999) }}"
+  - name: Exchange BRL to ARS
+    weight: 2
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: BRL
+            counterCurrency: ARS
+            baseAccountId: 100
+            counterAccountId: 101
+            baseAmount: 200
+            dni: "{{ $randomNumber(1000000, 99999999) }}"

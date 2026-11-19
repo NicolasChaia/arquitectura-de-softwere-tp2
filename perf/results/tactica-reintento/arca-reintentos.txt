@@ -1,0 +1,13 @@
+# Conteo de validaciones de ARCA en ~/.pm2/logs/app-out.log de cada nodo, 2026-11-14T19:35:46Z
+# El log arranca en el deploy con ARCA_RETRIES=1 (antes de root) y cubre exchange, exchange-capacity-2n y overdraft
+# total = líneas ARCA (1 por request validado); attempts2 = requests que se reintentaron; abajo, resultado del 2do intento
+10.0.2.4 | CHANGED | rc=0 >>
+total 119915 approved 74197 rejected 38179 error 7539 attempts2 30157
+  14888 status=approved
+   7539 status=error
+   7730 status=rejected
+10.0.2.5 | CHANGED | rc=0 >>
+total 120436 approved 74498 rejected 38394 error 7544 attempts2 30458
+  15052 status=approved
+   7544 status=error
+   7862 status=rejected

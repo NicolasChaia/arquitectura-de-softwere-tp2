@@ -1,0 +1,2 @@
+# 2026-11-19T11:59:34Z - terraform output
+redis_hostname = "tp2redis-dtsbfvgsjz.eastus.redis.azure.net"

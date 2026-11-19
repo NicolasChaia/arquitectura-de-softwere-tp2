@@ -1,0 +1,4 @@
+# Rango de cada prueba (P8.a solo global 1200 req/s, sin respaldo, 2 nodos F1as_v7, ARCA_RETRIES=0). Origen: PC del generador (CABA).
+# prueba | inicio ART | fin ART | inicio UTC | fin UTC
+root | 18:06:13 | 18:07:35 | 2026-11-14T21:06:13Z | 2026-11-14T21:07:35Z | exit=0
+exchange-avalancha | 18:09:35 | 18:15:45 | 2026-11-14T21:09:35Z | 2026-11-14T21:15:45Z | exit=0

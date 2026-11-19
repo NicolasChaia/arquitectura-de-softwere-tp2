@@ -1,0 +1,11 @@
+# 2026-11-10 18:19-18:49 ART - terraform apply en la rama jumpbox-eastus2 (commit 4937059), con instances = 2
+# Los 2 nodos (Standard_D2as_v4), Redis, ARCA y el LB se crearon en eastus. Falló solo la VM del jumpbox
+# fuera de eastus, por falta de capacidad (no de cuota: cada región tenía 0/4 vCPU usadas).
+# Intentos: eastus2 y westus2 con Standard_D2as_v4; eastus2, westus2, centralus, southcentralus
+# y canadacentral con Standard_B1s. Todos devolvieron el mismo error. Ejemplo:
+
+Error: creating Linux Virtual Machine (Subscription: "<subscription-id>"
+Virtual Machine Name: "jumpbox"): performing CreateOrUpdate: unexpected status 409 (409 Conflict) with error: SkuNotAvailable: The requested VM size for resource 'Following SKUs have failed for Capacity Restrictions: Standard_D2as_v4' is currently not available in location 'eastus2'. Please try another size or deploy to a different location or different zone. See https://aka.ms/azureskunotavailable for details.
+
+Error: creating Linux Virtual Machine (Subscription: "<subscription-id>"
+Virtual Machine Name: "jumpbox"): performing CreateOrUpdate: unexpected status 409 (409 Conflict) with error: SkuNotAvailable: The requested VM size for resource 'Following SKUs have failed for Capacity Restrictions: Standard_B1s' is currently not available in location 'westus2'. Please try another 

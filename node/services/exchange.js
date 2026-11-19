@@ -174,6 +174,7 @@ function logArcaResult(dni, arca) {
   if (arca.codigoAutorizacion) parts.push(`codigoAutorizacion=${arca.codigoAutorizacion}`);
   if (arca.reason) parts.push(`reason=${arca.reason}`);
   if (arca.detail) parts.push(`detail=${arca.detail}`);
+  if (arca.attempts > 1) parts.push(`attempts=${arca.attempts}`);
   parts.push(`latencyMs=${arca.latencyMs}`);
   console.log(parts.join(" "));
 }

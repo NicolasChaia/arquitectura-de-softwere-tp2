@@ -1,0 +1,27 @@
+# Extracto del log de la app (pm2, ~/.pm2/logs/app-out.log), 2026-11-14T21:16:10Z
+# Por nodo: solo lo posterior al último arranque (deploy solo global): línea de arranque, líneas ARCA y las 3 primeras de cada estado
+
+10.0.2.4 | CHANGED | rc=0 >>
+Exchange API listening on port 3000 (ARCA retries: 0, exchange rate limit: 1200 req/s global)
+líneas ARCA: 145019
+ARCA dni=9592524 status=approved codigoAutorizacion=0d4da3ac-1eaa-4ab7-93d2-ce8a0a7ad78a latencyMs=208
+ARCA dni=46620166 status=approved codigoAutorizacion=3a43f1d5-a03f-4121-9f47-347c19a7cae6 latencyMs=208
+ARCA dni=81202128 status=approved codigoAutorizacion=e4598d30-7b4e-4363-8dca-771ccafb523b latencyMs=414
+ARCA dni=41579972 status=rejected latencyMs=367
+ARCA dni=97021572 status=rejected latencyMs=319
+ARCA dni=77894036 status=rejected latencyMs=258
+ARCA dni=15220511 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=8
+ARCA dni=98901844 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=5
+ARCA dni=51052942 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=4
+10.0.2.5 | CHANGED | rc=0 >>
+Exchange API listening on port 3000 (ARCA retries: 0, exchange rate limit: 1200 req/s global)
+líneas ARCA: 143135
+ARCA dni=65075087 status=approved codigoAutorizacion=59d73a95-74d9-4923-afd7-ef1ff7674bff latencyMs=235
+ARCA dni=8738638 status=approved codigoAutorizacion=68c82fe2-17d5-499a-aca4-52f47fdf5b98 latencyMs=302
+ARCA dni=43338378 status=approved codigoAutorizacion=3bf7b485-15ae-4c08-8162-d94bdc8b94bc latencyMs=212
+ARCA dni=65119436 status=rejected latencyMs=242
+ARCA dni=51677218 status=rejected latencyMs=325
+ARCA dni=4167089 status=rejected latencyMs=282
+ARCA dni=58650787 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=11
+ARCA dni=89651833 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=11
+ARCA dni=24220021 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=5

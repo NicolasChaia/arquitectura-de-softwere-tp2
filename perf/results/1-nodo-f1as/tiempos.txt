@@ -1,0 +1,7 @@
+# Rango de cada prueba (1 nodo F1as_v7). Origen: PC del generador (CABA).
+# prueba | inicio ART | fin ART | inicio UTC | fin UTC
+root | 09:08:43 | 09:10:20 | 2026-11-11T12:08:43Z | 2026-11-11T12:10:20Z | exit=0
+exchange | 09:11:20 | 09:15:01 | 2026-11-11T12:11:20Z | 2026-11-11T12:15:01Z | exit=0
+exchange-stress | 09:16:31 | 09:26:11 | 2026-11-11T12:16:31Z | 2026-11-11T12:26:11Z | exit=0
+exchange-capacity | 09:28:11 | 09:35:45 | 2026-11-11T12:28:11Z | 2026-11-11T12:35:45Z | exit=0
+exchange-concurrency-overdraft | 09:37:45 | 09:40:18 | 2026-11-11T12:37:45Z | 2026-11-11T12:40:18Z | exit=0

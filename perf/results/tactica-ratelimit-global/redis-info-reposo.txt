@@ -1,0 +1,14 @@
+# Redis en reposo después de la táctica 2 (14/11 ~20:35 UTC), INFO tomado desde el nodo 10.0.2.4 con el cliente de la app.
+# Motivo: Azure Monitor muestra percentProcessorTime 12-13 % en reposo hasta 19:48 UTC y 23-25 % desde 19:49 UTC, también sin carga.
+dbsize 12
+uptime_in_seconds:6166
+connected_clients:3
+used_memory_human:6.24M
+total_commands_processed:3944528
+instantaneous_ops_per_sec:1
+expired_keys:362
+evicted_keys:0
+db0:keys=12,expires=0,avg_ttl=0
+claves ratelimit:* 0
+# Azure Monitor percentProcessorTime (promedio cada 5 min, UTC):
+# 20:00 25.2 | 20:05 25.2 | 20:10 24.8 | 20:15 23.9 | 20:20 22.7 | 20:25 22.9

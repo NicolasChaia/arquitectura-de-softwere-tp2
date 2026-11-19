@@ -1,0 +1,622 @@
+
+> perf@1.0.0 artillery
+> artillery run exchange-concurrency-overdraft.yaml --output results/1-nodo-f1as/exchange-concurrency-overdraft.json
+
+Test run id: trepy_qdz4ajffpb7zrnbf5e85entx4k8ge_ck5n
+2026-11-11T12:37:55.441Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:37:55.442Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400675440',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:37:55.442Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-11T12:38:04.509Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:38:04.510Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400684509',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:38:04.510Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-11T12:38:11.637Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:38:11.638Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400691637',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:38:11.638Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-11T12:38:18.758Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:38:18.760Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400698758',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:38:18.760Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-11T12:38:25.898Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:38:25.899Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400705898',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:38:25.899Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-11T12:38:32.932Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:38:32.933Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400712932',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:38:32.933Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-11T12:38:40.031Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:38:40.032Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400720031',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:38:40.032Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-11T12:38:47.073Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:38:47.074Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400727072',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:38:47.074Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-11T12:38:54.149Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:38:54.150Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400734148',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:38:54.150Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-11T12:39:01.236Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:39:01.237Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400741235',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:39:01.237Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-11T12:39:08.262Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:39:08.264Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400748262',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:39:08.264Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-11T12:39:15.407Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:39:15.409Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400755407',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:39:15.409Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-11T12:39:22.480Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:39:22.481Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400762479',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:39:22.481Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-11T12:39:29.643Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:39:29.645Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400769643',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:39:29.645Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-11T12:39:36.786Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:39:36.787Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400776786',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:39:36.787Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+2026-11-11T12:39:43.921Z plugin:publish-metrics:datadog-statsd creating DatadogReporter with config
+2026-11-11T12:39:43.923Z plugin:publish-metrics:datadog-statsd {
+  apiKey: '<redacted>',
+  appKey: undefined,
+  host: '127.0.0.1',
+  port: 8125,
+  prefix: 'artillery.',
+  event: {
+    title: 'Artillery.io Test 1794400783921',
+    text: 'Target: http://sgkxlneprl.eastus.cloudapp.azure.com',
+    priority: 'low',
+    alertType: 'info',
+    tags: [],
+    send: true
+  },
+  tags: [ 'test:exchange-concurrency-overdraft' ],
+  type: 'datadog',
+  apiHost: 'us5.datadoghq.com'
+}
+2026-11-11T12:39:43.923Z plugin:publish-metrics:datadog-statsd Initializing datadog via HTTPS
+metrics: The `apiHost` option (and `DATADOG_API_HOST` environment variable) for `init()` and `BufferedMetricsLogger` has been deprecated and will be removed in a future release. Please use the `site` option (or `DATADOG_SITE` environment variable) instead.
+Phase started: Overdraft burst (index: 0, duration: 30s) 09:39:44(-0300)
+
+2026-11-11T12:39:44.170Z plugin:publish-metrics:datadog-statsd sending start event
+2026-11-11T12:39:44.170Z plugin:publish-metrics:datadog-statsd sending event Target: http://sgkxlneprl.eastus.cloudapp.azure.com
+--------------------------------------
+Metrics for period to: 09:39:50(-0300) (width: 5.329s)
+--------------------------------------
+
+http.codes.200: ................................................................ 51
+http.codes.403: ................................................................ 21
+http.codes.409: ................................................................ 6
+http.codes.503: ................................................................ 14
+http.downloaded_bytes: ......................................................... 37137
+http.request_rate: ............................................................. 20/sec
+http.requests: ................................................................. 104
+http.response_time:
+  min: ......................................................................... 146
+  max: ......................................................................... 1003
+  mean: ........................................................................ 619.8
+  median: ...................................................................... 699.4
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1002.4
+http.response_time.2xx:
+  min: ......................................................................... 645
+  max: ......................................................................... 1003
+  mean: ........................................................................ 823.8
+  median: ...................................................................... 804.5
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1002.4
+http.response_time.4xx:
+  min: ......................................................................... 353
+  max: ......................................................................... 635
+  mean: ........................................................................ 479.6
+  median: ...................................................................... 468.8
+  p95: ......................................................................... 620.3
+  p99: ......................................................................... 620.3
+http.response_time.5xx:
+  min: ......................................................................... 146
+  max: ......................................................................... 151
+  mean: ........................................................................ 147.4
+  median: ...................................................................... 147
+  p95: ......................................................................... 149.9
+  p99: ......................................................................... 149.9
+http.responses: ................................................................ 92
+vusers.completed: .............................................................. 92
+vusers.created: ................................................................ 104
+vusers.created_by_name.Overdraft ARS -> USD: ................................... 104
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 148.3
+  max: ......................................................................... 1330.2
+  mean: ........................................................................ 676.4
+  median: ...................................................................... 713.5
+  p95: ......................................................................... 1107.9
+  p99: ......................................................................... 1224.4
+
+
+--------------------------------------
+Metrics for period to: 09:40:00(-0300) (width: 9.942s)
+--------------------------------------
+
+http.codes.403: ................................................................ 47
+http.codes.409: ................................................................ 96
+http.codes.503: ................................................................ 58
+http.downloaded_bytes: ......................................................... 88427
+http.request_rate: ............................................................. 20/sec
+http.requests: ................................................................. 200
+http.response_time:
+  min: ......................................................................... 145
+  max: ......................................................................... 648
+  mean: ........................................................................ 401.8
+  median: ...................................................................... 441.5
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.4xx:
+  min: ......................................................................... 347
+  max: ......................................................................... 648
+  mean: ........................................................................ 504.9
+  median: ...................................................................... 518.1
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 145
+  max: ......................................................................... 155
+  mean: ........................................................................ 147.6
+  median: ...................................................................... 147
+  p95: ......................................................................... 149.9
+  p99: ......................................................................... 153
+http.responses: ................................................................ 201
+vusers.completed: .............................................................. 201
+vusers.created: ................................................................ 200
+vusers.created_by_name.Overdraft ARS -> USD: ................................... 200
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 146.5
+  max: ......................................................................... 649.8
+  mean: ........................................................................ 404
+  median: ...................................................................... 441.5
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+
+
+Phase completed: Overdraft burst (index: 0, duration: 30s) 09:40:14(-0300)
+
+--------------------------------------
+Metrics for period to: 09:40:10(-0300) (width: 9.991s)
+--------------------------------------
+
+http.codes.403: ................................................................ 56
+http.codes.409: ................................................................ 90
+http.codes.503: ................................................................ 52
+http.downloaded_bytes: ......................................................... 86594
+http.request_rate: ............................................................. 20/sec
+http.requests: ................................................................. 200
+http.response_time:
+  min: ......................................................................... 145
+  max: ......................................................................... 654
+  mean: ........................................................................ 403.2
+  median: ...................................................................... 432.7
+  p95: ......................................................................... 620.3
+  p99: ......................................................................... 645.6
+http.response_time.4xx:
+  min: ......................................................................... 350
+  max: ......................................................................... 654
+  mean: ........................................................................ 494.1
+  median: ...................................................................... 487.9
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 145
+  max: ......................................................................... 156
+  mean: ........................................................................ 148.2
+  median: ...................................................................... 147
+  p95: ......................................................................... 153
+  p99: ......................................................................... 153
+http.responses: ................................................................ 198
+vusers.completed: .............................................................. 198
+vusers.created: ................................................................ 200
+vusers.created_by_name.Overdraft ARS -> USD: ................................... 200
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 147
+  max: ......................................................................... 805.1
+  mean: ........................................................................ 406.1
+  median: ...................................................................... 441.5
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+
+
+--------------------------------------
+Metrics for period to: 09:40:20(-0300) (width: 5.421s)
+--------------------------------------
+
+http.codes.403: ................................................................ 24
+http.codes.409: ................................................................ 56
+http.codes.503: ................................................................ 29
+http.downloaded_bytes: ......................................................... 48085
+http.request_rate: ............................................................. 20/sec
+http.requests: ................................................................. 96
+http.response_time:
+  min: ......................................................................... 145
+  max: ......................................................................... 646
+  mean: ........................................................................ 403.8
+  median: ...................................................................... 450.4
+  p95: ......................................................................... 620.3
+  p99: ......................................................................... 632.8
+http.response_time.4xx:
+  min: ......................................................................... 349
+  max: ......................................................................... 646
+  mean: ........................................................................ 496.8
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 145
+  max: ......................................................................... 150
+  mean: ........................................................................ 147.2
+  median: ...................................................................... 147
+  p95: ......................................................................... 149.9
+  p99: ......................................................................... 149.9
+http.responses: ................................................................ 109
+vusers.completed: .............................................................. 109
+vusers.created: ................................................................ 96
+vusers.created_by_name.Overdraft ARS -> USD: ................................... 96
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 146.9
+  max: ......................................................................... 706
+  mean: ........................................................................ 407.8
+  median: ...................................................................... 450.4
+  p95: ......................................................................... 620.3
+  p99: ......................................................................... 645.6
+
+
+All VUs finished. Total time: 33 seconds
+
+--------------------------------
+Summary report @ 09:40:18(-0300)
+--------------------------------
+
+http.codes.200: ................................................................ 51
+http.codes.403: ................................................................ 148
+http.codes.409: ................................................................ 248
+http.codes.503: ................................................................ 153
+http.downloaded_bytes: ......................................................... 260243
+http.request_rate: ............................................................. 20/sec
+http.requests: ................................................................. 600
+http.response_time:
+  min: ......................................................................... 145
+  max: ......................................................................... 1003
+  mean: ........................................................................ 436.1
+  median: ...................................................................... 450.4
+  p95: ......................................................................... 772.9
+  p99: ......................................................................... 1002.4
+http.response_time.2xx:
+  min: ......................................................................... 645
+  max: ......................................................................... 1003
+  mean: ........................................................................ 823.8
+  median: ...................................................................... 804.5
+  p95: ......................................................................... 1002.4
+  p99: ......................................................................... 1002.4
+http.response_time.4xx:
+  min: ......................................................................... 347
+  max: ......................................................................... 654
+  mean: ........................................................................ 497.5
+  median: ...................................................................... 497.8
+  p95: ......................................................................... 632.8
+  p99: ......................................................................... 645.6
+http.response_time.5xx:
+  min: ......................................................................... 145
+  max: ......................................................................... 156
+  mean: ........................................................................ 147.7
+  median: ...................................................................... 147
+  p95: ......................................................................... 149.9
+  p99: ......................................................................... 153
+http.responses: ................................................................ 600
+vusers.completed: .............................................................. 600
+vusers.created: ................................................................ 600
+vusers.created_by_name.Overdraft ARS -> USD: ................................... 600
+vusers.failed: ................................................................. 0
+vusers.session_length:
+  min: ......................................................................... 146.5
+  max: ......................................................................... 1330.2
+  mean: ........................................................................ 447.2
+  median: ...................................................................... 459.5
+  p95: ......................................................................... 804.5
+  p99: ......................................................................... 1085.9
+Log file: results/1-nodo-f1as/exchange-concurrency-overdraft.json
+2026-11-11T12:40:18.031Z plugin:publish-metrics:datadog-statsd sending event Target: http://sgkxlneprl.eastus.cloudapp.azure.com
+2026-11-11T12:40:18.032Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-11T12:40:18.031Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-11T12:40:18.031Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-11T12:40:18.031Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-11T12:40:18.031Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-11T12:40:18.031Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-11T12:40:18.031Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-11T12:40:18.031Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-11T12:40:18.031Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-11T12:40:18.031Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-11T12:40:18.031Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-11T12:40:18.031Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-11T12:40:18.031Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-11T12:40:18.031Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-11T12:40:18.031Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.
+2026-11-11T12:40:18.032Z plugin:publish-metrics:datadog-statsd flushing metrics
+metrics: The `onSuccess` and `onError` callback arguments for BufferedMetricsLogger.flush() are deprecated and will be removed in a future release. Please use the promise object that `flush()` returns instead.

@@ -1,0 +1,3 @@
+# Rango de cada prueba (P8.a global 1200 req/s + respaldo local 700 req/s por nodo, 2 nodos F1as_v7, ARCA_RETRIES=0). Origen: PC del generador (CABA).
+# prueba | inicio ART | fin ART | inicio UTC | fin UTC
+exchange-avalancha | 18:16:57 | 18:23:07 | 2026-11-14T21:16:57Z | 2026-11-14T21:23:07Z | exit=0

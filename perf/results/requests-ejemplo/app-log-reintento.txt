@@ -1,0 +1,33 @@
+accounts:index not found in Redis, seeding from accounts.json
+rates:pairs not found in Redis, seeding from rates.json
+Exchange API listening on port 3000 (ARCA retries: 1, exchange rate limit: 500 req/s local)
+ARCA dni=30007919 status=approved codigoAutorizacion=763fa8c5-af68-4bc9-a741-7004eff46f18 latencyMs=256
+ARCA dni=30015838 status=rejected latencyMs=333
+ARCA dni=30023757 status=approved codigoAutorizacion=7814e460-36b2-4236-9e40-6f11636dc87a latencyMs=342
+ARCA dni=30031676 status=approved codigoAutorizacion=3f2c0222-29a8-4371-b57f-e5035079dd55 latencyMs=325
+ARCA dni=30039595 status=rejected attempts=2 latencyMs=412
+ARCA dni=30047514 status=rejected latencyMs=361
+ARCA dni=30055433 status=approved codigoAutorizacion=fa267ff7-778c-4d8e-ac60-9250c9d28e91 latencyMs=310
+ARCA dni=30063352 status=error reason=bad_response detail=HTTP 500, non-JSON body attempts=2 latencyMs=30
+ARCA dni=30071271 status=approved codigoAutorizacion=416f1ecc-1020-4a83-b2d4-aa5491952662 latencyMs=208
+ARCA dni=30079190 status=rejected latencyMs=472
+ARCA dni=30087109 status=rejected latencyMs=248
+ARCA dni=30095028 status=approved codigoAutorizacion=c3ea73d6-6273-4955-b966-10a066a3c8ac attempts=2 latencyMs=290
+ARCA dni=30102947 status=approved codigoAutorizacion=26da36be-738c-4ee0-8f07-a02a8d4e0d45 attempts=2 latencyMs=477
+ARCA dni=30110866 status=approved codigoAutorizacion=2aef1914-3912-423a-9eae-5cd37969af2f latencyMs=496
+ARCA dni=30118785 status=rejected latencyMs=282
+ARCA dni=30126704 status=rejected latencyMs=301
+ARCA dni=30134623 status=approved codigoAutorizacion=f498e29d-1ec7-4296-ab17-386255ab802a latencyMs=392
+ARCA dni=30142542 status=approved codigoAutorizacion=25c2dd2b-bafd-45f2-9dfa-970370a6ce10 latencyMs=361
+ARCA dni=30150461 status=rejected attempts=2 latencyMs=321
+ARCA dni=30158380 status=approved codigoAutorizacion=23a24a3a-60b7-496d-b6bc-b127eb8dfcc5 latencyMs=296
+ARCA dni=30166299 status=approved codigoAutorizacion=641e4a6c-5d59-4d1e-ba95-fb8225750252 latencyMs=221
+ARCA dni=30174218 status=approved codigoAutorizacion=a5852739-1895-41f2-ac12-3a0cdbbd4ddd latencyMs=465
+ARCA dni=30182137 status=approved codigoAutorizacion=76ee6214-c5fc-4af7-a457-923f666c4bf7 latencyMs=488
+ARCA dni=30190056 status=error reason=bad_response detail=HTTP 500, non-JSON body attempts=2 latencyMs=21
+ARCA dni=30197975 status=approved codigoAutorizacion=43e0826b-c951-4f39-ba33-1c62a0e50181 latencyMs=401
+ARCA dni=30205894 status=error reason=bad_response detail=HTTP 500, non-JSON body attempts=2 latencyMs=20
+ARCA dni=30213813 status=approved codigoAutorizacion=76f21edd-cff7-4b9a-af00-f87785f227c3 attempts=2 latencyMs=389
+ARCA dni=30221732 status=approved codigoAutorizacion=a03f83c3-4514-40a8-9022-fa38a4afcba1 latencyMs=408
+ARCA dni=30229651 status=rejected latencyMs=271
+ARCA dni=30237570 status=approved codigoAutorizacion=283ee9fa-2832-4011-be13-0364e02248e8 latencyMs=272

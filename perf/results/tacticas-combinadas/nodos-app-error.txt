@@ -1,0 +1,9 @@
+# 2026-11-19T12:30:36Z - app-error.log de cada nodo (últimas 30 líneas) y reinicios de pm2
+10.0.2.5 | CHANGED | rc=0 >>
+0 /home/azureuser/.pm2/logs/app-error.log
+app restarts 0 status online
+10.0.2.4 | CHANGED | rc=0 >>
+2 /home/azureuser/.pm2/logs/app-error.log
+accounts:index not found in Redis, seeding from accounts.json
+rates:pairs not found in Redis, seeding from rates.json
+app restarts 0 status online

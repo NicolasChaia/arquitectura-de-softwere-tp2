@@ -1,0 +1,35 @@
+# 2026-11-10T22:30:55Z - SKU de 1 vCPU para los nodos (region eastus, suscripcion Free Trial)
+
+## 1. SKU de 1 vCPU que Azure ofrece a esta suscripcion en eastus
+# az vm list-skus -l eastus --resource-type virtualMachines (filtrado a vCPUs = 1)
+# Standard_DS1_v2, Standard_F1s, Standard_A1_v2 y la serie B no aparecen en la lista.
+SKU                   familia                    GiB  vCPU/core  restricciones
+Standard_F1ads_v7     StandardFadsv7Family         4          1  -
+Standard_F1alds_v7    StandardFaldsv7Family        2          1  -
+Standard_F1als_v7     StandardFalsv7Family         2          1  -
+Standard_F1amds_v7    StandardFamdsv7Family        8          1  -
+Standard_F1ams_v7     StandardFamsv7Family         8          1  -
+Standard_F1as_v7      StandardFasv7Family          4          1  -
+Standard_DS1_v2       presente en la lista: False
+Standard_F1s          presente en la lista: False
+Standard_A1_v2        presente en la lista: False
+Standard_B1s          presente en la lista: False
+Standard_B1ms         presente en la lista: False
+
+## 2. Cuota (az vm list-usage -l eastus), antes de la prueba
+Total Regional vCPUs           0 / 4
+Standard Fasv7 Family vCPUs    0 / 4
+
+## 3. Prueba real: VMSS descartable (grupo tp2-sku-probe, borrado al terminar)
+# az vmss create --vm-sku Standard_F1as_v7 --image Canonical:ubuntu-24_04-lts:server:latest --instance-count 1 --orchestration-mode Uniform
+# provisioningState = Succeeded en 50 s
+{
+  "capacity": 1,
+  "diskControllerType": "NVMe",
+  "imageOffer": "ubuntu-24_04-lts",
+  "imageSku": "server",
+  "sku": "Standard_F1as_v7"
+}
+# Cuota durante la prueba:
+Standard Fasv7 Family vCPUs	1	4
+Total Regional vCPUs	1	4

@@ -1,0 +1,67 @@
+# Entorno: app real (node/app.js vía perf/requests-ejemplo/app-local.mjs, Node v24.18.1) en la PC del grupo,
+# ARCA arqsoft/arca:1.0.0 en Docker (--cpus 0.5 --memory 512m, como arca.tf), Redis 7.4 en Docker (sin TLS).
+# Rate limit de /exchange: 500 req/s local (valor por defecto de node/config.js).
+# Fecha: 2026-11-18T12:41:43Z
+
+### 1. ARCA caído (docker stop tp2-arca): el exchange falla cerrado con 503, reason=unreachable, sin reservar fondos
+$ docker stop tp2-arca
+
+$ curl -s -i -X POST http://localhost:3000/exchange -H 'Content-Type: application/json' -d '{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"12345678"}'
+HTTP/1.1 503 Service Unavailable
+X-Powered-By: Express
+RateLimit-Policy: 500;w=1
+RateLimit-Limit: 500
+RateLimit-Remaining: 499
+RateLimit-Reset: 1
+Content-Type: application/json; charset=utf-8
+Content-Length: 420
+ETag: W/"1a4-wnbDiiF+cIMQagStdlRfOsu5am8"
+Date: Wed, 18 Nov 2026 12:41:44 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":"vBN7VpoYB31wrbnK7peLP","ts":"2026-11-18T12:41:44.227Z","ok":false,"request":{"baseCurrency":"USD","counterCurrency":"ARS","baseAccountId":100,"counterAccountId":101,"baseAmount":100,"dni":"12345678"},"exchangeRate":null,"counterAmount":0,"obs":"Could not validate client with ARCA","failure":"arca_unavailable","arca":{"status":"error","reason":"unreachable","detail":"UND_ERR_SOCKET","attempts":1,"latencyMs":4}}
+$ docker start tp2-arca
+
+### 2. Redis caído (docker stop tp2-redis): GET /health responde 503 degraded
+$ docker stop tp2-redis
+
+$ curl -s -i -X GET http://localhost:3000/health
+HTTP/1.1 503 Service Unavailable
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 36
+ETag: W/"24-2MeYlElOaG8hkTc51uMy+5VVQRI"
+Date: Wed, 18 Nov 2026 12:41:49 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"status":"degraded","redis":"down"}
+
+### 3. GET / sigue respondiendo 200 con Redis caído: la sonda TCP del LB (node.tf) no detectaría la falla
+$ curl -s -i -X GET http://localhost:3000/
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/plain; charset=utf-8
+Content-Length: 13
+ETag: W/"d-aGTv12Omx4QelmA2daCP+sXihWo"
+Date: Wed, 18 Nov 2026 12:41:49 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+Server is up.
+
+$ docker start tp2-redis
+
+### 4. Redis de vuelta: GET /health vuelve a 200
+$ curl -s -i -X GET http://localhost:3000/health
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 47
+ETag: W/"2f-UJ19KqLXidBmY1lzaYHFD7L7TnQ"
+Date: Wed, 18 Nov 2026 12:41:52 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"status":"ok","redis":"up","uptime":19.244062}

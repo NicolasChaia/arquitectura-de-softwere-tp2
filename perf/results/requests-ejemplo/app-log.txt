@@ -1,0 +1,563 @@
+accounts:index not found in Redis, seeding from accounts.json
+rates:pairs not found in Redis, seeding from rates.json
+Exchange API listening on port 3000 (ARCA retries: 0, exchange rate limit: 500 req/s local)
+ARCA dni=1000000 status=approved codigoAutorizacion=b9dcaa3a-4d2c-4e1d-ba9f-18eaddbeb999 latencyMs=265
+ARCA dni=99999999 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=11
+ARCA dni=12345678 status=approved codigoAutorizacion=f7eff8a8-9163-418e-a1b2-07574e954608 latencyMs=407
+ARCA dni=20304050 status=approved codigoAutorizacion=c9a7cfe8-dfce-4ef2-b520-53c7d5fbfc01 latencyMs=375
+ARCA dni=33444555 status=approved codigoAutorizacion=8529f4c6-de02-479e-8420-a16ff716d72d latencyMs=415
+ARCA dni=27123456 status=rejected latencyMs=373
+ARCA dni=45678901 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=18
+ARCA dni=30111222 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=14
+ARCA dni=18765432 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=16
+ARCA dni=40101235 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=14
+ARCA dni=27123456 status=rejected latencyMs=475
+ARCA dni=27123456 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=11
+ARCA dni=27123456 status=rejected latencyMs=365
+ARCA dni=27123456 status=rejected latencyMs=480
+ARCA dni=10000002 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=21
+ARCA dni=10000003 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=48
+ARCA dni=10000005 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=51
+ARCA dni=10000008 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=112
+ARCA dni=10000010 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=112
+ARCA dni=10000013 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=112
+ARCA dni=10000036 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=129
+ARCA dni=10000020 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=281
+ARCA dni=10000021 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=284
+ARCA dni=10000043 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=302
+ARCA dni=10000042 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=303
+ARCA dni=10000039 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=305
+ARCA dni=10000035 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=307
+ARCA dni=10000041 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=305
+ARCA dni=10000025 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=314
+ARCA dni=10000023 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=314
+ARCA dni=10000109 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=282
+ARCA dni=10000110 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=281
+ARCA dni=10000053 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=459
+ARCA dni=10000000 status=approved codigoAutorizacion=918fc0d3-614a-4e22-8ba9-4b2572f0a63d latencyMs=502
+ARCA dni=10000064 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=455
+ARCA dni=10000067 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=453
+ARCA dni=10000077 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=449
+ARCA dni=10000079 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=449
+ARCA dni=10000080 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=449
+ARCA dni=10000082 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=449
+ARCA dni=10000087 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=448
+ARCA dni=10000090 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=447
+ARCA dni=10000095 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=445
+ARCA dni=10000098 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=445
+ARCA dni=10000108 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=442
+ARCA dni=10000282 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=283
+ARCA dni=10000117 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=437
+ARCA dni=10000128 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=433
+ARCA dni=10000129 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=432
+ARCA dni=10000012 status=approved codigoAutorizacion=86ed9f8b-d23f-4dd2-b482-a84057786e5c latencyMs=500
+ARCA dni=10000029 status=approved codigoAutorizacion=fa82d0fe-f9e1-4036-8547-b4ba5c99b370 latencyMs=499
+ARCA dni=10000044 status=approved codigoAutorizacion=a66b3d07-e772-42b7-b740-3fc8459c2f78 latencyMs=494
+ARCA dni=10000022 status=approved codigoAutorizacion=d8cef3b3-936d-4d24-8226-06bc91e4c432 latencyMs=503
+ARCA dni=10000018 status=approved codigoAutorizacion=ca45d5a6-577f-4cdb-9fd6-04ab7b0d7eba latencyMs=505
+ARCA dni=10000027 status=approved codigoAutorizacion=f2525a20-8843-48ee-a854-3cb15088879b latencyMs=501
+ARCA dni=10000037 status=approved codigoAutorizacion=f4a7baf4-dd55-4535-8f61-26a0e6e9ca58 latencyMs=497
+ARCA dni=10000016 status=approved codigoAutorizacion=165ce3c4-c3a4-4e59-a68d-335c81ddbd4a latencyMs=508
+ARCA dni=10000001 status=approved codigoAutorizacion=09efea18-93a9-4906-9e85-9952a19297a5 latencyMs=525
+ARCA dni=10000014 status=approved codigoAutorizacion=812dc107-009b-48cb-8c77-e07132755846 latencyMs=515
+ARCA dni=10000028 status=approved codigoAutorizacion=81b65b8c-5213-49f2-b81d-35927302b99e latencyMs=505
+ARCA dni=10000015 status=approved codigoAutorizacion=be6aefe2-f4c9-40d5-af94-d3ac61ecc6c6 latencyMs=515
+ARCA dni=10000009 status=approved codigoAutorizacion=0c0b14ef-22a4-42c1-88eb-3eb3b651cffa latencyMs=522
+ARCA dni=10000006 status=approved codigoAutorizacion=28f32d94-875c-4494-b02a-24889f69777a latencyMs=531
+ARCA dni=10000034 status=approved codigoAutorizacion=98a216d0-e242-4aca-b1d4-42cbbf6e2473 latencyMs=534
+ARCA dni=10000033 status=approved codigoAutorizacion=88151b94-a9cc-4d20-83d6-9e69e0437c79 latencyMs=539
+ARCA dni=10000031 status=approved codigoAutorizacion=603e9685-40d0-4b7b-b3b6-f64e579b375a latencyMs=541
+ARCA dni=10000065 status=approved codigoAutorizacion=9e459733-bd9c-40e8-8374-b1da44535303 latencyMs=526
+ARCA dni=10000038 status=approved codigoAutorizacion=04e01980-58f4-4705-99fb-1a22b508f79f latencyMs=550
+ARCA dni=10000057 status=approved codigoAutorizacion=997816aa-eca4-4770-95bd-663a5a6f67fc latencyMs=530
+ARCA dni=10000011 status=approved codigoAutorizacion=6e196ff8-4c23-4317-8881-d9ebd19b557f latencyMs=566
+ARCA dni=10000137 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=469
+ARCA dni=10000047 status=approved codigoAutorizacion=dafa8293-e73c-4454-95e7-a6fffee5121b latencyMs=538
+ARCA dni=10000150 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=450
+ARCA dni=10000151 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=450
+ARCA dni=10000081 status=approved codigoAutorizacion=da94045e-330f-467b-83d9-16b2e222d7a8 latencyMs=520
+ARCA dni=10000159 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=447
+ARCA dni=10000024 status=approved codigoAutorizacion=562bad3b-cbb4-4263-b99d-21d56a000abd latencyMs=557
+ARCA dni=10000164 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=445
+ARCA dni=10000166 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=445
+ARCA dni=10000167 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=444
+ARCA dni=10000061 status=approved codigoAutorizacion=1602b969-1669-45d2-97bf-15f5e16641d8 latencyMs=537
+ARCA dni=10000102 status=rejected latencyMs=523
+ARCA dni=10000017 status=approved codigoAutorizacion=bbc39ef8-385d-488d-9ef3-d48a0c804dbf latencyMs=572
+ARCA dni=10000107 status=rejected latencyMs=524
+ARCA dni=10000032 status=approved codigoAutorizacion=82d0822c-b3a7-40f0-8e29-60dc407ab56d latencyMs=571
+ARCA dni=10000084 status=approved codigoAutorizacion=46cf485a-eb3f-40ba-a2e3-278cd8584813 latencyMs=537
+ARCA dni=10000093 status=approved codigoAutorizacion=3f508a5a-b8dc-42ee-9ff3-18e4343641b0 latencyMs=537
+ARCA dni=10000091 status=approved codigoAutorizacion=33e03422-1bbe-4a40-afa8-52c698ac913c latencyMs=538
+ARCA dni=10000004 status=approved codigoAutorizacion=ac3f4f58-974a-489f-b0cb-e6ad966ee3fe latencyMs=595
+ARCA dni=10000106 status=rejected latencyMs=533
+ARCA dni=10000115 status=rejected latencyMs=527
+ARCA dni=10000125 status=rejected latencyMs=524
+ARCA dni=10000170 status=rejected latencyMs=463
+ARCA dni=10000007 status=approved codigoAutorizacion=b8254e4e-3b13-4f21-85f4-3c14832943cf latencyMs=595
+ARCA dni=10000267 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=393
+ARCA dni=10000276 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=387
+ARCA dni=10000277 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=385
+ARCA dni=10000046 status=approved codigoAutorizacion=5d18eefb-808b-4899-9c18-8a571c6556c2 latencyMs=575
+ARCA dni=10000286 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=369
+ARCA dni=10000289 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=367
+ARCA dni=10000089 status=approved codigoAutorizacion=a7ef86e6-e1d7-47c3-9dd7-c94188182fb6 latencyMs=544
+ARCA dni=10000293 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=366
+ARCA dni=10000294 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=366
+ARCA dni=10000297 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=366
+ARCA dni=10000104 status=rejected latencyMs=544
+ARCA dni=10000306 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=361
+ARCA dni=10000114 status=rejected latencyMs=538
+ARCA dni=10000116 status=rejected latencyMs=538
+ARCA dni=10000111 status=rejected latencyMs=539
+ARCA dni=10000048 status=approved codigoAutorizacion=db236d8d-1830-4ab7-93f1-88776a84daf0 latencyMs=571
+ARCA dni=10000305 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=363
+ARCA dni=10000317 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=358
+ARCA dni=10000309 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=361
+ARCA dni=10000311 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=361
+ARCA dni=10000316 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=358
+ARCA dni=10000326 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=354
+ARCA dni=10000328 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=353
+ARCA dni=10000323 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=356
+ARCA dni=10000335 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=350
+ARCA dni=10000337 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=349
+ARCA dni=10000344 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=345
+ARCA dni=10000346 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=344
+ARCA dni=10000350 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=340
+ARCA dni=10000349 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=341
+ARCA dni=10000351 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=340
+ARCA dni=10000357 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=335
+ARCA dni=10000364 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=330
+ARCA dni=10000370 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=327
+ARCA dni=10000383 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=323
+ARCA dni=10000381 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=324
+ARCA dni=10000384 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=323
+ARCA dni=10000394 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=320
+ARCA dni=10000396 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=320
+ARCA dni=10000395 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=320
+ARCA dni=10000410 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=315
+ARCA dni=10000412 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=315
+ARCA dni=10000417 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=313
+ARCA dni=10000420 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=312
+ARCA dni=10000423 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=311
+ARCA dni=10000421 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=312
+ARCA dni=10000429 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=310
+ARCA dni=10000432 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=309
+ARCA dni=10000440 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=307
+ARCA dni=10000436 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=308
+ARCA dni=10000442 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=306
+ARCA dni=10000068 status=approved codigoAutorizacion=964b131a-4f0c-420f-b19e-89217dd76c8c latencyMs=566
+ARCA dni=10000019 status=approved codigoAutorizacion=fbb8b378-fda1-4f56-8ef2-cf0a12e844c4 latencyMs=600
+ARCA dni=10000066 status=approved codigoAutorizacion=188b02c4-7f0f-4e30-a93b-1c65d5b6500b latencyMs=568
+ARCA dni=10000058 status=approved codigoAutorizacion=5bf13474-8ae2-4252-926d-a218f4581df5 latencyMs=572
+ARCA dni=10000445 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=306
+ARCA dni=10000446 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=306
+ARCA dni=10000447 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=306
+ARCA dni=10000449 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=305
+ARCA dni=10000454 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=304
+ARCA dni=10000639 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=302
+ARCA dni=10000641 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=302
+ARCA dni=10000459 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=299
+ARCA dni=10000645 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=301
+ARCA dni=10000465 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=297
+ARCA dni=10000469 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=295
+ARCA dni=10000461 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=299
+ARCA dni=10000475 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=293
+ARCA dni=10000055 status=approved codigoAutorizacion=03912a5d-8f14-449a-9b82-9bf2490c059a latencyMs=577
+ARCA dni=10000481 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=288
+ARCA dni=10000480 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=290
+ARCA dni=10000119 status=rejected latencyMs=548
+ARCA dni=10000484 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=287
+ARCA dni=10000070 status=approved codigoAutorizacion=725b2728-bb55-4397-a48a-dc0ead84a651 latencyMs=569
+ARCA dni=10000094 status=approved codigoAutorizacion=90dce373-a012-4ae7-9231-df1fbd57d3c0 latencyMs=561
+ARCA dni=10000187 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=479
+ARCA dni=10000188 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=478
+ARCA dni=10000189 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=478
+ARCA dni=10000198 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=475
+ARCA dni=10000199 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=475
+ARCA dni=10000204 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=473
+ARCA dni=10000209 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=471
+ARCA dni=10000215 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=469
+ARCA dni=10000217 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=468
+ARCA dni=10000218 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=468
+ARCA dni=10000220 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=468
+ARCA dni=10000221 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=467
+ARCA dni=10000222 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=467
+ARCA dni=10000045 status=approved codigoAutorizacion=8188ad56-e43f-4af7-b9b7-b9892a28ef91 latencyMs=597
+ARCA dni=10000075 status=approved codigoAutorizacion=22a51a5c-248f-4b1b-bd85-710e868fa5f1 latencyMs=571
+ARCA dni=10000226 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=466
+ARCA dni=10000227 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=466
+ARCA dni=10000235 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=464
+ARCA dni=10000051 status=approved codigoAutorizacion=09182125-6c42-40c4-a470-80cacfa366f7 latencyMs=584
+ARCA dni=10000237 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=464
+ARCA dni=10000239 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=463
+ARCA dni=10000026 status=approved codigoAutorizacion=e23a3951-47a2-41b9-951e-e83e02e7b55b latencyMs=606
+ARCA dni=10000248 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=460
+ARCA dni=10000253 status=error reason=bad_response detail=HTTP 500, non-JSON body latencyMs=459
+ARCA dni=10000122 status=rejected latencyMs=557
+ARCA dni=10000103 status=rejected latencyMs=566
+ARCA dni=10000040 status=approved codigoAutorizacion=07515a20-a1e1-4f65-b0df-882147e6b2eb latencyMs=605
+ARCA dni=10000062 status=approved codigoAutorizacion=e4f42cde-fa1a-4cb6-9462-b4640f79b14b latencyMs=584
+ARCA dni=10000030 status=approved codigoAutorizacion=ae07e247-ac61-4188-998b-62a420cda1c9 latencyMs=610
+ARCA dni=10000092 status=approved codigoAutorizacion=b629de34-83b1-4321-8840-61df33ff05c4 latencyMs=572
+ARCA dni=10000126 status=rejected latencyMs=558
+ARCA dni=10000050 status=approved codigoAutorizacion=1d2d4ad5-86fb-42c0-8d6c-85542996a484 latencyMs=593
+ARCA dni=10000097 status=approved codigoAutorizacion=488937dc-3052-4355-9ae2-9bd760ab4066 latencyMs=571
+ARCA dni=10000169 status=rejected latencyMs=498
+ARCA dni=10000059 status=approved codigoAutorizacion=87345b04-9879-4d3d-a5ec-9b58774b0743 latencyMs=588
+ARCA dni=10000063 status=approved codigoAutorizacion=2743180c-2267-41b3-a61f-ca93226f1245 latencyMs=590
+ARCA dni=10000120 status=rejected latencyMs=574
+ARCA dni=10000052 status=approved codigoAutorizacion=9528bcdc-4e16-4b8f-847c-6c87ddd7fb4c latencyMs=606
+ARCA dni=10000072 status=approved codigoAutorizacion=22137c4f-c6f8-47f5-b926-6b45eb22cf88 latencyMs=597
+ARCA dni=10000049 status=approved codigoAutorizacion=5f2ce163-af98-4d55-bd1b-57e4a51be0c8 latencyMs=619
+ARCA dni=10000175 status=rejected latencyMs=530
+ARCA dni=10000078 status=approved codigoAutorizacion=67028582-5848-4aee-804a-7d0857ac5fc4 latencyMs=615
+ARCA dni=10000074 status=approved codigoAutorizacion=905f9c8b-ba96-48df-8715-f8db82834159 latencyMs=623
+ARCA dni=10000124 status=rejected latencyMs=603
+ARCA dni=10000069 status=approved codigoAutorizacion=6c41ce60-a437-4425-ba80-9f1a7d172791 latencyMs=627
+ARCA dni=10000165 status=rejected latencyMs=550
+ARCA dni=10000139 status=rejected latencyMs=576
+ARCA dni=10000149 status=rejected latencyMs=562
+ARCA dni=10000054 status=approved codigoAutorizacion=af723791-5d43-4874-9a28-43db74bbf997 latencyMs=647
+ARCA dni=10000171 status=rejected latencyMs=554
+ARCA dni=10000071 status=approved codigoAutorizacion=2bfb7419-3f49-4544-8de1-defb26803ca5 latencyMs=639
+ARCA dni=10000133 status=rejected latencyMs=590
+ARCA dni=10000083 status=approved codigoAutorizacion=5e76076c-0b1f-4486-8c7f-10d2c99927bf latencyMs=636
+ARCA dni=10000056 status=approved codigoAutorizacion=c02a00e5-2eac-4e0a-82e9-53d967158d8d latencyMs=650
+ARCA dni=10000155 status=rejected latencyMs=571
+ARCA dni=10000060 status=approved codigoAutorizacion=733847df-18cd-40e6-85f2-e8c138697c30 latencyMs=654
+ARCA dni=10000086 status=approved codigoAutorizacion=296d3421-e0a3-4344-9359-624e1aa28f12 latencyMs=647
+ARCA dni=10000121 status=rejected latencyMs=632
+ARCA dni=10000101 status=rejected latencyMs=643
+ARCA dni=10000100 status=rejected latencyMs=644
+ARCA dni=10000096 status=approved codigoAutorizacion=4401c5cd-6f4e-44fd-bdfa-cf2d59149870 latencyMs=646
+ARCA dni=10000112 status=rejected latencyMs=642
+ARCA dni=10000073 status=approved codigoAutorizacion=9283bf37-0a9e-4364-b1e6-40a2f815f328 latencyMs=658
+ARCA dni=10000105 status=rejected latencyMs=650
+ARCA dni=10000076 status=approved codigoAutorizacion=97f0ae03-ad45-4595-82af-89ef733ea00d latencyMs=670
+ARCA dni=10000177 status=rejected latencyMs=590
+ARCA dni=10000174 status=rejected latencyMs=595
+ARCA dni=10000153 status=rejected latencyMs=606
+ARCA dni=10000264 status=approved codigoAutorizacion=192bd592-b584-4eca-8d65-0aa0c06fde88 latencyMs=527
+ARCA dni=10000456 status=approved codigoAutorizacion=75fb56e2-331c-4b26-ba2c-fb5cbde02343 latencyMs=420
+ARCA dni=10000085 status=approved codigoAutorizacion=a8f408d3-4692-4098-82e4-5360e7817d95 latencyMs=683
+ARCA dni=10000157 status=rejected latencyMs=613
+ARCA dni=10000113 status=rejected latencyMs=678
+ARCA dni=10000163 status=rejected latencyMs=621
+ARCA dni=10000088 status=approved codigoAutorizacion=5cbbd162-74fd-408a-ab97-58fce5a38fc8 latencyMs=696
+ARCA dni=10000118 status=rejected latencyMs=683
+ARCA dni=10000152 status=rejected latencyMs=629
+ARCA dni=10000298 status=approved codigoAutorizacion=94868115-bb70-4d5e-9090-6c2c96d9b1d6 latencyMs=518
+ARCA dni=10000127 status=rejected latencyMs=686
+ARCA dni=10000099 status=approved codigoAutorizacion=383412ff-fd3c-4d16-8b66-2b8a9c90680b latencyMs=700
+ARCA dni=10000123 status=rejected latencyMs=695
+ARCA dni=10000319 status=approved codigoAutorizacion=5aa2ec53-a473-4d2f-85a0-3de027c3c48c latencyMs=516
+ARCA dni=10000313 status=approved codigoAutorizacion=7cbeda50-5f4b-452c-9837-b43ae23df84d latencyMs=520
+ARCA dni=10000143 status=rejected latencyMs=658
+ARCA dni=10000278 status=approved codigoAutorizacion=d2119296-dabb-4764-9cc1-9f4a8b4c8c72 latencyMs=552
+ARCA dni=10000455 status=approved codigoAutorizacion=e898f9a7-7942-411a-bf1f-481fc928bff1 latencyMs=453
+ARCA dni=10000426 status=approved codigoAutorizacion=922e28f9-bd19-4ab7-9008-9a6e0ac6de0c latencyMs=474
+ARCA dni=10000134 status=rejected latencyMs=679
+ARCA dni=10000636 status=approved codigoAutorizacion=1f918704-9648-4e36-85d3-623189b73c4b latencyMs=467
+ARCA dni=10000196 status=rejected latencyMs=636
+ARCA dni=10000274 status=approved codigoAutorizacion=96f30306-1d2c-4cea-9983-687d056a6dfd latencyMs=573
+ARCA dni=10000203 status=approved codigoAutorizacion=bfe1af01-1ff0-47ef-9197-51f11d6a1220 latencyMs=639
+ARCA dni=10000219 status=approved codigoAutorizacion=d93ec493-811d-4eb8-b4fb-b18d3c571e29 latencyMs=633
+ARCA dni=10000138 status=rejected latencyMs=684
+ARCA dni=10000463 status=approved codigoAutorizacion=f1e9c606-3504-4415-a624-d510f2a6524c latencyMs=473
+ARCA dni=10000202 status=approved codigoAutorizacion=1d0d8e04-8620-4977-a9bc-d2172dad7350 latencyMs=647
+ARCA dni=10000644 status=approved codigoAutorizacion=94b31ebb-f959-4f3f-becc-1f6986f3fdf5 latencyMs=479
+ARCA dni=10000367 status=approved codigoAutorizacion=5598c3b0-c96d-4ac9-8a3d-a77e6e8685dc latencyMs=513
+ARCA dni=10000443 status=approved codigoAutorizacion=7851e47b-eb89-48b1-9143-81c3b01d409b latencyMs=488
+ARCA dni=10000393 status=approved codigoAutorizacion=c8c9e54b-d710-4520-af32-2bf2df34c960 latencyMs=506
+ARCA dni=10000379 status=approved codigoAutorizacion=0e06d949-9c32-4363-b5f2-d983dede5de4 latencyMs=511
+ARCA dni=10000176 status=rejected latencyMs=663
+ARCA dni=10000275 status=approved codigoAutorizacion=7eb57899-4cfd-45cf-b0da-1e59ddc8c772 latencyMs=587
+ARCA dni=10000288 status=approved codigoAutorizacion=3d3142f7-7b28-4b1f-a94e-233964697f84 latencyMs=569
+ARCA dni=10000145 status=rejected latencyMs=681
+ARCA dni=10000369 status=approved codigoAutorizacion=9e8a3ffa-5cb4-4d43-b8f3-b58a17e1c604 latencyMs=522
+ARCA dni=10000355 status=approved codigoAutorizacion=be6e6cc7-66c6-4f87-91d4-2ff5e954051d latencyMs=533
+ARCA dni=10000333 status=approved codigoAutorizacion=45852191-b555-4c1a-895c-0d817f450776 latencyMs=549
+ARCA dni=10000401 status=approved codigoAutorizacion=9d5acae4-5423-4d18-be00-fff534216097 latencyMs=514
+ARCA dni=10000224 status=approved codigoAutorizacion=a880ea5c-6d11-4097-871c-0ed00934d2fd latencyMs=653
+ARCA dni=10000284 status=approved codigoAutorizacion=2b7f1c69-c0fc-40ea-9eea-4b7215b27678 latencyMs=579
+ARCA dni=10000398 status=approved codigoAutorizacion=3c6b8d3e-2d7a-4981-80a1-6b313fd1ff95 latencyMs=517
+ARCA dni=10000200 status=approved codigoAutorizacion=888f0194-03d1-41a2-8ee7-ce9657402129 latencyMs=665
+ARCA dni=10000315 status=approved codigoAutorizacion=54bcde00-5a9e-4ad4-b57f-b54d452d62d2 latencyMs=563
+ARCA dni=10000148 status=rejected latencyMs=691
+ARCA dni=10000408 status=approved codigoAutorizacion=cea14855-c5d8-4c8a-9b64-4aeaff9eb51c latencyMs=519
+ARCA dni=10000260 status=approved codigoAutorizacion=1977ea2a-ce10-4aa8-8e3f-93c893f2467d latencyMs=648
+ARCA dni=10000280 status=approved codigoAutorizacion=52d47694-0fba-4707-b7e1-fe2085469f0e latencyMs=601
+ARCA dni=10000327 status=approved codigoAutorizacion=678610c3-f934-4071-8d07-01e9d437dbac latencyMs=567
+ARCA dni=10000425 status=approved codigoAutorizacion=e54ec2c0-997e-4c3a-b3db-93f09569131f latencyMs=523
+ARCA dni=10000637 status=approved codigoAutorizacion=ccd9fc89-ef78-4f1c-9f61-864fb8a798c8 latencyMs=513
+ARCA dni=10000361 status=approved codigoAutorizacion=855a5d38-8a57-4913-81b2-2c9093b72a7b latencyMs=547
+ARCA dni=10000255 status=approved codigoAutorizacion=2875cc1f-470f-4dfd-bb7f-69f97b310bd4 latencyMs=661
+ARCA dni=10000356 status=approved codigoAutorizacion=617f1aed-796f-4e4b-9e83-3374641c06e1 latencyMs=553
+ARCA dni=10000439 status=approved codigoAutorizacion=800419ef-bf55-4c4a-a58d-044dccb60a85 latencyMs=521
+ARCA dni=10000471 status=approved codigoAutorizacion=ebae0800-1ba8-4112-9db2-0403f3b68e70 latencyMs=505
+ARCA dni=10000243 status=approved codigoAutorizacion=b45495af-abf6-4834-a9d4-9b92e903e2cb latencyMs=667
+ARCA dni=10000241 status=approved codigoAutorizacion=74435e86-69f4-428d-a154-4e96c95c85ec latencyMs=668
+ARCA dni=10000427 status=approved codigoAutorizacion=df12cc9b-9550-4dbb-9f86-87e9e4f64cd0 latencyMs=526
+ARCA dni=10000375 status=approved codigoAutorizacion=27757420-02cf-4901-a096-60829e5ab879 latencyMs=543
+ARCA dni=10000252 status=approved codigoAutorizacion=c7bf3932-a018-4ebc-9cd5-e2a5a3901559 latencyMs=665
+ARCA dni=10000283 status=approved codigoAutorizacion=a8ff2339-3322-4b3d-82bb-e023c82b8fdd latencyMs=601
+ARCA dni=10000207 status=approved codigoAutorizacion=615c5065-ba72-4a39-aa6d-6c7aeafd5eaa latencyMs=681
+ARCA dni=10000290 status=approved codigoAutorizacion=aa99c96e-355e-4a43-8f1f-70197e192334 latencyMs=597
+ARCA dni=10000368 status=approved codigoAutorizacion=bd7f4e9e-8004-4a38-97db-5b5969a2b2e1 latencyMs=549
+ARCA dni=10000342 status=approved codigoAutorizacion=aeba9b84-c0a8-466f-826f-9bb93c11ff64 latencyMs=570
+ARCA dni=10000404 status=approved codigoAutorizacion=709016a8-3411-423b-a731-6e682c20a53c latencyMs=539
+ARCA dni=10000386 status=approved codigoAutorizacion=de3ee194-f2e4-4fcc-aa2b-222e27ee60a8 latencyMs=545
+ARCA dni=10000391 status=approved codigoAutorizacion=78235da9-f337-4780-8a75-b868bfda1f24 latencyMs=545
+ARCA dni=10000366 status=approved codigoAutorizacion=e23eeffd-a35b-49bc-9748-3fc0b025d91e latencyMs=555
+ARCA dni=10000413 status=approved codigoAutorizacion=9214f8a1-c56b-45e4-80ac-479f05974b99 latencyMs=539
+ARCA dni=10000183 status=rejected latencyMs=699
+ARCA dni=10000213 status=approved codigoAutorizacion=38c5807e-56fd-4762-9d41-24967e17842e latencyMs=687
+ARCA dni=10000472 status=approved codigoAutorizacion=b428dd64-8b4a-466b-8141-d5ca7af3407c latencyMs=517
+ARCA dni=10000400 status=approved codigoAutorizacion=52766b31-c54e-41a3-a875-1b154803713b latencyMs=547
+ARCA dni=10000352 status=approved codigoAutorizacion=ff59fbd7-1a37-41ca-a6af-76a1c671a20c latencyMs=575
+ARCA dni=10000431 status=approved codigoAutorizacion=f998ef70-b338-4bdc-adeb-6a8ccb128e6a latencyMs=543
+ARCA dni=10000246 status=approved codigoAutorizacion=68a07495-096b-4898-bfe5-2948f3f271cb latencyMs=685
+ARCA dni=10000178 status=rejected latencyMs=710
+ARCA dni=10000450 status=approved codigoAutorizacion=e3aef999-44cf-4ba1-be05-d4d07cd02759 latencyMs=538
+ARCA dni=10000205 status=approved codigoAutorizacion=212f9558-65d5-4b14-95fc-bf74dc81a5a2 latencyMs=702
+ARCA dni=10000136 status=rejected latencyMs=748
+ARCA dni=10000325 status=approved codigoAutorizacion=2446b179-822b-4213-897a-fbef0605d295 latencyMs=600
+ARCA dni=10000254 status=approved codigoAutorizacion=4e3c6c9e-6712-4930-b48a-85065bc605be latencyMs=689
+ARCA dni=10000478 status=approved codigoAutorizacion=8dd44e49-18f5-4b2b-a376-1220d4129334 latencyMs=530
+ARCA dni=10000336 status=approved codigoAutorizacion=2fb3573d-055d-4665-a647-a8a715a66207 latencyMs=596
+ARCA dni=10000314 status=approved codigoAutorizacion=6e450a05-e34f-497b-96f4-0923a14848ca latencyMs=610
+ARCA dni=10000388 status=approved codigoAutorizacion=885a8602-d71f-47de-9f38-a0a0a81c6606 latencyMs=570
+ARCA dni=10000225 status=approved codigoAutorizacion=f265bde1-5ef7-45ee-8ff1-3040054bd62d latencyMs=705
+ARCA dni=10000160 status=rejected latencyMs=732
+ARCA dni=10000428 status=approved codigoAutorizacion=142a9257-8b4c-4a26-b220-b04b7aa53b23 latencyMs=559
+ARCA dni=10000385 status=approved codigoAutorizacion=37caa50f-4827-45e6-864e-d04ec1a99796 latencyMs=574
+ARCA dni=10000643 status=approved codigoAutorizacion=5d47bce2-1e88-494c-a1b0-b9c746c1438f latencyMs=550
+ARCA dni=10000302 status=approved codigoAutorizacion=056483e2-b6e7-443f-8cf7-95f76d9d8bf7 latencyMs=627
+ARCA dni=10000407 status=approved codigoAutorizacion=4b161bc1-8dd8-4858-8aa4-2777ba7219d0 latencyMs=575
+ARCA dni=10000473 status=approved codigoAutorizacion=8d1e3f6e-5884-4f73-8e71-84dcbf350583 latencyMs=548
+ARCA dni=10000231 status=approved codigoAutorizacion=15166035-c583-4aaf-9a7c-3922ba89d83b latencyMs=716
+ARCA dni=10000452 status=approved codigoAutorizacion=bedfaf53-3ef5-4f8c-bf90-e9a54af28bbf latencyMs=562
+ARCA dni=10000197 status=rejected latencyMs=730
+ARCA dni=10000172 status=rejected latencyMs=741
+ARCA dni=10000363 status=approved codigoAutorizacion=c2e6fa3a-49dd-401d-820d-dfd39eb4adad latencyMs=596
+ARCA dni=10000354 status=approved codigoAutorizacion=906b87c6-67ab-4da8-abb9-e98e9bd6382b latencyMs=604
+ARCA dni=10000485 status=approved codigoAutorizacion=36f172f2-7c2a-459e-a649-92c2cbc270d0 latencyMs=545
+ARCA dni=10000359 status=approved codigoAutorizacion=dd8cc25b-c0a2-404c-bdfe-a8dbcee212e6 latencyMs=600
+ARCA dni=10000142 status=rejected latencyMs=770
+ARCA dni=10000180 status=rejected latencyMs=740
+ARCA dni=10000424 status=approved codigoAutorizacion=d2a7aa58-ca2b-45c2-ba4f-4558893ae132 latencyMs=577
+ARCA dni=10000482 status=approved codigoAutorizacion=f61a1d8c-3a52-42ad-a11e-c3725e94cc7a latencyMs=549
+ARCA dni=10000265 status=approved codigoAutorizacion=94360a85-cb32-4438-9c94-1da097620242 latencyMs=674
+ARCA dni=10000329 status=approved codigoAutorizacion=8f7b2981-a3df-4cee-9617-859cce335eec latencyMs=624
+ARCA dni=10000435 status=approved codigoAutorizacion=407291dd-8b05-410a-8af6-b360ba45accc latencyMs=575
+ARCA dni=10000287 status=approved codigoAutorizacion=f93eeea7-ee54-4840-946a-c6416a886e50 latencyMs=649
+ARCA dni=10000640 status=approved codigoAutorizacion=93fdf33d-2020-479c-8084-8a92a314c4f9 latencyMs=568
+ARCA dni=10000399 status=approved codigoAutorizacion=9e5b863a-0483-4f55-a92c-eb59b1a2d19f latencyMs=590
+ARCA dni=10000256 status=approved codigoAutorizacion=cfa7bbcf-8f5c-48a3-a98b-e09051195aa2 latencyMs=717
+ARCA dni=10000321 status=approved codigoAutorizacion=68c1c95a-658f-4d39-98fd-989b7ce27fcd latencyMs=635
+ARCA dni=10000228 status=approved codigoAutorizacion=688f10f8-d647-496e-8324-429d1a522671 latencyMs=731
+ARCA dni=10000195 status=rejected latencyMs=745
+ARCA dni=10000642 status=approved codigoAutorizacion=66a52723-3b5d-4c29-a466-59ac531105ca latencyMs=574
+ARCA dni=10000131 status=rejected latencyMs=792
+ARCA dni=10000184 status=rejected latencyMs=750
+ARCA dni=10000272 status=approved codigoAutorizacion=af39efa9-ac5f-4394-ab49-3caa47fe2a5e latencyMs=681
+ARCA dni=10000453 status=approved codigoAutorizacion=4fee3f81-432d-4206-95a3-e3ba311a1b6c latencyMs=579
+ARCA dni=10000292 status=approved codigoAutorizacion=6f49c579-6db6-4573-8a21-7350400384ed latencyMs=655
+ARCA dni=10000146 status=rejected latencyMs=772
+ARCA dni=10000273 status=approved codigoAutorizacion=97884e49-fcc2-47a5-adeb-2418cdd19ac3 latencyMs=682
+ARCA dni=10000300 status=approved codigoAutorizacion=7f43c44e-f44d-4212-9def-a10dee52daf4 latencyMs=653
+ARCA dni=10000437 status=approved codigoAutorizacion=20473ecb-8da4-4527-a166-dda81a012b5a latencyMs=588
+ARCA dni=10000162 status=rejected latencyMs=767
+ARCA dni=10000130 status=rejected latencyMs=822
+ARCA dni=10000438 status=approved codigoAutorizacion=c597b348-d6ae-4c50-ac26-db6bf1bea6c1 latencyMs=591
+ARCA dni=10000135 status=rejected latencyMs=796
+ARCA dni=10000419 status=approved codigoAutorizacion=0828da5f-13d6-4fba-b7c4-fb0cb135ec4a latencyMs=598
+ARCA dni=10000348 status=approved codigoAutorizacion=c15d76fb-4cbf-472a-9913-e087d8f14769 latencyMs=631
+ARCA dni=10000181 status=rejected latencyMs=763
+ARCA dni=10000147 status=rejected latencyMs=779
+ARCA dni=10000448 status=approved codigoAutorizacion=a45c7ee6-7c5b-410e-96ef-419363f14661 latencyMs=593
+ARCA dni=10000467 status=approved codigoAutorizacion=c33cd806-51c6-45c6-a841-b715b6656bf1 latencyMs=585
+ARCA dni=10000240 status=approved codigoAutorizacion=61a90b88-20dd-477e-997c-923970fe8904 latencyMs=746
+ARCA dni=10000132 status=rejected latencyMs=808
+ARCA dni=10000457 status=approved codigoAutorizacion=2a41285c-1c0f-4046-a0fd-9da8af725ad2 latencyMs=590
+ARCA dni=10000358 status=approved codigoAutorizacion=fdd80928-ca60-48d0-b12f-725db7dc2431 latencyMs=631
+ARCA dni=10000281 status=approved codigoAutorizacion=bbdc1443-7d7a-4b8b-be18-c6885879d8a7 latencyMs=688
+ARCA dni=10000464 status=approved codigoAutorizacion=5b6bef02-4eaf-4edc-8562-5bdb8a10afb0 latencyMs=589
+ARCA dni=10000304 status=approved codigoAutorizacion=a8091eb2-2a73-4a2b-9a5b-52ce29df7a1d latencyMs=666
+ARCA dni=10000296 status=approved codigoAutorizacion=7b621f94-7214-49a5-953f-9f182e56ec11 latencyMs=673
+ARCA dni=10000312 status=approved codigoAutorizacion=4df1696e-31ae-4501-b883-3f41b2a831bc latencyMs=664
+ARCA dni=10000416 status=approved codigoAutorizacion=13f58b77-67de-4515-873a-7e7d34805cb8 latencyMs=613
+ARCA dni=10000372 status=approved codigoAutorizacion=a77c3073-7e10-4c8c-91e3-7651bde64d25 latencyMs=628
+ARCA dni=10000251 status=approved codigoAutorizacion=a6ad2f85-da7a-412d-9a4e-1be40f4df6ad latencyMs=749
+ARCA dni=10000320 status=approved codigoAutorizacion=8ade5c23-8bbb-481c-94f5-1ea84a61c03e latencyMs=663
+ARCA dni=10000232 status=approved codigoAutorizacion=f5ffedd2-7c48-44ef-8960-2dc81e6e89f8 latencyMs=757
+ARCA dni=10000161 status=rejected latencyMs=786
+ARCA dni=10000409 status=approved codigoAutorizacion=19e424f2-bdf2-4541-bbb1-cb57fa86d613 latencyMs=619
+ARCA dni=10000266 status=approved codigoAutorizacion=a36c3271-b6af-4228-bf9a-448c63ec71d2 latencyMs=711
+ARCA dni=10000141 status=rejected latencyMs=808
+ARCA dni=10000318 status=approved codigoAutorizacion=e62c7be1-2677-4362-b08f-97235d0fd79a latencyMs=669
+ARCA dni=10000477 status=approved codigoAutorizacion=8f26904a-4274-41e3-8b1d-39e4fcefac7d latencyMs=596
+ARCA dni=10000389 status=approved codigoAutorizacion=f6e275d7-475c-4b17-9e4a-21d99ba463cd latencyMs=631
+ARCA dni=10000156 status=rejected latencyMs=796
+ARCA dni=10000331 status=approved codigoAutorizacion=c18b8c33-b01c-4206-94c4-7f60766b69c7 latencyMs=666
+ARCA dni=10000158 status=rejected latencyMs=802
+ARCA dni=10000261 status=approved codigoAutorizacion=b11a1c99-5cd2-439d-9502-f92ca4fd32a7 latencyMs=763
+ARCA dni=10000154 status=rejected latencyMs=805
+ARCA dni=10000406 status=approved codigoAutorizacion=0022800b-62ee-45a8-be1b-3ba371442c6a latencyMs=637
+ARCA dni=10000233 status=approved codigoAutorizacion=6c3ef5c0-d724-43e2-9260-d5a9dc9a6abd latencyMs=775
+ARCA dni=10000269 status=approved codigoAutorizacion=02473b09-7874-435c-83ec-ec0c0b7ca5eb latencyMs=726
+ARCA dni=10000405 status=approved codigoAutorizacion=29264bc3-28c0-4056-aa4d-405f4c7f3c2e latencyMs=643
+ARCA dni=10000474 status=approved codigoAutorizacion=442fa521-558d-422d-9b8c-3da7cb8be91b latencyMs=618
+ARCA dni=10000268 status=approved codigoAutorizacion=b068d9c2-644c-42a8-af8d-be9ea89632be latencyMs=735
+ARCA dni=10000168 status=rejected latencyMs=810
+ARCA dni=10000362 status=approved codigoAutorizacion=ea562572-b329-46c8-9800-b6835acd947b latencyMs=668
+ARCA dni=10000173 status=rejected latencyMs=814
+ARCA dni=10000140 status=rejected latencyMs=843
+ARCA dni=10000330 status=approved codigoAutorizacion=72efd65a-8c2c-42b8-b3bf-b82279345f60 latencyMs=695
+ARCA dni=10000387 status=approved codigoAutorizacion=f4a95db2-b052-499e-bac0-d79152ed0b50 latencyMs=662
+ARCA dni=10000230 status=approved codigoAutorizacion=de9ee67c-9125-41ab-b9bb-6f2151dc138a latencyMs=795
+ARCA dni=10000380 status=approved codigoAutorizacion=69f40da7-bbce-4208-b032-82e633d9c0d9 latencyMs=667
+ARCA dni=10000242 status=approved codigoAutorizacion=c12c4cda-673f-408a-a81a-3ad32547576a latencyMs=795
+ARCA dni=10000144 status=rejected latencyMs=846
+ARCA dni=10000468 status=approved codigoAutorizacion=4f686d42-7b4a-45d7-84d3-e6f454aee429 latencyMs=636
+ARCA dni=10000418 status=approved codigoAutorizacion=72127d60-6ac8-4d51-b29e-ea45810824af latencyMs=663
+ARCA dni=10000257 status=approved codigoAutorizacion=f584d768-191a-49a5-a9e7-c7019a669d3b latencyMs=798
+ARCA dni=10000208 status=approved codigoAutorizacion=c08bff00-7f05-4638-8235-436e505dc137 latencyMs=818
+ARCA dni=10000279 status=approved codigoAutorizacion=d56d2642-261f-4730-b460-6daf38f35570 latencyMs=750
+ARCA dni=10000223 status=approved codigoAutorizacion=995f31d2-2c24-4d31-b27a-b23465b28db5 latencyMs=814
+ARCA dni=10000190 status=rejected latencyMs=832
+ARCA dni=10000186 status=rejected latencyMs=835
+ARCA dni=10000238 status=approved codigoAutorizacion=5422ecaa-395a-4576-9785-8cf96b05c52d latencyMs=818
+ARCA dni=10000479 status=approved codigoAutorizacion=a64c4e91-d641-4c81-8ca8-d5a3dbea52dc latencyMs=652
+ARCA dni=10000353 status=approved codigoAutorizacion=10e6b914-b749-4de0-a3fb-64cd3a3fd241 latencyMs=707
+ARCA dni=10000247 status=approved codigoAutorizacion=1c01f4ca-46de-4cda-94d3-90ce4276916b latencyMs=817
+ARCA dni=10000466 status=approved codigoAutorizacion=77d19f6b-833f-4ece-80e2-88b668db2ba2 latencyMs=659
+ARCA dni=10000250 status=approved codigoAutorizacion=ea07eece-e870-402f-940c-f4e45e6f1c87 latencyMs=816
+ARCA dni=10000488 status=approved codigoAutorizacion=a3a674ca-a527-4bbf-9be3-16aceaaf8588 latencyMs=647
+ARCA dni=10000270 status=approved codigoAutorizacion=68861d81-f6d6-4e32-86da-5babede1e4d7 latencyMs=772
+ARCA dni=10000371 status=approved codigoAutorizacion=905fec42-93ec-4701-957f-ea4d4b8e9a61 latencyMs=698
+ARCA dni=10000460 status=approved codigoAutorizacion=0853158d-a604-4246-b727-62d6c869c130 latencyMs=665
+ARCA dni=10000360 status=approved codigoAutorizacion=17816a5b-ccc0-4b7a-bbf1-75b4c82a050f latencyMs=705
+ARCA dni=10000422 status=approved codigoAutorizacion=8d4dd986-bf90-4279-87a1-d6487cbc859b latencyMs=682
+ARCA dni=10000263 status=approved codigoAutorizacion=6129daca-6195-4c75-b38f-b4b7f728de12 latencyMs=781
+ARCA dni=10000332 status=approved codigoAutorizacion=54073c0e-d6eb-4a2a-bfd2-a2ba519f6a9e latencyMs=728
+ARCA dni=10000340 status=approved codigoAutorizacion=6e867b4a-925c-42fe-b6d9-de4621d585bd latencyMs=727
+ARCA dni=10000638 status=approved codigoAutorizacion=4cc58005-fdb4-465e-a0fa-d286487aada2 latencyMs=676
+ARCA dni=10000258 status=approved codigoAutorizacion=94e6e879-d00c-455f-8203-5c3ee1fa1a78 latencyMs=824
+ARCA dni=10000378 status=approved codigoAutorizacion=18bac573-79ef-4284-a3a8-1f62e8f38a04 latencyMs=705
+ARCA dni=10000382 status=approved codigoAutorizacion=70a594eb-ea30-40b9-bc9c-2ebf7b37a08a latencyMs=704
+ARCA dni=10000308 status=approved codigoAutorizacion=395813b6-0680-4d9d-89b5-322c8a17a64d latencyMs=747
+ARCA dni=10000444 status=approved codigoAutorizacion=4ad54c52-419b-4002-a4aa-11d0ab5c0992 latencyMs=687
+ARCA dni=10000236 status=approved codigoAutorizacion=59b5c868-8c2a-40ce-87de-7170296f3e8a latencyMs=837
+ARCA dni=10000441 status=approved codigoAutorizacion=0939324f-716e-4e3d-bfb3-0878a5433868 latencyMs=689
+ARCA dni=10000341 status=approved codigoAutorizacion=8cd66f34-c765-400d-88e4-dabca3b4343c latencyMs=735
+ARCA dni=10000462 status=approved codigoAutorizacion=7b3bb42d-7591-40be-81c5-4a393ad58d07 latencyMs=679
+ARCA dni=10000301 status=approved codigoAutorizacion=155b7546-a5b3-4758-b15a-3c2fade1ecba latencyMs=756
+ARCA dni=10000193 status=rejected latencyMs=855
+ARCA dni=10000291 status=approved codigoAutorizacion=ba8fa9d0-4769-4089-95b8-e7230f17b6c8 latencyMs=764
+ARCA dni=10000411 status=approved codigoAutorizacion=452e59d1-bea1-4b6e-ba0d-016f297af761 latencyMs=702
+ARCA dni=10000271 status=approved codigoAutorizacion=5ac83da8-e90c-4f56-b082-3238580fa7ba latencyMs=792
+ARCA dni=10000434 status=approved codigoAutorizacion=7e6a1086-3e3c-4ce9-9d80-d42d3895b597 latencyMs=695
+ARCA dni=10000234 status=approved codigoAutorizacion=8d5ee60d-65fd-4520-90de-a5b1e3c8f8bf latencyMs=844
+ARCA dni=10000179 status=rejected latencyMs=865
+ARCA dni=10000245 status=approved codigoAutorizacion=2c4b42c5-ee99-42a6-99b2-4f75615aa22a latencyMs=841
+ARCA dni=10000322 status=approved codigoAutorizacion=654ef622-445b-4629-a16d-c8e20521481e latencyMs=753
+ARCA dni=10000262 status=approved codigoAutorizacion=0ad701f6-ce8d-4b47-b312-401d1e653109 latencyMs=838
+ARCA dni=10000414 status=approved codigoAutorizacion=dde251c2-4f55-4002-8b0c-d5b15b2b00d3 latencyMs=709
+ARCA dni=10000285 status=approved codigoAutorizacion=26ad343f-e44b-4ed2-8b78-09410953e0d4 latencyMs=776
+ARCA dni=10000365 status=approved codigoAutorizacion=759291b4-7b3a-4f5f-9924-692d2954ae60 latencyMs=726
+ARCA dni=10000343 status=approved codigoAutorizacion=f1382df0-852e-4cda-86f4-920f25f7d8b7 latencyMs=747
+ARCA dni=10000259 status=approved codigoAutorizacion=6194e6c7-eb34-42f0-86dd-650a545c2734 latencyMs=846
+ARCA dni=10000191 status=rejected latencyMs=872
+ARCA dni=10000347 status=approved codigoAutorizacion=628370c1-ecc9-477f-ac30-e3c77bb5763c latencyMs=746
+ARCA dni=10000307 status=approved codigoAutorizacion=93f85e30-b306-43fb-bae5-68077b66bc98 latencyMs=770
+ARCA dni=10000374 status=approved codigoAutorizacion=567408f3-c255-46f2-a483-f51666ba4da4 latencyMs=731
+ARCA dni=10000310 status=approved codigoAutorizacion=8c3e9e61-f0e7-40d7-a9bb-7c926195bd67 latencyMs=770
+ARCA dni=10000377 status=approved codigoAutorizacion=67884252-dfc3-431b-b3b0-2dd5ad274f55 latencyMs=730
+ARCA dni=10000194 status=rejected latencyMs=873
+ARCA dni=10000295 status=approved codigoAutorizacion=8b2e5ec0-cac0-43ed-9706-9d60516f9d81 latencyMs=780
+ARCA dni=10000483 status=approved codigoAutorizacion=f3e16edc-dfb9-413c-bf7e-694c4249081b latencyMs=689
+ARCA dni=10000403 status=approved codigoAutorizacion=f9a93ca7-d44c-4ab1-93f0-798b57a73e9f latencyMs=726
+ARCA dni=10000192 status=rejected latencyMs=878
+ARCA dni=10000634 status=approved codigoAutorizacion=5791aebb-95ae-4a07-b871-fa6971eccf57 latencyMs=711
+ARCA dni=10000229 status=approved codigoAutorizacion=91be5f67-f886-40bd-872c-9074c6b02125 latencyMs=867
+ARCA dni=10000206 status=approved codigoAutorizacion=34fca9a4-bf07-49f6-8ccf-73a348b32b94 latencyMs=878
+ARCA dni=10000470 status=approved codigoAutorizacion=298902c5-1bd6-40b7-af3e-ffc31bd0b188 latencyMs=707
+ARCA dni=10000182 status=rejected latencyMs=891
+ARCA dni=10000392 status=approved codigoAutorizacion=782ec1c8-9f7d-426d-bc4b-f4a061c916b4 latencyMs=739
+ARCA dni=10000201 status=approved codigoAutorizacion=12d53aa9-2029-47b8-a594-a095e430b6d9 latencyMs=885
+ARCA dni=10000402 status=approved codigoAutorizacion=1e0c5553-2762-4d3d-8dea-b0c88110e0d5 latencyMs=738
+ARCA dni=10000397 status=approved codigoAutorizacion=14498099-7bc5-4344-a43f-62a94a3783a1 latencyMs=740
+ARCA dni=10000244 status=approved codigoAutorizacion=47fb6553-349d-4617-93f2-ec0689b7d7e3 latencyMs=871
+ARCA dni=10000299 status=approved codigoAutorizacion=fc15a2e2-0147-4c8c-803c-c38359bea406 latencyMs=794
+ARCA dni=10000334 status=approved codigoAutorizacion=7901e5f0-8254-43a6-863d-12bc9999fae9 latencyMs=776
+ARCA dni=10000211 status=approved codigoAutorizacion=eb404a87-c1d9-49e3-9dbe-631b4a720473 latencyMs=887
+ARCA dni=10000324 status=approved codigoAutorizacion=3c4f13c5-b87e-4cb1-bf11-593eda94193f latencyMs=785
+ARCA dni=10000390 status=approved codigoAutorizacion=90ac030f-6752-420c-b221-a9aacac58b40 latencyMs=751
+ARCA dni=10000339 status=approved codigoAutorizacion=856b66a4-f513-4a29-97f4-bf9147852bf0 latencyMs=782
+ARCA dni=10000433 status=approved codigoAutorizacion=8afa5bac-42d1-410e-9cdb-a4899953492f latencyMs=740
+ARCA dni=10000373 status=approved codigoAutorizacion=b60b5f1c-da87-4bd9-89fb-555a2bda33f2 latencyMs=760
+ARCA dni=10000214 status=approved codigoAutorizacion=a1840635-d2ae-4ee0-b032-6e61979148e3 latencyMs=897
+ARCA dni=10000486 status=approved codigoAutorizacion=fe4b9aad-8c1e-4f66-b582-5c1657237cca latencyMs=716
+ARCA dni=10000212 status=approved codigoAutorizacion=bda097e8-ae75-4643-bf09-01799766a208 latencyMs=901
+ARCA dni=10000345 status=approved codigoAutorizacion=60f7a170-4092-4108-b849-0ec1cddd9f40 latencyMs=785
+ARCA dni=10000451 status=approved codigoAutorizacion=edf3fa09-5282-450d-9b22-0f79ca71d385 latencyMs=741
+ARCA dni=10000216 status=approved codigoAutorizacion=1f69c375-11cb-4812-81c5-b1f6878c78a0 latencyMs=901
+ARCA dni=10000303 status=approved codigoAutorizacion=5fbc0f40-4050-455e-a447-a9906055b62c latencyMs=812
+ARCA dni=10000430 status=approved codigoAutorizacion=b88a29d8-d6ed-49c2-a7ee-0cc3a0e500f7 latencyMs=751
+ARCA dni=10000458 status=approved codigoAutorizacion=ca9abe1d-59bb-4be6-91c7-252d4377f48a latencyMs=738
+ARCA dni=10000635 status=approved codigoAutorizacion=24c013a1-7483-43db-b38b-2113b1b9ed90 latencyMs=744
+ARCA dni=10000415 status=approved codigoAutorizacion=71e41519-5fdc-4d64-b756-313f86b206bc latencyMs=759
+ARCA dni=10000185 status=rejected latencyMs=919
+ARCA dni=10000338 status=approved codigoAutorizacion=07b798b1-c070-4d21-8e9c-73da451d822c latencyMs=799
+ARCA dni=10000476 status=approved codigoAutorizacion=9a3948cb-3bb3-4da3-bbd1-bbf6fa685bd4 latencyMs=737
+ARCA dni=10000376 status=approved codigoAutorizacion=2e66a9c6-e8c7-43f5-934f-272d972f0cbb latencyMs=777
+ARCA dni=10000210 status=approved codigoAutorizacion=0fea5931-f37d-4ca9-ac3b-e00bd097b06c latencyMs=926
+ARCA dni=10000249 status=approved codigoAutorizacion=87263aa6-e4df-4d9e-9f7c-ed7dd0dfcff5 latencyMs=924
+ARCA dni=12345678 status=error reason=unreachable detail=UND_ERR_SOCKET latencyMs=4
+Redis client error: SocketClosedUnexpectedlyError: Socket closed unexpectedly
+    at Socket.<anonymous> (C:\Users\Nico Chaia\Desktop\Arq de Soft\arquitectura-de-softwere-tp2\node\node_modules\@redis\client\dist\lib\client\socket.js:194:118)
+    at Object.onceWrapper (node:events:631:26)
+    at Socket.emit (node:events:509:28)
+    at TCP.<anonymous> (node:net:351:12)
+Redis client error: SocketClosedUnexpectedlyError: Socket closed unexpectedly
+    at Socket.<anonymous> (C:\Users\Nico Chaia\Desktop\Arq de Soft\arquitectura-de-softwere-tp2\node\node_modules\@redis\client\dist\lib\client\socket.js:194:118)
+    at Object.onceWrapper (node:events:631:26)
+    at Socket.emit (node:events:509:28)
+    at TCP.<anonymous> (node:net:351:12)
+Redis client error: SocketClosedUnexpectedlyError: Socket closed unexpectedly
+    at Socket.<anonymous> (C:\Users\Nico Chaia\Desktop\Arq de Soft\arquitectura-de-softwere-tp2\node\node_modules\@redis\client\dist\lib\client\socket.js:194:118)
+    at Object.onceWrapper (node:events:631:26)
+    at Socket.emit (node:events:509:28)
+    at TCP.<anonymous> (node:net:351:12)
+Redis client error: SocketClosedUnexpectedlyError: Socket closed unexpectedly
+    at Socket.<anonymous> (C:\Users\Nico Chaia\Desktop\Arq de Soft\arquitectura-de-softwere-tp2\node\node_modules\@redis\client\dist\lib\client\socket.js:194:118)
+    at Object.onceWrapper (node:events:631:26)
+    at Socket.emit (node:events:509:28)
+    at TCP.<anonymous> (node:net:351:12)
+Redis client error: SocketClosedUnexpectedlyError: Socket closed unexpectedly
+    at Socket.<anonymous> (C:\Users\Nico Chaia\Desktop\Arq de Soft\arquitectura-de-softwere-tp2\node\node_modules\@redis\client\dist\lib\client\socket.js:194:118)
+    at Object.onceWrapper (node:events:631:26)
+    at Socket.emit (node:events:509:28)
+    at TCP.<anonymous> (node:net:351:12)
+Redis client error: SocketClosedUnexpectedlyError: Socket closed unexpectedly
+    at Socket.<anonymous> (C:\Users\Nico Chaia\Desktop\Arq de Soft\arquitectura-de-softwere-tp2\node\node_modules\@redis\client\dist\lib\client\socket.js:194:118)
+    at Object.onceWrapper (node:events:631:26)
+    at Socket.emit (node:events:509:28)
+    at TCP.<anonymous> (node:net:351:12)
+Redis client error: SocketClosedUnexpectedlyError: Socket closed unexpectedly
+    at Socket.<anonymous> (C:\Users\Nico Chaia\Desktop\Arq de Soft\arquitectura-de-softwere-tp2\node\node_modules\@redis\client\dist\lib\client\socket.js:194:118)
+    at Object.onceWrapper (node:events:631:26)
+    at Socket.emit (node:events:509:28)
+    at TCP.<anonymous> (node:net:351:12)
+Redis client error: SocketClosedUnexpectedlyError: Socket closed unexpectedly
+    at Socket.<anonymous> (C:\Users\Nico Chaia\Desktop\Arq de Soft\arquitectura-de-softwere-tp2\node\node_modules\@redis\client\dist\lib\client\socket.js:194:118)
+    at Object.onceWrapper (node:events:631:26)
+    at Socket.emit (node:events:509:28)
+    at TCP.<anonymous> (node:net:351:12)
+Redis client error: SocketClosedUnexpectedlyError: Socket closed unexpectedly
+    at Socket.<anonymous> (C:\Users\Nico Chaia\Desktop\Arq de Soft\arquitectura-de-softwere-tp2\node\node_modules\@redis\client\dist\lib\client\socket.js:194:118)
+    at Object.onceWrapper (node:events:631:26)
+    at Socket.emit (node:events:509:28)
+    at TCP.<anonymous> (node:net:351:12)

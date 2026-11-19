@@ -128,3 +128,336 @@ En ningún escalón hay timeouts. La mediana total de Artillery baja en los esca
 - **Exactamente 51 respuestas 200** y saldo final de **≈ 1.011 USD**, nunca negativo. Del resto: 503 ≈ 26 %, 403 ≈ 25 % y 409 para los aprobados sin fondos.
 - **Por qué:** cada exchange pide 1.750.000 / 1.513 = 1.156,6 USD y la cuenta arranca en 60.000: alcanzan para 51 (60.000 − 51 × 1.156,6 = 1.011,4). La reserva es un script Lua atómico en Redis, que es compartido. Que los requests lleguen a 2 procesos distintos no cambia nada. (P2.c predijo 50 con una tasa redondeada a 0,00066; con 1 nodo se midieron 51.)
 
+
+---
+
+# Cambios en el tamaño del vCPU
+
+Se debió reestructurar por el motivo de que no se podía escalar a dos nodos en las pruebas de la segunda instancia debido al tamaño que estos tenían. Por esto es que se bajo a 1 el vCPU
+
+| Hecho                                                                                                                               | Fuente                                     |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| Cuota Free Trial: **4 vCPU por región**. 2 nodos `D2as_v4` + jumpbox `D2as_v4` = 6                                                  | `results/2-nodos/apply-error-cuota.txt`    |
+| Jumpbox `D2as_v4` (2 vCPU) + 2 nodos de 1 vCPU = **4**                                                                              | `variables.tf` (`machine_sku`, `node_sku`) |
+| En `eastus` la suscripción no ofrece `DS1_v2`, `F1s`, `A1_v2` ni la serie B. Los únicos SKU de 1 vCPU son de la familia F v7 de AMD | `results/2-nodos/sku-1vcpu-eastus.txt`     |
+| `F1as_v7` se pudo crear como VMSS en `eastus` (prueba descartable, 50 s, disco NVMe elegido por Azure)                              | `results/2-nodos/sku-1vcpu-eastus.txt`     |
+
+Para comparar 1 contra 2 nodos con la misma máquina, se vuelve a medir 1 nodo con `F1as_v7` (`results/1-nodo-f1as/`). El caso escalado va a `results/2-nodos-f1as/`.
+
+## Capacidad de 1 nodo `F1as_v7`
+
+Con 1 nodo `D2as_v4`, el nodo llegó al rate limit de **500 req/s** sin colapsar. En ese punto la VM usaba ~45 % de sus 2 vCPU, o sea, **~0,9 vCPU** (`results/1-nodo/exchange-capacity-4.png`).
+
+`F1as_v7` tiene 1 vCPU. En `D2as_v4`, en cambio, cada vCPU es medio core compartido (`results/1-nodo/nodos-lscpu.txt`). Por eso estimamos que el mismo trabajo ocupa **~70 % del único vCPU**: alcanza para llegar a 500 req/s con margen.
+
+**El límite de 1 nodo va a ser el rate limit de 500 req/s, no la CPU.**
+
+## P4.a. 1 nodo `F1as_v7`, `root` (GET `/`, 1 req/s)
+
+- **p50 145 ms**, igual que con `D2as_v4`. Es solo la red.
+
+## P4.b. 1 nodo `F1as_v7`, carga normal (`exchange`, 5 req/s)
+
+| Métrica | Predicción | Por qué |
+| --- | --- | --- |
+| Códigos | 200: **50 %**, 403: **25 %**, 503: **25 %** | lo define ARCA, no la máquina |
+| 409, 429, 500, timeouts | **0** | 5 req/s ≪ 500 |
+| Latencia Artillery | p50 **660 ms**, p95 **985 ms** | igual que P1 medido: con 5 req/s la CPU no influye |
+| CPU del nodo | **< 5 %** | la carga es mínima |
+
+## P4.c. 1 nodo `F1as_v7`, estrés (`exchange-stress`: 50, 100, 200, 400, 800 y 1.600 req/s)
+
+| Escalón | Predicción | Por qué |
+| --- | --- | --- |
+| ≤ 400 | latencias iguales a P4.b, 0 429, sin timeouts. CPU ≈ **55 %** con 400 | 400 < 500 del rate limit, y la CPU alcanza |
+| 800 y 1.600 | **~500 resp/s** atendidas con latencia normal, el resto **429**. CPU ≈ **70 %** con 800 y ≈ **80 %** con 1.600 | el rate limit corta en 500, igual que con `D2as_v4`. Los 429 también cuestan algo de CPU |
+| Recuperación | vuelve a P4.b enseguida | no queda cola |
+
+## P4.d. 1 nodo `F1as_v7`, capacidad (`exchange-capacity`: 150 a 650 req/s)
+
+- **Estable hasta 500 req/s; desde 550, el excedente sale como 429** y las atendidas quedan en ~500 resp/s.
+- **Por qué:** el rate limit corta en 500 antes de que se llene la CPU (~70 %).
+
+## P4.e. 1 nodo `F1as_v7`, consistencia (`exchange-concurrency-overdraft`)
+
+- ** ~50 respuestas 200** y saldo final de **1.095 USD**, nunca negativo. La cantidad la definen el saldo y la tasa, no la máquina.
+- **Por qué:** la tasa ARS → USD efectiva es 0,00066, porque `PUT /rates` redondea la recíproca a 5 decimales (`node/services/rates.js` l. 23). Cada exchange pide 1.750.000 × 0,00066 = 1.155 USD: alcanzan para ⌊60.000 / 1.155⌋ = 51 y sobran 60.000 − 51 × 1.155 = 1.095.
+
+---
+
+# P5. Caso escalado: 2 nodos `F1as_v7`
+
+## ¿Escala ×2 el throughput?
+
+**Sí: de ~500 a ~1.000 req/s atendidas.**
+
+- **Por qué:** con 1 nodo lo que limita es el rate limit, y cada nodo tiene el suyo. Con 2 nodos, el límite pasa a **2 × 500 = 1.000 req/s**. La CPU también se duplica: cada nodo tiene su vCPU y atiende lo mismo que con 1 nodo (~50 % de CPU). Pero hay que tener cuidado porque como no se duplican ni ARCA ni Redis sino que se comparten. El otro riesgo es el **Load Balancer**: reparte conexiones, no requests. Si un nodo recibe más de la mitad, llega a su límite de 500 antes que el otro y el total queda un poco por debajo de 1.000. Por eso la predicción es 900 a 1.000.
+
+## P5.a. 2 nodos, `root` y carga normal (`exchange`, 5 req/s)
+
+| Métrica                 | Predicción                                                       | Por qué                                                           |
+| ----------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `root` p50              | **145 ms**                                                       | es solo la red                                                    |
+| Códigos                 | 200: **50 %**, 403: **25 %**, 503: **25 %**                      | lo define ARCA                                                    |
+| 409, 429, 500, timeouts | **0**                                                            | 5 req/s ≪ 1.000                                                   |
+| Latencia Artillery      | p50 **620 ms**, p95 **965 ms**                                   | igual que con 1 nodo: con 5 req/s la cantidad de nodos no influye |
+
+
+## P5.b. 2 nodos, estrés (`exchange-stress`: 50, 100, 200, 400, 800 y 1.600 req/s)
+
+| Escalón      | Predicción                                                                                                           | Por qué                                                                                                |
+| ------------ | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| ≤ 400        | latencia como P5.a, 0 429. CPU por nodo ≈ **25 %** con 400                                                           | cada nodo recibe ~200 req/s: lo mismo que 1 nodo con 200                                               |
+| **800**      | **0 429**, ~800 req/s atendidas. CPU por nodo ≈ **40 %**                                                             | 800 < 1.000; cada nodo recibe ~400 (con 1 nodo, en 800 ya había 300/s de 429)                          |
+| **1.600**    | **~1.000 req/s atendidas** y ~600/s de 429, sin timeouts. CPU por nodo ≈ **55 %**. ARCA ≈ **50 %**, Redis ≈ **30 %** | el rate limit corta en 2 × 500. Cada nodo recibe ~800: lo mismo que 1 nodo en el escalón de 800 (52 %) |
+
+
+## P5.c. 2 nodos, capacidad (`exchange-capacity` y `exchange-capacity-2n`)
+
+- **`exchange-capacity` (150 a 650): 0 429 en todos los escalones**, latencia plana (p50 ≈ 620 ms, p95 ≈ 965 ms). Con 1 nodo aparecían desde 550.
+  - **Por qué:** con 650 de entrada, cada nodo recibe ~325, por debajo de su límite de 500.
+- **`exchange-capacity-2n` (600 a 1.400): estable hasta 900; los 429 aparecen entre 1.000 y 1.100**, y desde ahí las atendidas quedan planas en **~1.000 req/s**. Sin timeouts. CPU por nodo ≈ **55 %** al final.
+  - **Por qué:** 2 × 500 = 1.000. Si el reparto del LB no es parejo, los primeros 429 pueden aparecer un escalón antes.
+
+## P5.d. 2 nodos, consistencia (`exchange-concurrency-overdraft`)
+
+- **51 respuestas 200** y saldo final de **1.095 USD**, nunca negativo. Igual que con 1 nodo.
+- **Por qué:** la reserva es un script Lua atómico en el Redis compartido. Da igual a qué nodo llegue cada request: los dos descuentan del mismo saldo.
+
+---
+
+# P6. Táctica 1: reintento ante errores de ARCA (2 nodos `F1as_v7`)
+
+Escrito el 12/11, después de medir 2 nodos (`results/2-nodos-f1as/`) y **antes** de implementar la táctica.
+
+## Problema observado
+
+Con 2 nodos y 5 req/s, el **22–26 % de los clientes recibe 503** porque ARCA respondió HTTP 500 (`results/2-nodos-f1as/exchange.json`; `results/1-nodo-f1as/exchange.json`). No es falta de capacidad: pasa igual con 5 req/s que con 1.000.
+
+## Qué se cambia
+
+- Si ARCA responde **HTTP 5xx**, la app la vuelve a llamar **1 vez** (`ARCA_RETRIES=1`, configurado por Ansible). **No se reintentan los timeouts** (3 s): si ARCA está saturada y no responde, reintentar le sumaría carga justo cuando no puede atenderla.
+- Es seguro reintentar: validar no tiene efectos y ocurre **antes** de reservar fondos (`node/services/exchange.js`), así que no hay riesgo de cobrar dos veces.
+- Todo lo demás queda como en `2-nodos-f1as`: 2 nodos `F1as_v7`, rate limit local de 500 req/s por nodo.
+
+## Datos que se usan
+
+| Dato | Valor | Fuente |
+| --- | --- | --- |
+| Errores de ARCA | **26 % por llamada, al azar**: un mismo DNI falla en una llamada y responde bien en la siguiente | `ejecucion-previa/resultados/arca-determinismo.txt` |
+| Aprobado o rechazado | depende siempre del DNI (0 casos mezclados en 200) → el reintento no cambia la proporción 2:1 entre 200 y 403 | ídem; `results/2-nodos-f1as/exchange.json` (51,8 % / 25,9 %) |
+| Latencia de un error de ARCA | p50 **6 ms** | `ejecucion-previa/resultados/arca-distribucion-5000.txt` |
+| ARCA con ~1.000 req/s (2 nodos) | **50 %** de su CPU | `results/2-nodos-f1as/exchange-capacity-2n-azure.txt` |
+| Redis con ~1.000 req/s | ~9.400 ops/s (≈ 9,4 por request), CPU 34 % (14 % en reposo) | ídem |
+| Nodos con ~500 req/s cada uno | CPU ≈ **45 %**, ELU ≈ 0,44 | `results/2-nodos-f1as/exchange-capacity(2n)-2n-4.png` |
+
+## Cuentas
+
+- **503:** ahora solo si fallan las 2 llamadas: 0,26² ≈ **7 %** (antes 26 %).
+- **El resto se reparte 2:1**, como antes: 200 ≈ 0,93 × 2/3 ≈ **62 %**, 403 ≈ 0,93 × 1/3 ≈ **31 %**.
+- **Llamadas a ARCA por request:** 1 + 0,26 = **1,26**.
+- **Exchanges exitosos:** pasan de ~50 % a ~62 % de lo atendido (**+25 %**). Un 200 hace más trabajo que un 403 o un 503 (reserva Lua, 2 transferencias, más operaciones de Redis), así que los nodos y Redis trabajan más con la misma cantidad de requests.
+
+## P6.a. Carga normal (`exchange`, 5 req/s)
+
+| Métrica | Predicción | Antes (`2-nodos-f1as`) | Por qué |
+| --- | --- | --- | --- |
+| 503 | **7 % ± 3** | 22,3 % | 0,26² |
+| 200 / 403 | **62 % / 31 %** (± 4) | 51,8 % / 25,9 % | los que antes eran 503 se reparten 2:1 |
+| 409, 429, 500, timeouts | **0** | 0 | 5 req/s ≪ 1.000 |
+| Latencia Artillery p50 | **~750 ms** (+90) | 659 ms | hay menos 503 rápidos (~10 ms) que tiren la mediana para abajo; el que se reintenta suma solo ~6 ms |
+| Latencia Artillery p95 | **~1.000 ms** (+40) | 963 ms | la cola la siguen definiendo los 200; ahora hay más |
+
+## P6.b. Capacidad con 2 nodos (`exchange-capacity-2n`: 600 a 1.400 req/s)
+
+| Métrica | Predicción | Antes | Por qué |
+| --- | --- | --- | --- |
+| Atendidas (no-429) | **~1.000 req/s**, igual | ~998 | el reintento ocurre después del rate limit: no cambia cuántas entran |
+| **200 por segundo** en el tope | **~620** (+25 %) | ~495 | 62 % de 1.000 |
+| Llamadas a ARCA en el tope | **~1.260/s** | ~1.000/s | 1,26 por request |
+| CPU de ARCA en el tope | **~63 %** (± 5) | 50 % | 50 % × 1,26 |
+| Redis en el tope | ~**10.800 ops/s**, CPU **~37 %** | 9.400 ops/s, 34 % | +16 % de operaciones por los 200 de más |
+| CPU por nodo en el tope | **~50 %**, ELU ~0,5 | 45 %, 0,44 | más 200 y las llamadas extra a ARCA |
+| Timeouts | **0** | 0 | ARCA al 63 % sigue con margen |
+
+## P6.c. Consistencia (`exchange-concurrency-overdraft`)
+
+- **51 respuestas 200 y saldo final de 1.095 USD**, igual que antes: lo que limita es el saldo, no ARCA.
+- De las 600: 503 ≈ **40** (7 %; antes 154), 403 ≈ **185** (antes 152) y 409 ≈ **325** (antes 243). Los 409 suben porque ahora hay más aprobados por ARCA que se quedan sin fondos.
+- Ningún saldo negativo ni descontado dos veces: el reintento ocurre antes de reservar.
+
+## Tradeoff que se espera ver
+
+Se gana **disponibilidad** (un 503 de cada 4 pasa a 1 de cada 14) a costa de **~26 % más de carga en ARCA**, que es el recurso compartido que no escala. Con el rate limit actual (1.000 req/s) sobra margen. Pero el techo de ARCA, medido en requests de clientes, baja **≈ 1,26 veces**: con 1.000 req/s ARCA está al 50 % de su CPU (`results/2-nodos-f1as/exchange-capacity-2n-azure.txt`), así que sin reintento se saturaría cerca de ~2.000 req/s, y con reintento cerca de **~1.600**.
+
+## Cómo se mide
+
+- Escenarios: `root` (L), `exchange`, `exchange-capacity-2n` y `exchange-concurrency-overdraft`, en `results/tactica-reintento/`, desde la misma ubicación que `2-nodos-f1as`.
+- Métrica propia nueva: `exchange.arca.retry` (reintentos por segundo) en Datadog; debería dar ~26 % de las validaciones.
+- Azure Monitor (`azure-metrics.sh`) para la CPU de ARCA y la carga de Redis.
+
+---
+
+# P7. Táctica 2: rate limit global en Redis, dimensionado por ARCA (2 nodos `F1as_v7`)
+
+Escrito el 12/11, en la rama `tactica-ratelimit-global`, **antes** de implementar la táctica. Se mide sola: con `ARCA_RETRIES=0`, para separar su efecto del de la táctica 1.
+
+## Problema observado
+
+1. **El límite de entrada crece con la cantidad de nodos.** Con 1 nodo entran ~498 req/s y con 2, ~998 (`results/1-nodo-f1as/exchange-capacity.json`, `results/2-nodos-f1as/exchange-capacity-2n.json`): exactamente 500 × N, porque cada proceso cuenta en su memoria (`node/createApp.js`, `exchangeMax: 500`).
+2. **Además, cuenta por IP del cliente.** `node/middleware/rateLimit.js` no define `keyGenerator` ni `store`, así que `express-rate-limit` usa la IP del cliente como clave. En las pruebas toda la carga sale de una sola IP (el generador). Con muchos clientes reales, cada uno tendría su propio cupo de 500 req/s en cada nodo: **el límite no acota la carga total del sistema**.
+3. **ARCA no crece con los nodos.** Su CPU sube en proporción a la carga total: ~25 % con ~500 req/s (`results/1-nodo-f1as/exchange-capacity-azure.txt`) y 50 % con ~1.000 (`results/2-nodos-f1as/exchange-capacity-2n-azure.txt`). Proyectado, se satura cerca de **~2.000 req/s**, y con la táctica 1 (1,26 llamadas por request, P6) cerca de **~1.600**.
+
+Con el límite actual, nada impide que entre más carga de la que ARCA puede atender: alcanza con 4 nodos, o con varios clientes.
+
+## Qué se cambia
+
+- El rate limit de `POST /exchange` pasa a ser **uno solo para todo el sistema**: un contador en el Redis compartido, con **una clave única** (no por IP), ventana de 1 s.
+- **Límite total: 1.200 req/s.** Es ~75 % del techo proyectado de ARCA con reintento (~1.600): deja margen para la imprecisión de la proyección y para picos.
+- Se activa por Ansible: `rate_limit_mode=global` y `exchange_rate_limit=1200`. Con `rate_limit_mode=local` (por defecto) queda como en `2-nodos-f1as`.
+- En modo global no queda limitador por nodo: el límite global reemplaza al local.
+
+## Datos que se usan
+
+| Dato | Valor | Fuente |
+| --- | --- | --- |
+| Atendidas con límite local y 2 nodos | **~998 req/s**; 429 desde el escalón de 1.000 | `results/2-nodos-f1as/exchange-capacity-2n.json` |
+| Nodos con ~500 req/s cada uno | CPU ≈ **45 %**, ELU ≈ 0,44; reparto del LB parejo | `results/2-nodos-f1as/exchange-capacity(2n)-2n-4.png` |
+| ARCA con ~1.000 req/s | **50 %** de CPU | `results/2-nodos-f1as/exchange-capacity-2n-azure.txt` |
+| Redis con ~1.000 req/s | ~9.400 ops/s (≈ 9,4 por request), CPU 34 % (14 % en reposo) | ídem |
+| Latencia con 5 req/s | Artillery p50 659 ms, p95 963 ms | `results/2-nodos-f1as/exchange.json` |
+
+## P7.a. Carga normal (`exchange`, 5 req/s)
+
+| Métrica | Predicción | Por qué |
+| --- | --- | --- |
+| Códigos | 200 ≈ 50 %, 403 ≈ 25 %, 503 ≈ 25 % (igual que `2-nodos-f1as`) | `ARCA_RETRIES=0`: la táctica no toca ARCA |
+| 429, timeouts | **0** | 5 ≪ 1.200 |
+| Latencia Artillery | p50 **~660 ms**, p95 **~965 ms** (± 5 %) | se suma una ida y vuelta a Redis dentro de la misma región (~1 ms): no se distingue del ruido |
+
+## P7.b. Capacidad (`exchange-capacity-2n`: 600 a 1.400 req/s)
+
+| Escalón | Predicción | Con límite local (medido) |
+| --- | --- | --- |
+| 600 a 1.100 | **0 429**: entra todo | 429 desde 1.000; plano en ~998 |
+| 1.200 | entra casi todo (**≥ 1.150 req/s**), pocos 429 | ~998 + ~200 429/s |
+| 1.300 y 1.400 | **~1.200 req/s** atendidas (± 3 %), el resto 429 | ~998 |
+
+- **El tope pasa de 2 × 500 a 1.200**, y no depende de cómo reparta el LB: los dos nodos descuentan del mismo contador.
+- **Nodos en el tope:** ~600 req/s cada uno → CPU **~55 %** por nodo, ELU **~0,53**.
+- **ARCA en el tope:** **~60 %** de CPU (50 % × 1.200 / 1.000). Sigue con margen.
+- **Redis en el tope:** ~9,4 ops por request atendido más ~1 por cada request, incluidos los 429 → ~**13.000 ops/s** (antes ~9.400), CPU **~43 %**.
+- **Latencia de los 200:** igual que con límite local (p50 ~630 ms). Los 429 tardan ~1 ms más, porque ahora consultan Redis.
+- **Sin timeouts.**
+
+## Tradeoffs que se esperan
+
+- **A favor:** el límite queda en **un número que se decide según la capacidad del recurso compartido**, no según N ni según cuántos clientes haya. Con estos 2 nodos, además, entran **+20 %** de requests (1.200 contra ~998) sin acercar a ARCA a su techo.
+- **En contra:**
+  - +1 operación de Redis por request, también para los 429 (~+11 % por request atendido). En el tope, Redis pasa de ~9.400 a ~13.000 ops/s, sobre todo porque entran más requests.
+  - ~1 ms más por request.
+  - Redis pasa a decidir qué requests entran: si se cae, el límite deja de funcionar. Se elige dejar pasar todo (*fail open*): si Redis se cae, de todos modos fallan las reservas.
+  - Un límite global no protege a cada nodo por separado: con 1 solo nodo, ese nodo recibiría 1.200 req/s (~110 % de su CPU, proyectado). El límite tiene que revisarse si cambia la cantidad de nodos.
+  - Un único contador da el mismo cupo a todos los clientes: uno solo puede agotarlo.
+
+## Cómo se mide
+
+- 2 nodos `F1as_v7`, `./ansible/deploy.sh -e rate_limit_mode=global -e exchange_rate_limit=1200` (con `arca_retries=0`).
+- Escenarios: `root` (L), `exchange` y `exchange-capacity-2n`, en `results/tactica-ratelimit-global/`, desde la misma ubicación que `2-nodos-f1as`.
+- Datadog: códigos por segundo y CPU/ELU por nodo. Azure Monitor (`azure-metrics.sh`): CPU de ARCA y operaciones de Redis.
+- La línea de arranque de pm2 muestra el modo y el límite de cada nodo, como evidencia de la configuración.
+
+---
+
+# P8. Táctica 2, segunda iteración: respaldo local por nodo delante del límite global (`F1as_v7`)
+
+## Problema observado en la primera iteración
+
+1. **El límite global no protege a cada nodo.**
+2. **Cada request ofrecida hace un `EVAL` en Redis, incluso las que terminan en 429.** Ante una avalancha de tráfico, el limitador mismo carga al recurso compartido.
+
+## Qué se cambia
+
+- Delante del límite global, cada nodo tiene un **respaldo local en memoria de 700 req/s**, con una sola clave para todo el nodo (no por IP). Lo que rechaza el respaldo local no llega a Redis.
+- Por qué 700: con 2 nodos, a cada uno le corresponden 1.200 / 2 = 600. 700 deja ~15 % de margen para un reparto desparejo del LB.
+- El límite global sigue en 1.200 req/s. 
+
+## P8.a. Avalancha con 2 nodos (`exchange-avalancha`: 1.200, 1.600, 2.000 y 2.400 req/s, 60 s cada escalón)
+
+Se corre dos veces en la misma sesión: **solo global** (como la primera iteración) y **global + respaldo de 700**.
+
+Predicciones:
+- **Redis:** solo global crece con lo ofrecido; con respaldo se queda medianamente estable en ~14.000 ops/s desde 1.600.
+- **Nodos:** cada uno atiende ~600 req/s  y rechaza ~600 en 2.400.
+- **Latencia de los 200:** igual que en la primera iteración con rate limit global.
+- **ARCA:** ~50 %, igual que en la primera iteración, porque las atendidas no cambian.
+
+**Por qué alcanza con la avalancha.** Los escenarios que ya corrimos con 2 nodos (`exchange`, `exchange-stress`, `exchange-capacity`, `exchange-capacity-2n`, overdraft) ofrecen como mucho 1.600 req/s. La avalancha cubre ese rango (1.200 a 2.400) y lo supera. El respaldo de 700 por nodo solo actúa cuando entran más de 1.400 req/s en total. Por debajo de eso, el sistema se comporta igual que en la primera iteración (`results/tactica-ratelimit-global/`), que ya está medida. Por eso no se vuelven a correr.
+
+**Con un solo nodo no se mide.** Que el nodo corte en 700 sale directamente del límite que se le pone.
+
+## Cómo se mide
+
+Todo en la misma sesión de infraestructura (la de las tácticas 1 y 2), desde la misma ubicación. Resultados en `results/tactica-ratelimit-respaldo/`.
+
+1. 2 nodos, `deploy.sh -e rate_limit_mode=global -e exchange_rate_limit=1200`: `root` y `exchange-avalancha` (solo global).
+2. 2 nodos, el mismo deploy más `-e exchange_local_rate_limit=700`: `exchange-avalancha` (con respaldo).
+**Métricas:**
+- Datadog: códigos por segundo, CPU y ELU por nodo.
+- Azure Monitor: ops/s y CPU de Redis, y CPU de ARCA.
+- La línea de arranque de pm2 muestra el límite global y el respaldo de cada nodo, como evidencia de la configuración.
+
+---
+
+# P9. Tácticas 1 y 2 juntas: reintento + rate limit global con respaldo local (2 nodos `F1as_v7`)
+
+Escrito el 19/11, **antes** de medir. TS1 se midió con límite local (1.000 req/s) y TS2 con `ARCA_RETRIES=0`, así que la combinación no está medida. Hay que medirla antes de recomendarla.
+
+## Qué se cambia
+
+`./ansible/deploy.sh -e arca_retries=1 -e rate_limit_mode=global -e exchange_rate_limit=1200 -e exchange_local_rate_limit=700`. No cambia el código.
+
+## P9.a. Carga normal (`exchange`, 5 req/s)
+
+| Métrica | Predicción | Por qué |
+| --- | --- | --- |
+| 503 | **6 % ± 3** | como TS1: 0,25² |
+| 200 / 403 | **62 % / 31 %** (± 4) | como TS1 |
+| 429, timeouts | **0** | 5 ≪ 700 |
+| Latencia Artillery p50 / p95 | **~745 / ~985 ms** | como TS1|
+
+## P9.b. Capacidad (`exchange-capacity-2n`: 600 a 1.400 req/s)
+
+| Métrica | Predicción | Por qué |
+| --- | --- | --- |
+| Atendidas (no-429) | **~1.200 req/s**; 429 desde el escalón de 1.300 | cupo global |
+| 503 sobre no-429 | **~6 %** | reintento; ARCA no satura |
+| 200 por segundo en el tope | **~740** (contra ~620 en TS1 y ~595 en TS2) | 62 % de 1.200 |
+| Llamadas a ARCA en el tope | **~1.500/s**; red recibida **~530 KB/s** | 1.200 × 1,25; ~354 B por llamada, medido en TS1 y TS2 |
+| CPU de ARCA en el tope | **~60 % (± 8)** | 52 % × 1.500 / 1.250; con margen amplio por la variación entre sesiones |
+| Redis en el tope | **~15.000 ops/s**, CPU ~40–45 % | capacidad de Redis |
+| CPU por nodo en el tope | **~60 %** | ~600 req/s cada uno, con más 200 que en TS2 |
+| Timeouts | **0** | ARCA lejos del 100 % |
+
+## P9.c. Avalancha (`exchange-avalancha`: 1.200 a 2.400 req/s)
+
+- **Atendidas:** ~1.200 req/s en todos los escalones; el resto, 429.
+- **Redis:** estable en **~15.000 ops/s** desde 1.600 (el respaldo corta antes de Redis).
+- **ARCA:** igual que en P9.b (~60 %, ~1.500 llamadas/s): las atendidas no crecen con lo ofrecido.
+- **503:** ~6 % de no-429.
+
+## P9.d. Consistencia (`exchange-concurrency-overdraft`)
+
+- **51 respuestas 200 y saldo final de 1.095 USD**, como siempre. Ni el reintento ni el rate limit tocan la reserva.
+
+## Cómo se mide
+
+Infra nueva, 2 nodos `F1as_v7`, desde la misma ubicación (CABA). Resultados en `results/tacticas-combinadas/`: `root`, `exchange`, `exchange-capacity-2n`, `exchange-avalancha` y `exchange-concurrency-overdraft`, con `azure-metrics.sh` para ARCA y Redis, y `evidencia-infra.sh` para la configuración.
+
+## P9.e. Control en la misma sesión: TS2 sola (`arca_retries=0`), `exchange-capacity-2n`
+
+Escrito el 19/11 a las 09:31, después de medir P9.b y **antes** de correr el control. En P9.b la red que recibió ARCA fue la prevista (~495 KB/s en el tope), pero su CPU llegó a ~100 %, contra ~60 % predicho. Este contenedor gasta ~1,0 milicores por KB/s, contra ~0,64 en la sesión de TS1. Para separar el efecto de la combinación del de la sesión, se repite TS2 sola sobre la misma infraestructura.
+
+- **Llamadas a ARCA en el tope:** ~1.200/s, con red recibida **~400 KB/s** (1.200 / 1,25 de P9.b).
+- **CPU de ARCA en el tope:** **~80 %** (≈ 100 % / 1,25). Si da eso, la diferencia con P9 es el +25 % de llamadas del reintento, y la CPU absoluta depende de la sesión.
+- **503:** ~25 % de no-429 (sin reintento). Admisión ~1.200 req/s.

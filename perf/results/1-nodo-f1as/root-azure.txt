@@ -1,0 +1,43 @@
+Azure Monitor para results/1-nodo-f1as/root.json
+Rango (UTC): 2026-11-11T12:08:19Z -> 2026-11-11T12:11:18Z, granularidad 1 minuto
+
+== ARCA (Container Instances, 0.5 vCPU = 500 millicores)
+-- CpuUsage (Count)
+   2026-11-11T12:08:00Z  avg=         0.5  max=         1.0   (max = 0% de 0.5 vCPU)
+   2026-11-11T12:09:00Z  avg=         0.0  max=         0.0   (max = 0% de 0.5 vCPU)
+   2026-11-11T12:10:00Z  avg=         0.0  max=         0.0   (max = 0% de 0.5 vCPU)
+-- MemoryUsage (Bytes)
+   2026-11-11T12:08:00Z  avg=   9529344.0  max=   9531392.0
+   2026-11-11T12:09:00Z  avg=   9535488.0  max=   9535488.0
+   2026-11-11T12:10:00Z  avg=   9541632.0  max=   9543680.0
+-- NetworkBytesReceivedPerSecond (Bytes)
+   2026-11-11T12:08:00Z  avg=         0.0  max=         0.0
+   2026-11-11T12:09:00Z  avg=         0.0  max=         0.0
+   2026-11-11T12:10:00Z  avg=         0.0  max=         0.0
+-- NetworkBytesTransmittedPerSecond (Bytes)
+   2026-11-11T12:08:00Z  avg=         0.0  max=         0.0
+   2026-11-11T12:09:00Z  avg=         0.0  max=         0.0
+   2026-11-11T12:10:00Z  avg=         1.0  max=         2.0
+
+== Managed Redis
+-- percentProcessorTime (Percent)
+   2026-11-11T12:08:00Z  avg=        11.5  max=        12.0
+   2026-11-11T12:09:00Z  avg=        12.5  max=        13.0
+   2026-11-11T12:10:00Z  avg=        12.0  max=        12.0
+-- serverLoad (Percent)
+   2026-11-11T12:08:00Z  avg=        11.5  max=        12.0
+   2026-11-11T12:09:00Z  avg=        12.5  max=        13.0
+   2026-11-11T12:10:00Z  avg=        12.0  max=        12.0
+-- usedmemorypercentage (Percent)
+   2026-11-11T12:08:00Z  avg=         0.0  max=         0.0
+   2026-11-11T12:09:00Z  avg=         0.0  max=         0.0
+   2026-11-11T12:10:00Z  avg=         1.0  max=         1.0
+-- operationsPerSecond (CountPerSecond)
+   2026-11-11T12:08:00Z  avg=         1.0  max=         1.0
+   2026-11-11T12:09:00Z  avg=         1.0  max=         1.0
+   2026-11-11T12:10:00Z  avg=         1.0  max=         1.0
+-- connectedclients (Count)
+   2026-11-11T12:08:00Z  avg=         1.0  max=         1.0
+   2026-11-11T12:09:00Z  avg=         1.5  max=         2.0
+   2026-11-11T12:10:00Z  avg=         2.0  max=         2.0
+

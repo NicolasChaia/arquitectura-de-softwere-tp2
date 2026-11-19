@@ -1,0 +1,17 @@
+# Managed Redis, Azure Monitor, granularidad 1 min (UTC), desde 21:10 hasta 21:26 (las dos avalanchas).
+# Azure Monitor llega ~1-1,5 min corrido respecto de Artillery: solo-global 21:11:40-21:15:40, con-respaldo 21:19:00-21:23:00 (tiempos.txt de cada carpeta).
+21:10 operationsPerSecond avg 1 max 1 | percentProcessorTime avg 12.5 max 14
+21:11 operationsPerSecond avg 1 max 1 | percentProcessorTime avg 13 max 15
+21:12 operationsPerSecond avg 1 max 1 | percentProcessorTime avg 12.5 max 13
+21:13 operationsPerSecond avg 6849 max 13697 | percentProcessorTime avg 24.5 max 38
+21:14 operationsPerSecond avg 13881 max 13942 | percentProcessorTime avg 38.5 max 40
+21:15 operationsPerSecond avg 14609.5 max 15075 | percentProcessorTime avg 38.5 max 40
+21:16 operationsPerSecond avg 16294 max 17137 | percentProcessorTime avg 39 max 40
+21:17 operationsPerSecond avg 8688 max 17375 | percentProcessorTime avg 26.5 max 39
+21:18 operationsPerSecond avg 1 max 1 | percentProcessorTime avg 12 max 13
+21:19 operationsPerSecond avg 1 max 1 | percentProcessorTime avg 12 max 13
+21:20 operationsPerSecond avg 3280.5 max 6560 | percentProcessorTime avg 15 max 19
+21:21 operationsPerSecond avg 13792.5 max 13899 | percentProcessorTime avg 37.5 max 39
+21:22 operationsPerSecond avg 13832 max 13844 | percentProcessorTime avg 37.5 max 38
+21:23 operationsPerSecond avg 14062 max 14442 | percentProcessorTime avg 37.5 max 38
+21:24 operationsPerSecond avg 10243 max 14616 | percentProcessorTime avg 33.5 max 36
